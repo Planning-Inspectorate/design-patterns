@@ -1,0 +1,73 @@
+{% extends '_layouts/layout-pins.html' %}
+
+{% set title = 'Name input' %}
+
+{% set nav = true %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    html: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">
+      {{ title }}
+    </h1>
+
+    <p class="govuk-body">
+      Planning Inspectorate have agreed that names will be captured with First and Last name to fit with the data schema.
+    </p>
+
+    <p class="govuk-body">
+      We know that full name fields are more inclusive and so we do want to move to a single field in future.
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://github.com/Planning-Inspectorate/appeals-prototype/blob/main/app/views/patterns/input/name.html" class="govuk-link">
+        View the code on GitHub
+      </a>
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
+
+    {% call govukFieldset({
+      legend: {
+      html: 'What is your name?',
+      classes: 'govuk-fieldset__legend--l',
+      isPageHeading: true
+    }
+
+  }) %}
+
+  <p class="govuk-hint">This should match the name on the application to the local planning authority</p>
+
+  {{ govukInput({
+    id: 'appellant-first-name',
+    name: 'appellant-first-name',
+    value: data['appellant-first-name'],
+    classes: 'govuk-!-width-three-quarters',
+    label: {
+      html: 'First name'
+    },
+    autocomplete: 'given-name',
+    spellcheck: false
+  }) }}
+
+  {{ govukInput({
+    id: 'appellant-last-name',
+    name: 'appellant-last-name',
+    value: data['appellant-last-name'],
+    classes: 'govuk-!-width-three-quarters',
+    label: {
+      html: 'Last name'
+    },
+    autocomplete: 'family-name',
+    spellcheck: false
+  }) }}
+
+  {% endcall %}
+{% endblock %}

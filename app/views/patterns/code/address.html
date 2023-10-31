@@ -1,0 +1,85 @@
+{% call govukFieldset({
+  legend: {
+    html: 'What’s the address of the appeal site?',
+    classes: 'govuk-fieldset__legend--l',
+    isPageHeading: true
+  }
+}) %}
+
+  <p class="govuk-hint">This should match the address on the application to the local planning authority</p>
+
+  {{ govukInput({
+    id: 'address-line-1',
+    name: 'address-line-1',
+    value: data['address-line-1'],
+    label: {
+      html: 'Address line 1'
+    },
+    autocomplete: 'address-line1'
+  }) }}
+
+  {{ govukInput({
+    id: 'address-line-2',
+    name: 'address-line-2',
+    value: data['address-line-2'],
+    label: {
+      html: 'Address line 2 (optional)'
+    },
+    autocomplete: 'address-line2'
+  }) }}
+
+  {{ govukInput({
+    id: 'address-town',
+    name: 'address-town',
+    value: data['address-town'],
+    classes: 'govuk-!-width-two-thirds',
+    label: {
+      html: 'Town or city'
+    },
+    autocomplete: 'address-level2'
+  }) }}
+
+  {% if data['grid'] == 'true' %}
+    {{ govukInput({
+      id: 'address-eastings',
+      name: 'address-eastings',
+      value: data['address-eastings'],
+      classes: 'govuk-input--width-10',
+      label: {
+        html: 'Eastings (optional)'
+      },
+      hint: {
+        html: 'For example, &lsquo;529090&rsquo;'
+      }
+    }) }}
+
+    {{ govukInput({
+      id: 'address-northings',
+      name: 'address-northings',
+      value: data['address-northings'],
+      classes: 'govuk-input--width-10',
+      label: {
+        html: 'Northings (optional)'
+      },
+      hint: {
+        html: 'For example, &lsquo;179645&rsquo;'
+      }
+    }) }}
+
+    <p class="govuk-!-margin-bottom-7"><a class="govuk-link--no-visited-state" href="?grid=false">The site does  have a postcode</a></p>
+  {% else %}
+    {{ govukInput({
+      id: 'address-postcode',
+      name: 'address-postcode',
+      value: data['address-postcode'],
+      classes: 'govuk-input--width-10',
+      label: {
+        html: 'Postcode'
+      },
+      autocomplete: 'postal-code'
+    }) }}
+
+    <p class="govuk-!-margin-bottom-7"><a class="govuk-link--no-visited-state" href="?grid=true">The site does not have a postcode</a></p>
+  {% endif %}
+
+{% endcall %}

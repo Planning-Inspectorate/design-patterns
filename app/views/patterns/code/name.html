@@ -1,0 +1,34 @@
+{% call govukFieldset({
+  legend: {
+  html: 'What is your name?',
+  classes: 'govuk-fieldset__legend--l',
+  isPageHeading: true
+}
+
+<p class="govuk-hint">This should match the name on the application to the local planning authority</p>
+
+{{ govukInput({
+  id: 'appellant-first-name',
+  name: 'appellant-first-name',
+  value: data['appellant-first-name'],
+  classes: 'govuk-!-width-three-quarters',
+  label: {
+    html: 'First name'
+  },
+  autocomplete: 'given-name',
+  spellcheck: false
+}) }}
+
+{{ govukInput({
+  id: 'appellant-last-name',
+  name: 'appellant-last-name',
+  value: data['appellant-last-name'],
+  classes: 'govuk-!-width-three-quarters',
+  label: {
+    html: 'Last name'
+  },
+  autocomplete: 'family-name',
+  spellcheck: false
+}) }}
+
+{% endcall %}

@@ -1,0 +1,81 @@
+{% extends '_layouts/layout-pins.html' %}
+
+{% set title = 'File upload' %}
+{% set nav = false %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    html: 'Back',
+    href: 'javascript:history.back()'
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      {{ title }}
+    </h1>
+
+    <p>
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+
+    {% set uploadHtml %}
+      {{ govukFileUpload({
+        id: "final-documents",
+        name: "final-documents",
+        classes: 'moj-multi-file-upload__input',
+        label: {
+          text: "Upload files",
+          classes: 'govuk-label--m'
+        },
+        hint: {
+          text: 'The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 15MB'
+        },
+        attributes: { multiple: '' }
+      }) }}
+
+      {{govukButton({
+        text: 'Upload file',
+        classes: 'govuk-button--secondary moj-multi-file-upload__button'
+      })}}
+    {% endset %}
+
+    {{ mojMultiFileUpload({
+      uploadedFiles: {
+        heading: { text: 'Files added' },
+        items: []
+      },
+      uploadHtml: uploadHtml
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--xl">
+
+    <p class="govuk-body">
+      <a href="https://github.com/Planning-Inspectorate/appeals-prototype/blob/main/app/views/patterns/final-comments/v1/documents-upload.html" class="govuk-link">
+        Go to the GitHub code
+      </a>
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+  <script>
+  // I really should learn how the MOJ upload works, however, a hack to get all the files passed into data
+    $('#multiupload').submit(function(e) {
+      e.preventDefault();
+
+      $('.moj-multi-file-upload__filename').each(function() {
+        $('<input name="final-documents" type="checkbox" value="'+ $(this).text() +'" checked="true" style="display: none">').insertBefore('.govuk-heading-l');
+      });
+
+      $(this).unbind('submit').submit();
+    })
+  </script>
+{% endblock %}

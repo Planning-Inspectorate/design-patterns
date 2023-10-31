@@ -1,0 +1,46 @@
+{% set uploadHtml %}
+
+  {{ govukFileUpload({
+    id: "final-documents",
+    name: "final-documents",
+    classes: 'moj-multi-file-upload__input',
+    label: {
+      text: "Upload files",
+      classes: 'govuk-label--m'
+    },
+    hint: {
+      text: 'The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 15MB'
+    },
+    attributes: { multiple: '' }
+  }) }}
+
+  {{govukButton({
+    text: 'Upload file',
+    classes: 'govuk-button--secondary moj-multi-file-upload__button'
+  })}}
+
+{% endset %}
+
+{{ mojMultiFileUpload({
+uploadedFiles: {
+    heading: { text: 'Files added' },
+    items: []
+  },
+  uploadHtml: uploadHtml
+}) }}
+
+<!-- the script needs to be included in the page template -->
+{% block pageScripts %}
+  <script>
+  // I really should learn how the MOJ upload works, however, a hack to get all the files passed into data
+    $('#multiupload').submit(function(e) {
+      e.preventDefault();
+
+      $('.moj-multi-file-upload__filename').each(function() {
+        $('<input name="final-documents" type="checkbox" value="'+ $(this).text() +'" checked="true" style="display: none">').insertBefore('.govuk-heading-l');
+      });
+
+      $(this).unbind('submit').submit();
+    })
+  </script>
+{% endblock %}
