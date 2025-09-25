@@ -1,5 +1,5 @@
 {
-  "serviceName": "Service name goes here",
+  "serviceName": "Planning Inspectorate Design System",
   "plugins": {
     "govuk-frontend": {
       "rebrand": true
