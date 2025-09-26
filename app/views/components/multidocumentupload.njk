@@ -1,0 +1,46 @@
+{% macro multiDocumentUpload() %}
+
+  {%- from "govuk/components/file-upload/macro.njk" import govukFileUpload -%}
+  {% from "govuk/components/button/macro.njk" import govukButton %}
+  {%- from "moj/components/multi-file-upload/macro.njk" import mojMultiFileUpload -%}
+
+  <p class="govuk-body">
+    Choose a single or multiple files to upload.
+  </p>
+
+  <p class="govuk-hint">
+    The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
+  </p>
+
+  <p class="govuk-hint">
+    The total of your uploaded files must be smaller than 1 GB.
+  </p>
+
+  {% set uploadHtml %}
+    {{ govukFileUpload({
+      id: "documents",
+      name: "documents",
+      classes: 'moj-multi-file-upload__input',
+      label: {
+      text: "Upload a file",
+      classes: 'govuk-visually-hidden'
+      },
+      attributes: { multiple: '' },
+      errorMessage: errorMessage
+    }) }}
+
+    {{ govukButton({
+      text: 'Upload file',
+      classes: 'govuk-button--secondary moj-multi-file-upload__button'
+    })}}
+  {% endset %}
+
+  {{ mojMultiFileUpload({
+    uploadedFiles: {
+      heading: { text: 'Files added' },
+      items: uploadedFiles
+    },
+    uploadHtml: uploadHtml
+  }) }}
+
+{% endmacro %}

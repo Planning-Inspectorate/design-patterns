@@ -1,0 +1,112 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% from "patterns/address.njk" import address %}
+
+{% set pageName = "Address" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item1") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="case-heading">
+      {{ pageName }}
+    </h1>
+    <p>
+      {{govukTag({
+        text: "GDS core pattern",
+        classes: "govuk-tag--green"
+      })}}
+    </p>
+
+    <p class="govuk-body-l">
+      Gathering address data.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+      Based on the <a href="https://design-system.service.gov.uk/patterns/addresses/">GDS address form</a>.
+    </p>
+
+    {% set exampleHtml %}
+      {{ address (
+        country = true
+      ) }}
+    {% endset -%}
+    {% set codeHtml %}
+
+    <pre class="code-snippet"><code>{% raw -%}{{ address () }}
+
+{{ address (
+// address with an extra field for country
+country = true
+) }}
+{% endraw %}
+      </code></pre>
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Example",
+          id: "example",
+          panel: {
+            html: exampleHtml
+          }
+        },
+        {
+          label: "Nunjucks",
+          id: "nunjucks",
+          panel: {
+            html: codeHtml
+          }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-l">
+      When to use this pattern
+    </h2>
+
+    <p>
+      Use the address form to gather address data consistently.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      How it works
+    </h2>
+
+    <p class="govuk-body">
+      You can use this component as a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> macro.
+    </p>
+
+    <p class="govuk-body">
+      There is an optional parameter for address forms with an extra field for a country.
+    </p>
+
+    <h3 class="govuk-heading-m">
+      Parameters
+    </h3>
+
+    {{ govukSummaryList ({
+      rows: [
+        {
+          key: {
+            text: "country"
+          },
+          value: {
+            text: "Setting to true (any not null value) adds a country field"
+          }
+        }
+      ]
+    }) }}
+
+  </div>
+</div>
+  </div>
+</div>
+{% endblock %}

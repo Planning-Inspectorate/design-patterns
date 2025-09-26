@@ -1,0 +1,20 @@
+{# layouts/side-menu.html #}
+{%- from "moj/components/side-navigation/macro.njk" import mojSideNavigation -%}
+
+{% macro sideMenu(currentItem) %}
+  {{ mojSideNavigation({
+    label: "Side navigation",
+    items: [
+      {
+        text: "Redaction tool",
+        href: "/components/redaction-tool",
+        active: currentItem == "item1"
+      },
+      {
+        text: "Upload multiple files",
+        href: "/components/upload-multiple-files",
+        active: currentItem == "item2"
+      }
+    ]
+  }) }}
+{% endmacro %}

@@ -1,0 +1,117 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Upload multiple files" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% from "components/multidocumentupload.njk" import multiDocumentUpload %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item2") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="personal-list">
+      {{ pageName }}
+    </h1>
+
+    <p>
+      <strong class="govuk-tag govuk-!-margin-bottom-5">Experimental</strong>
+    </p>
+
+    <p class="govuk-body-l">
+      Use this component to show how users can upload several files. This component is based on <a href="https://design-patterns.service.justice.gov.uk/components/multi-file-upload/" target="_blank">the MOJ multi file upload component</a>.
+    </p>
+
+    {% set exampleHtml %}
+
+      <p class="govuk-body">
+        Choose a single or multiple files to upload.
+      </p>
+
+      <p class="govuk-hint">
+        <!-- Files must be PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, JPG, JPEG, MPEG, MP3, MP4, MOV, PNG, TIF or TIFF. -->
+        The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
+      </p>
+
+      <div id="upload-hint" class="govuk-hint">
+        <!-- The file must be a DOC, DOCX, PDF, XLS, TIF, JPG or PNG and be smaller than 25MB -->
+        The total of your uploaded files must be smaller than 1 GB.
+      </div>
+
+      {% set uploadHtml %}
+        {{ govukFileUpload({
+          id: "documents",
+          name: "documents",
+          classes: 'moj-multi-file-upload__input',
+          label: {
+            text: "Upload files",
+            classes: 'govuk-visually-hidden'
+          },
+          attributes: { multiple: '' }
+        }) }}
+
+      {% endset %}
+
+      {{ mojMultiFileUpload({
+        uploadedFiles: {
+          heading: { text: 'Files added' },
+          items: uploadedFiles
+        },
+        uploadHtml: uploadHtml
+      }) }}
+
+    {% endset -%}
+
+    {% set codeHtml %}
+      <pre class="code-snippet"><code>{% raw -%}{{ multiDocumentUpload () }}
+{% endraw %}
+</code></pre>
+
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Example",
+          id: "example",
+          panel: {
+            html: exampleHtml
+          }
+        },
+        {
+          label: "Nunjucks",
+          id: "nunjucks",
+          panel: {
+            html: codeHtml
+          }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-l">
+      When to use this pattern
+    </h2>
+
+    <p>
+      Use the multi file upload component when you want users to be able to upload more than one file.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      How it works
+    </h2>
+
+    <p>
+      You can use this component as a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> macro.
+    </p>
+
+    <p>
+      It should be nested in a ‘two-thirds’ grid layout and an HTML form element. You will need to add a GOV.UK button after the component.
+    </p>
+
+  </div>
+</div>
+{% endblock %}

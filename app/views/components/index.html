@@ -1,0 +1,19 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Components" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+    <p class="govuk-body">Components are the reusable building blocks of our services. Each one includes guidance, examples, and code to help teams design and build consistently and accessibly.</p>
+  </div>
+</div>
+{% endblock %}

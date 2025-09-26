@@ -1,0 +1,99 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Redaction tool" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item1") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+    <p class="govuk-!-margin-bottom-0">Original statement:</p>
+    {{ govukInsetText({
+      classes: 'govuk-!-margin-top-2',
+      text: "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees."
+    }) }}
+
+    <button type="button" class="govuk-button govuk-button--secondary" id="revertButton">
+      Revert to original statement
+    </button>
+
+    <p id="replaceHint">Replace any character with █ to redact it.</p>
+
+    <form method="post" class="govuk-!-margin-top-2">
+
+      {{ govukTextarea({
+        name: "redactedComment",
+        id: "redactedComment",
+        rows: "9",
+        label: {
+          text: "Redacted statement",
+          classes: "govuk-label--m",
+          isPageHeading: false
+        },
+
+        value: "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees."
+
+      }) }}
+
+      <div class="govuk-button-group app-hidden">
+        <button type="button" class="govuk-button govuk-button--secondary" id="redactButton">Redact selected text</button>
+        <button type="button" class="govuk-button govuk-button--secondary" id="undoButton">Undo changes</button>
+      </div>
+
+      {{ govukButton({
+        text: "Continue"
+      }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+  {{super()}}
+  <script>
+    function getSel() {
+        // Obtain the object reference for the textarea
+      var txtarea = document.getElementById("redactedComment");
+
+      // Obtain the index of the first and last selected character
+      var start = txtarea.selectionStart;
+      var finish = txtarea.selectionEnd;
+
+      // Obtain all text from the textarea
+      var allText = txtarea.value;
+
+      // Calculate the length of the selection and create a "█" for each character
+      var redactedText = "█".repeat(finish - start);
+
+      // Replace the selected text with the redacted version
+      var newText = allText.substring(0, start) + redactedText + allText.substring(finish);
+
+      // Update the textarea with the new text
+      txtarea.value = newText;
+
+      // Set the cursor to immediately after the redacted section
+      txtarea.selectionStart = txtarea.selectionEnd = start + redactedText.length;
+
+      // Return focus to the textarea
+      txtarea.focus();
+    }
+
+    $('#replaceHint').addClass('app-hidden')
+    $('.govuk-button-group').removeClass('app-hidden')
+    $('#redactButton')
+      .on('click', getSel)
+    $('#undoButton').on('click', function(e) {
+      $('#redactedComment')[0].value = $('#redactedComment')[0].defaultValue
+    })
+
+  </script>
+{% endblock %}

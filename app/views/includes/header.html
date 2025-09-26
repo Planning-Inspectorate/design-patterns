@@ -1,0 +1,29 @@
+{% block header %}
+{{ govukHeader({
+    classes: "govuk-header--full-width-border",
+    serviceName: serviceName
+  }) }}
+  {{ govukServiceNavigation({
+    navigation: [
+      {
+        href: "/",
+        text: "Home",
+        active: currentPage == "home"
+      },
+      {
+        href: "/components",
+        text: "Components",
+        active: currentPage == "components"
+      },
+      {
+        href: "/patterns",
+        text: "Patterns",
+        active: currentPage == "patterns"
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+  
+  
