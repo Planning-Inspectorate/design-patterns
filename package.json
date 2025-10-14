@@ -1,4 +1,6 @@
 {
+  "name": "pins-design-patterns",
+  "private": true,
   "scripts": {
     "dev": "govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
