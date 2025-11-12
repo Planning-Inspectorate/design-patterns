@@ -1,5 +1,5 @@
 {
-  "serviceName": "Planning Inspectorate Design System",
+  "serviceName": "Planning Inspectorate pattern library",
   "plugins": {
     "govuk-frontend": {
       "rebrand": true
