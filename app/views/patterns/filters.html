@@ -6,6 +6,7 @@
 {% from "layouts/pattern-menu.html" import sideMenu %}
 
 {% block content %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
     {{ sideMenu("item2") }}
@@ -58,7 +59,7 @@
       </ul>
       <div class="govuk-tabs__panel" id="tab-1">
         <img src="/public/images/patterns/filters/filter-above-results.png"
-      alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+          alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
       </div>
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="tab-2">
         <h4 class="govuk-heading-s">NSIPs prototype</h4>
@@ -89,7 +90,7 @@
         </ul>
       </div>
     </div>
-   
+
     <p class="govuk-body">This pattern is based on the
       <a
         href="https://national-infrastructure-consenting.planninginspectorate.gov.uk/projects/EN010128/documents?itemsPerPage=25">Find
@@ -106,7 +107,7 @@
       <li>the left-hand column is used for other important content</li>
     </ul>
 
- <div class="govuk-tabs" data-module="govuk-tabs">
+    <div class="govuk-tabs" data-module="govuk-tabs">
       <h2 class="govuk-tabs__title">Contents</h2>
       <ul class="govuk-tabs__list">
         <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
@@ -121,7 +122,7 @@
           alt="A screenshot of a filter panel in the left-hand navigation of the Find a National Infrastructure Project service. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
       </div>
       <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="tab-2">
-        
+
         <h4 class="govuk-heading-s">Crown Developments prototype</h4>
         <ul class="govuk-list">
           <li>
@@ -140,7 +141,7 @@
 
 
 
-   
+
 
     <p class="govuk-body">This pattern is based on the
       <a href="https://www.gov.uk/search">GOV.UK search</a>
@@ -219,11 +220,13 @@
       tap the button, the filter panel can expand as an accordion or appear as a full-screen overlay.
     </p>
 
-    <div style="display: flex; gap: 20px; padding-bottom: 20px; align-items: flex-start">
-      <img style="border:1px solid grey" src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
+    <div style="width:100%; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:20px; align-items:flex-start;">
+      <img style="border:1px solid grey; max-width:45%; height:auto;"
+        src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
         alt="A screenshot of a mobile filter panel overlay on the Find a National Infrastructure Project service. The filter panel has a 'return to results' button at the top, and each filter can be expanded or collapsed. There is also an Apply filters button at the bottom.">
 
-      <img style="border:1px solid grey;" src="/public/images/patterns/filters/filter-above-results-mobile.png"
+      <img style="border:1px solid grey; max-width:49%; height:auto;"
+        src="/public/images/patterns/filters/filter-above-results-mobile.png"
         alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
     </div>
 
