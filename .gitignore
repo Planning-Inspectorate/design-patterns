@@ -2,3 +2,7 @@
 node_modules
 
 .DS_Store
+
+
+app/views/patterns/design-patterns.code-workspace
+
