@@ -1,0 +1,76 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Service navigation" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item5") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+    <p>
+      <strong class="govuk-tag govuk-tag--yellow">Work in progress
+      </strong>
+    </p>
+
+    <p class="govuk-body-l">Use the service navigation component to show the service name and provide links to key sections of the service. It helps users orient themselves and move between pages without cluttering the main header.</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Use the <a href="https://design-system.service.gov.uk/components/service-navigation/">GOV.UK service navigation</a> for services hosted on GOV.UK domains where the GOV.UK header must remain minimal.</li>
+        <li>Use it for PINS-hosted services to provide consistent navigation across pages.</li>
+    </ul>
+
+    <h2 class="govuk-heading-l">When not to use this component</h2>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>On single-page or linear journeys where navigation would distract from completing the task.</li>
+        <li>For links that belong in the footer (e.g., Privacy, Accessibility, Cookies).</li>
+        <li>To add GOV.UK branding or crown — this is not part of the service navigation.</li>
+        <li>For global navigation across multiple services. It is only for navigation within one service.</li>
+    </ul>
+    
+    <h2 class="govuk-heading-l">How it works</h2>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Appears directly below the GOV.UK header or PINS header.</li>
+        <li>Displays the service name (e.g., “Appeal a planning decision”).</li>
+        <li>Provides links to key sections of the service, such as:
+          <ul>
+            <li>Dashboard</li>
+            <li>Assigned to me</li>
+            <li>Sign out</li>
+          </ul>
+        </li>
+        <li>Keep navigation minimal to avoid distracting users.</li>
+    </ul>
+   
+
+    <h2 class="govuk-heading-m">Design rules</h2>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Font: Match the header font (GDS Transport for GOV.UK services, Arial or Sans Serif for PINS services).</li>
+        <li>Colour: Use GOV.UK blue for GOV.UK services; use PINS colour palette for PINS services.</li>
+        <li>Colour palette for PINS services should align with MHCLG colourways.</li>
+        <li>Accessibility: Links must have clear focus states and meet WCAG contrast requirements.</li>
+  <li>Responsive behaviour: Navigation should collapse into a menu on smaller screens.</li>
+  <li>Implementation details will be added once a shared approach is agreed.</li>
+    </ul>
+
+  
+
+    <h2 class="govuk-heading-l">Examples</h2>
+    <h3 class="govuk-heading-m">GOV.UK service navigation</h3>
+    <image src="/public/images/components/service-navigation/service-navigation.png" alt="Example of GOV service header" class="govuk-!-margin-top-2 govuk-!-margin-bottom-6">
+    <br>
+    <h3 class="govuk-heading-m">PINS service navigation</h3>
+    <image src="/public/images/components/service-navigation/pins-service-nav.png" alt="Example of PINS service header" class="govuk-!-margin-top-2 govuk-!-margin-bottom-6">
+
+    <h2 class="govuk-heading-l">Research on this component</h2>
+
+    <p class="govuk-body">User research findings on this component are in progress and will be added here when available.
+    </p>
+
+  </div>
+</div>
+{% endblock %}
