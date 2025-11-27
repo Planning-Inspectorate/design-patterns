@@ -6,6 +6,7 @@
 {% from "layouts/pattern-menu.html" import sideMenu %}
 
 {% block content %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
     {{ sideMenu("item2") }}
@@ -18,107 +19,259 @@
       </strong>
     </p>
 
-    <p class="govuk-body">This pattern is based on the <a
-        href="https://national-infrastructure-consenting.planninginspectorate.gov.uk/projects/EN010128/documents?itemsPerPage=25">Find
-        a National Infrastructure Project</a> filter, incorporating our guidance and recommended changes.</p>
+    <p class="govuk-body">Use filters to help users narrow down a list of results. There are 2 common filter layouts.
+      Choose the one that best meets user needs and the context of the page. Test both with users to find out what works
+      best.</p>
 
-    <!--<image src="/public/images/patterns/filters/filter.png" alt="Filter" class="govuk-!-margin-top-6 govuk-!-margin-bottom-6">-->
+    <h2 class="govuk-heading-l">When to use this pattern</h2>
 
-    <h2 class="govuk-heading-l">Use filters on the left first</h2>
+    <p class="govuk-body">Use filters when users need to:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>narrow down a long list of results</li>
+      <li>find specific items based on known criteria</li>
+      <li>combine filters with search to refine results</li>
+    </ul>
 
+    <p class="govuk-body">Do not use filters if users are unlikely to understand the filtering options or if the list is
+      short enough to scan easily.</p>
 
-    <p class="govuk-body">The Department for Education recommends you should place filters on the left of the screen.
+    <h2 class="govuk-heading-l">Filter layouts</h2>
+
+    <h3 class="govuk-heading-m">Left-hand filter panel</h3>
+
+    <p class="govuk-body">Use left-hand filters when you want to keep filters visible while users browse results. This
+      layout works well when:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>filters are important to the task</li>
+      <li>users need to adjust filters while browsing results</li>
+      <li>there is enough horizontal space to accommodate the filter panel</li>
+    </ul>
+
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">Contents</h2>
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#left-tab-1">Example image</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#left-tab-2">Example links</a>
+        </li>
+      </ul>
+      <div class="govuk-tabs__panel" id="left-tab-1">
+        <img src="/public/images/patterns/filters/filter-above-results.png"
+          alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+      </div>
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="left-tab-2">
+        <h4 class="govuk-heading-s">NSIPs prototype</h4>
+        <ul class="govuk-list">
+          <li>
+            <a
+              href="https://github.com/Planning-Inspectorate/applications-service-prototype/blob/main/app/views/FrontOffice/Project_documents.html">GitHub
+              link</a>
+          </li>
+          <li>
+            <a
+              href="https://pins-app-prototype-applications-front-office.azurewebsites.net/FrontOffice/Project_documents">View
+              in prototype</a>
+          </li>
+        </ul>
+
+        <h4 class="govuk-heading-s">Crown Developments prototype</h4>
+        <ul class="govuk-list">
+          <li>
+            <a
+              href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/written-reps.html">GitHub
+              link</a>
+          </li>
+          <li>
+            <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/written-reps">View
+              in prototype</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="govuk-body">This pattern is based on the
+      <a
+        href="https://national-infrastructure-consenting.planninginspectorate.gov.uk/projects/EN010128/documents?itemsPerPage=25">Find a National Infrastructure Project</a> filter, with updates based on user research and design guidance.
     </p>
 
-    <p class="govuk-body">This allows the list of results to take up the middle and right-hand columns.</p>
+    <h3 class="govuk-heading-m">Filters above results</h3>
 
-    <p class="govuk-body">This can make it easier for users to notice changes to the list of results as they select and apply filters.</p>
+    <p class="govuk-body">Show filters above the results when:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>the page layout does not allow for a left-hand panel</li>
+      <li>the results need to span the full width of the page</li>
+      <li>the left-hand column is used for other important content</li>
+    </ul>
 
-    <h2 class="govuk-heading-l">When to put filters at the top of the page</h2>
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 class="govuk-tabs__title">Contents</h2>
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#top-tab-1">Example image</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#top-tab-2">Example links</a>
+        </li>
+      </ul>
+      <div class="govuk-tabs__panel" id="top-tab-1">
+        <img src="/public/images/patterns/filters/left-hand-filter-panel.png"
+          alt="A screenshot of a filter panel in the left-hand navigation of the Find a National Infrastructure Project service. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+      </div>
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-2">
 
-    <p class="govuk-body">There are some cases where it is more suitable to use a filter on the top of the page.
+        <h4 class="govuk-heading-s">Crown Developments prototype</h4>
+        <ul class="govuk-list">
+          <li>
+            <a
+              href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/applications.html">GitHub
+              link</a>
+          </li>
+          <li>
+            <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/applications">View
+              in prototype</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+
+    <p class="govuk-body">This pattern is based on the
+      <a href="https://www.gov.uk/search">GOV.UK search</a>
+      filters.
     </p>
 
-    <p class="govuk-body">For example, when you need to show data in a table across the full width of a page or if related content in the right-hand column cannot be moved.
+    <h2 class="govuk-heading-l">How to design filters</h2>
+
+    <h3 class="govuk-heading-m">Make filters relevant</h3>
+
+    <p class="govuk-body">Base filters on real user needs. Use language your users understand. Avoid technical terms or
+      internal labels.
     </p>
 
-    <p class="govuk-body">Test each approach with your users and choose the one that works best for them.
+    <p class="govuk-body">Group related filters together and use clear headings.
     </p>
 
-    <h2 class="govuk-heading-l">How to use this component</h2>
+    <h3 class="govuk-heading-m">Keep filter lists short</h3>
 
-    <p class="govuk-body">Allow users to expand and collapse individual filters in the vertical view.
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Show the most common or useful options first.</li>
+      <li>Keep lists scannable and avoid long, ungrouped lists</li>
+      <li>Consider grouping options into categories</li>
+    </ul>
+
+    <h3 class="govuk-heading-m">Show applied filters</h3>
+
+    <p class="govuk-body">When users apply filters:</p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>show selected filters as removable tags or “chips”</li>
+      <li>provide a “Clear filters” option</li>
+      <li>update the results and filter counts dynamically</li>
+    </ul>
+
+    <img style="border:1px solid grey; margin-bottom: 30px" src="/public/images/patterns/filters/filtered-results.png"
+      alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+
+    <h3 class="govuk-heading-m">Make filters work with search</h3>
+
+    <p class="govuk-body">Make it easy to remove filters or clear the search independently.
     </p>
 
-    <p class="govuk-body">Add a “Show all filters” option to expand/collapse everything at once.
+    <h3 class="govuk-heading-m">No results</h3>
+
+    <p class="govuk-body">
+      If a user applies filters or enters a search and gets no results, help them recover:
     </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>show a clear message that no results were found</li>
+      <li>suggest how they can change or remove filters</li>
+      <li>offer a link to remove filters and clear search</li>
+    </ul>
 
-    <p class="govuk-body">Base filters on real user needs - make sure they are relevant and predictable to your users.
-    </p>
+    <h3 class="govuk-heading-m">Allow users to show or hide filters</h3>
 
-    <p class="govuk-body">Show applied filters as chips inside the filter panel.
-    </p>
+    <p class="govuk-body">Let users expand or collapse individual filters. Include a “Show all filters” option to expand
+      or collapse all.</p>
 
-    <p class="govuk-body">Indicate the number of items matching each filter where possible, updating dynamically as filters change.
-    </p>
-
-    <p class="govuk-body">When filters have been applied, display the "Clear filters" option beside the "Apply filters" button.
-    </p>
-
-    <p class="govuk-body">Make applied filters easy to remove from the panel.
-    </p>
-
-    <p class="govuk-body">If there is a need to show or hide the filter panel (for example, to improve visibility of a map), include a clear ‘Show’ and ‘Hide’ button.</p>
-
-    <h3 class="govuk-heading-m">Filter list length</h3>
-
-    <p class="govuk-body">Filter lists should be short, scannable and searchable. Show the most common options first. </p>
-
-    <p class="govuk-body">If there are many filter options, consider grouping them into categories to help users find what they need more easily.</p>
-
-    <p class="govuk-body">If there are only a few filter options, consider using checkboxes directly on the page instead of a collapsible filter panel.</p>
-
-    <p class="govuk-body">Use a search box or collapsible list within the filter panel if there are more than 15 items (e.g., locations, names). 
-    </p>
-
-    <h3 class="govuk-heading-m">Filters and search behaviour</h3>
-
-    <p class="govuk-body">Filters and search must work together. Results should always reflect both.</p>
-
-    <p class="govuk-body">User selections should persist. If someone searches after applying filters, both the search
-      term and the filters should remain until they are cleared.</p>
-
-    <p class="govuk-body">Provide clear ways to remove filters or clear the search independently.</p>
+    <p class="govuk-body">If filters are in a panel, provide a clear “Show filters” and “Hide filters” button,
+      especially if the panel overlaps content like a map.</p>
 
     <h2 class="govuk-heading-l">What not to do</h2>
 
-    <p class="govuk-body">Don't show long filters that scroll beyond the main page content, instead use expand/collapse. Avoid overwhelming users with long, ungrouped lists.
+    <p class="govuk-body">Avoid:
     </p>
-
-    <p class="govuk-body">Don’t create scroll traps - avoid endless scrolling in filter sections.
-    </p>
-
-    <p class="govuk-body">Don't use unusual filter input types (e.g. radios for filters) unless there's a strong
-      rationale.
-    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>long filter lists that scroll beyond the page content: use collapsible sections instead</li>
+      <li>scroll traps: do not allow endless scrolling inside filter panels</li>
+      <li>unusual input types: for example, avoid using radio buttons unless there’s a clear reason</li>
+    </ul>
 
     <h2 class="govuk-heading-l">Mobile design</h2>
 
-    <p class="govuk-body"><a href="https://design.education.gov.uk/design-system/components/filter#:~:text=when%20using%20filters-,Mobile%20design,-When%20using%20mobile">See DfE guidance</a> for designing filters on mobile.</p>
-
-    <h2 class="govuk-heading-l">Accessiblity and consistency</h2>
-
-    <p class="govuk-body">Filters must be keyboard navigable and screen reader friendly (esp. expand/collapse, chips,
-      show/hide).
+    <p class="govuk-body">On mobile, filters are usually hidden behind a “Show filters” button to save space. When users
+      tap the button, the filter panel can expand as an accordion or appear as a full-screen overlay.
     </p>
 
-    <p class="govuk-body">Use simple, clean visuals (e.g., white backgrounds, uncluttered layouts, simple arrows).
+    <div style="width:100%; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:20px; align-items:flex-start;">
+      <img style="border:1px solid grey; max-width:45%; height:auto;"
+        src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
+        alt="A screenshot of a mobile filter panel overlay on the Find a National Infrastructure Project service. The filter panel has a 'return to results' button at the top, and each filter can be expanded or collapsed. There is also an Apply filters button at the bottom.">
+
+      <img style="border:1px solid grey; max-width:49%; height:auto;"
+        src="/public/images/patterns/filters/filter-above-results-mobile.png"
+        alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+    </div>
+
+    <p class="govuk-body">You can also
+      <a
+        href="https://design.education.gov.uk/design-system/components/filter#:~:text=when%20using%20filters-,Mobile%20design,-When%20using%20mobile">read
+        Department for Education guidance</a>
+      for designing filters on mobile.
+    </p>
+
+    <h2 class="govuk-heading-l">Accessibility</h2>
+
+    <p class="govuk-body">Make sure filters are:
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>keyboard navigable</li>
+      <li>screen reader friendly</li>
+      <li>visually clear: use white backgrounds, simple arrows, and uncluttered layouts</li>
+    </ul>
+
+    <p class="govuk-body">Use simple visuals (for example, white backgrounds, uncluttered layouts, simple arrows).
     </p>
 
     <h2 class="govuk-heading-l">Research on this component</h2>
 
-    <p class="govuk-body">User research findings on this component are in progress and will be added here when available.
+    <p class="govuk-body">We’re currently doing user research on this pattern. We’ll update this page when findings are
+      available.
     </p>
+
+    <h2 class="govuk-heading-l">Links to other design systems</h2>
+
+    <ul class="govuk-list govuk-list--bullet">
+      <li>
+        <a href="https://design-patterns.service.justice.gov.uk/components/filter/">Ministry of Justice (MOJ) filter
+          component
+        </a>
+      </li>
+      <li>
+        <a href="https://design.education.gov.uk/design-system/components/filter">Department for Education (DfE) filter
+          component
+        </a>
+      </li>
+      <li>
+        <a href="https://design-system.est.org.uk/patterns/filter.html">Energy Saving Trust (EST) filter pattern</a>
+      </li>
+    </ul>
 
   </div>
 </div>
