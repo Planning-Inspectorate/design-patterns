@@ -12,7 +12,19 @@
   </div>
 
   <div class="govuk-grid-column-three-quarters">
-    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="personal-list">
+      {{ pageName }}
+    </h1>
+
+    <p>
+      <strong class="govuk-tag govuk-tag--yellow govuk-!-margin-bottom-5">Work in progress</strong>
+    </p>
+
+    <p class="govuk-body-l">Use the redaction tool to hide personal or sensitive information before publishing content.
+      Redaction replaces characters with a block symbol (█). This means the information cannot be read or restored once redacted.</p>
+
+    {% set exampleHtml %}
+
     <p class="govuk-!-margin-bottom-0">Original statement:</p>
     {{ govukInsetText({
       classes: 'govuk-!-margin-top-2',
@@ -52,48 +64,146 @@
 
     </form>
 
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Example",
+          id: "example",
+          panel: {
+            html: exampleHtml
+          }
+        },
+        {
+          label: "Code",
+          id: "code",
+          panel: {
+            text: ""
+          }
+        }
+      ]
+    }) }}
+
+    <section id="redaction-pattern" class="govuk-!-margin-bottom-6">
+      <h2 class="govuk-heading-l">When to use this pattern</h2>
+    
+      <p class="govuk-body">Use this tool when users need to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>remove personal details from statements or documents</li>
+        <li>protect sensitive information before publishing</li>
+        <li>respond to information requests where some content cannot be shared</li>
+      </ul>
+    
+      <h2 class="govuk-heading-l">When not to use this pattern</h2>
+      <p class="govuk-body">Do not use this tool when:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>users are editing content for clarity or correction</li>
+        <li>an internal system already handles sensitive information securely</li>
+        <li>personal data should not have been collected in the first place (follow data minimisation policies)</li>
+      </ul>
+    
+      <h2 class="govuk-heading-l">How it works</h2>
+      <p class="govuk-body">Users:</p>
+      <ol class="govuk-list govuk-list--number">
+        <li>Select the text they want to hide</li>
+        <li>Choose <strong>Redact selected text</strong></li>
+        <li>Review the redacted statement</li>
+        <li>Continue to the next step</li>
+      </ol>
+      <p class="govuk-body">Users can revert to the original statement before submitting, or undo the last change.</p>
+    
+      <h2 class="govuk-heading-l">Content guidance</h2>
+      <p class="govuk-body">Use clear instructions so users understand what to redact and why.</p>
+
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">Example guidance to show near the tool:</h3>
+      <div class="govuk-inset-text govuk-!-margin-bottom-2">
+        Remove personal or sensitive information before publishing.<br>
+        Redact names, addresses, contact details or other information that could identify someone.<br>
+        Do not change the meaning of the statement.
+      </div>
+    
+      <h3 class="govuk-heading-m govuk-!-margin-top-4">UI text recommendations</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Redact selected text</li>
+        <li>Undo changes</li>
+        <li>Revert to original statement</li>
+        <li>Continue</li>
+      </ul>
+    
+      <h2 class="govuk-heading-l">Accessibility considerations</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <li><strong>Screen readers:</strong> announce “redacted” for each hidden character or group of characters. One common approach is to render a visible redaction glyph and a visually hidden label for screen readers, for example:
+          <pre class="govuk-body govuk-!-padding-2 govuk-!-margin-top-2" aria-hidden="false" tabindex="0">
+    <span aria-hidden="true">██████</span><span class="govuk-visually-hidden">, redacted</span>
+          </pre>
+          This makes the visual redaction obvious while providing an informative label to assistive technology.
+        </li>
+    
+        <li><strong>Keyboard access:</strong> ensure users can select text with the keyboard (shift + arrow keys) and activate all buttons (Enter/Space). Buttons should be focusable and have visible focus styles.</li>
+    
+        <li><strong>Communicate permanence:</strong> clearly state that redaction is permanent (or explain undo/revert behaviour) so users understand the consequences of their action.</li>
+      </ul>
+
+      <h2 class="govuk-heading-l">Existing research</h2>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/AS2/pages/2458878009/AZURE+AI+REDACTION+TOOL+Usability+Test">NSIP Applications user research findings</a>
+        </li>
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/BO/pages/2190180392/Rule+6+Party+Findings">Appeals Rule 6 user research findings</a>
+        </li>
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/BO/pages/1362395137/POST+MVP+-+Statement+redaction+and+Crosscopy">Appeals S78 statement redcation user research findings</a>
+        </li>
+      </ul>
+    
+    </section>
+
+    
   </div>
 </div>
 
 {% endblock %}
 
 {% block pageScripts %}
-  {{super()}}
+  {{ super() }}
   <script>
     function getSel() {
-        // Obtain the object reference for the textarea
-      var txtarea = document.getElementById("redactedComment");
+      const txtarea = document.getElementById("redactedComment");
+      const start = txtarea.selectionStart;
+      const finish = txtarea.selectionEnd;
+      const allText = txtarea.value;
+      const redactedText = "█".repeat(finish - start);
 
-      // Obtain the index of the first and last selected character
-      var start = txtarea.selectionStart;
-      var finish = txtarea.selectionEnd;
+      txtarea.value =
+        allText.substring(0, start) + redactedText + allText.substring(finish);
 
-      // Obtain all text from the textarea
-      var allText = txtarea.value;
-
-      // Calculate the length of the selection and create a "█" for each character
-      var redactedText = "█".repeat(finish - start);
-
-      // Replace the selected text with the redacted version
-      var newText = allText.substring(0, start) + redactedText + allText.substring(finish);
-
-      // Update the textarea with the new text
-      txtarea.value = newText;
-
-      // Set the cursor to immediately after the redacted section
+      // move cursor after redacted section
       txtarea.selectionStart = txtarea.selectionEnd = start + redactedText.length;
-
-      // Return focus to the textarea
       txtarea.focus();
     }
 
-    $('#replaceHint').addClass('app-hidden')
-    $('.govuk-button-group').removeClass('app-hidden')
-    $('#redactButton')
-      .on('click', getSel)
-    $('#undoButton').on('click', function(e) {
-      $('#redactedComment')[0].value = $('#redactedComment')[0].defaultValue
-    })
+    document.addEventListener("DOMContentLoaded", function () {
+      // Hide the replace hint and show the button group
+      document.getElementById("replaceHint").classList.add("app-hidden");
+      document.querySelector(".govuk-button-group").classList.remove("app-hidden");
 
+      // Redact selected text
+      document.getElementById("redactButton").addEventListener("click", getSel);
+
+      // Undo changes (revert to default value)
+      document.getElementById("undoButton").addEventListener("click", function () {
+        const textarea = document.getElementById("redactedComment");
+        textarea.value = textarea.defaultValue;
+      });
+
+      // Revert to original statement button
+      document.getElementById("revertButton").addEventListener("click", function () {
+        const textarea = document.getElementById("redactedComment");
+        textarea.value = textarea.defaultValue;
+      });
+    });
   </script>
 {% endblock %}

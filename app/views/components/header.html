@@ -1,0 +1,64 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Header" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item3") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+    <p>
+      <strong class="govuk-tag govuk-tag--yellow">Work in progress
+      </strong>
+    </p>
+
+    <p class="govuk-body-l">Use the header component to provide consistent navigation and branding across Planning Inspectorate services. The version used depends on the domain and service type.</p>
+    <p class="govuk-body">Use the <a href="https://design-system.service.gov.uk/components/header/">GOV.UK header</a> for services hosted on service.gov.uk or gov.uk domains.</p>
+    <p class="govuk-body">Use the PINS header for services hosted on planninginspectorate.gov.uk or internal domains.</p>
+
+    <h2 class="govuk-heading-l">When not to use this component</h2>
+    <p class="govuk-body">Do not use the GOV.UK header on services not hosted on GOV.UK domains. Avoid mixing GOV.UK and PINS branding on the same page.</p>
+    
+    <h2 class="govuk-heading-l">How it works</h2>
+    <h3 class="govuk-heading-m">GOV.UK header</h3>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Mandatory for GOV.UK-hosted services.</li>
+        <li>Includes GOV.UK crown and logotype.</li>
+        <li>Blue background, height 60px.</li>
+        <li>Service name and navigation must be handled separately using the <a href="https://design-system.service.gov.uk/components/service-navigation/">Service navigation component.</a></li>
+        <li>Font: GDS Transport.</li>
+    </ul>
+    
+
+    <h3 class="govuk-heading-m">PINS header</h3>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Must not include GOV.UK branding.</li>
+        <li>Visually distinct from GOV.UK header.</li>
+        <li>Colour palette should align with MHCLG colourways but use PINS assets.</li>
+        <li>Licensing must reflect non-GOV.UK status.</li>
+        <li>Font: Arial or Sans Serif.</li>
+        <li>Implementation details will be added once a shared approach is agreed.</li>
+    </ul>
+
+    <!--<image src="/public/images/components/header/NSIP-header.png" alt="Example of PINS header" class="govuk-!-margin-top-6 govuk-!-margin-bottom-6">-->
+    <h2 class="govuk-heading-l">Accessiblity</h2>
+    <p class="govuk-body">All headers must meet WCAG 2.2 standards.
+    </p>
+
+    <p class="govuk-body">Link colours must pass contrast checks (e.g. Teal #10847E for AAA compliance in Back Office).
+    </p>
+
+    <h2 class="govuk-heading-l">Research on this component</h2>
+
+    <p class="govuk-body">User research findings on this component are in progress and will be added here when available.
+    </p>
+
+  </div>
+</div>
+{% endblock %}
