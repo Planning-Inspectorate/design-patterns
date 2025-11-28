@@ -4,6 +4,8 @@
 {% set pageName = "Redaction tool" %}
 
 {% from "layouts/component-menu.html" import sideMenu %}
+{% from "components/redaction-tool.njk" import redactionTool %}
+
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -21,49 +23,29 @@
     </p>
 
     <p class="govuk-body-l">Use the redaction tool to hide personal or sensitive information before publishing content.
-      Redaction replaces characters with a block symbol (█). This means the information cannot be read or restored once redacted.</p>
+      Redaction replaces characters with a block symbol (█). This means the information cannot be read once published online.</p>
 
     {% set exampleHtml %}
 
-    <p class="govuk-!-margin-bottom-0">Original statement:</p>
-    {{ govukInsetText({
-      classes: 'govuk-!-margin-top-2',
-      text: "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees."
-    }) }}
+    {{ redactionTool(
+      "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees.
+      ",
+      "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees.
+      "
+    ) }}
 
-    <button type="button" class="govuk-button govuk-button--secondary" id="revertButton">
-      Revert to original statement
-    </button>
+    {% endset -%}
 
-    <p id="replaceHint">Replace any character with █ to redact it.</p>
+    {% set codeHtml %}
 
-    <form method="post" class="govuk-!-margin-top-2">
+    <pre class="code-snippet"><code>{% raw -%}
+{{ redactionTool 
 
-      {{ govukTextarea({
-        name: "redactedComment",
-        id: "redactedComment",
-        rows: "9",
-        label: {
-          text: "Redacted statement",
-          classes: "govuk-label--m",
-          isPageHeading: false
-        },
+("statement goes here", "statement goes here") 
 
-        value: "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees."
-
-      }) }}
-
-      <div class="govuk-button-group app-hidden">
-        <button type="button" class="govuk-button govuk-button--secondary" id="redactButton">Redact selected text</button>
-        <button type="button" class="govuk-button govuk-button--secondary" id="undoButton">Undo changes</button>
-      </div>
-
-      {{ govukButton({
-        text: "Continue"
-      }) }}
-
-    </form>
-
+}}
+{% endraw %}
+      </code></pre>
     {% endset -%}
 
     {{ govukTabs({
@@ -76,10 +58,10 @@
           }
         },
         {
-          label: "Code",
-          id: "code",
+          label: "Nunjucks",
+          id: "nunjucks",
           panel: {
-            text: ""
+            html: codeHtml
           }
         }
       ]
@@ -90,40 +72,32 @@
     
       <p class="govuk-body">Use this tool when users need to:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>remove personal details from statements or documents</li>
-        <li>protect sensitive information before publishing</li>
-        <li>respond to information requests where some content cannot be shared</li>
+        <li>remove personal details from statements or written representations</li>
+        <li>hide sensitive or inflammatory information before publishing</li>
       </ul>
     
       <h2 class="govuk-heading-l">When not to use this pattern</h2>
       <p class="govuk-body">Do not use this tool when:</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>users are editing content for clarity or correction</li>
-        <li>an internal system already handles sensitive information securely</li>
         <li>personal data should not have been collected in the first place (follow data minimisation policies)</li>
+        <li>to merge written representations or statements - follow the proper process for doing so instead</li>
       </ul>
     
       <h2 class="govuk-heading-l">How it works</h2>
       <p class="govuk-body">Users:</p>
       <ol class="govuk-list govuk-list--number">
-        <li>Select the text they want to hide</li>
+        <li>Highlight the text they want to hide</li>
         <li>Choose <strong>Redact selected text</strong></li>
         <li>Review the redacted statement</li>
         <li>Continue to the next step</li>
       </ol>
-      <p class="govuk-body">Users can revert to the original statement before submitting, or undo the last change.</p>
-    
-      <h2 class="govuk-heading-l">Content guidance</h2>
-      <p class="govuk-body">Use clear instructions so users understand what to redact and why.</p>
+      <p class="govuk-body">Users can revert to the original statement before submitting, or undo all redactions made during the current session.</p>
 
-      <h3 class="govuk-heading-m govuk-!-margin-top-4">Example guidance to show near the tool:</h3>
-      <div class="govuk-inset-text govuk-!-margin-bottom-2">
-        Remove personal or sensitive information before publishing.<br>
-        Redact names, addresses, contact details or other information that could identify someone.<br>
-        Do not change the meaning of the statement.
-      </div>
+      <p class="govuk-body">Any changes should be saved to the case history, including who made them and when.</p>
     
-      <h3 class="govuk-heading-m govuk-!-margin-top-4">UI text recommendations</h3>
+      <h2 class="govuk-heading-l">UI text recommendations</h2>
+    
       <ul class="govuk-list govuk-list--bullet">
         <li>Redact selected text</li>
         <li>Undo changes</li>
@@ -132,18 +106,22 @@
       </ul>
     
       <h2 class="govuk-heading-l">Accessibility considerations</h2>
+
       <ul class="govuk-list govuk-list--bullet">
-        <li><strong>Screen readers:</strong> announce “redacted” for each hidden character or group of characters. One common approach is to render a visible redaction glyph and a visually hidden label for screen readers, for example:
-          <pre class="govuk-body govuk-!-padding-2 govuk-!-margin-top-2" aria-hidden="false" tabindex="0">
-    <span aria-hidden="true">██████</span><span class="govuk-visually-hidden">, redacted</span>
+        <li>
+          <strong>Screen readers:</strong> announce “redacted” for each hidden character or group of characters. Render a visible redaction glyph with a screen-reader label, for example:
+          <pre class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0" tabindex="0">
+            <span aria-label="redacted">██████</span>
           </pre>
           This makes the visual redaction obvious while providing an informative label to assistive technology.
         </li>
     
-        <li><strong>Keyboard access:</strong> ensure users can select text with the keyboard (shift + arrow keys) and activate all buttons (Enter/Space). Buttons should be focusable and have visible focus styles.</li>
-    
-        <li><strong>Communicate permanence:</strong> clearly state that redaction is permanent (or explain undo/revert behaviour) so users understand the consequences of their action.</li>
+        <li><strong>Keyboard access:</strong> ensure users can select text with the keyboard (shift + arrow keys) and activate all buttons (Enter/Space).</li>
       </ul>
+
+      <h2 class="govuk-heading-l">AI assisted redactions</h2>
+
+      <p class="govuk-body">The Planning Inspectorate is exploring the use of AI to suggest redactions for users to review and confirm. Guidance will follow after further research, but note it’s already used in some services.</p>
 
       <h2 class="govuk-heading-l">Existing research</h2>
 
