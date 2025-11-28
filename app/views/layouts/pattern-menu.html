@@ -1,4 +1,5 @@
 {# layouts/side-menu.html #}
+
 {%- from "moj/components/side-navigation/macro.njk" import mojSideNavigation -%}
 
 {% macro sideMenu(currentItem) %}
@@ -14,6 +15,11 @@
         text: "Filters",
         href: "/patterns/filters",
         active: currentItem == "item2"
+      },
+      {
+        text: "Redaction tool",
+        href: "/patterns/redaction-tool",
+        active: currentItem == "item3"
       }
     ]
   }) }}

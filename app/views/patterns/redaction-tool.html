@@ -1,16 +1,16 @@
-{% set currentPage = "components" %}
+{% set currentPage = "patterns" %}
 {% extends "layouts/main.html" %}
 
 {% set pageName = "Redaction tool" %}
 
-{% from "layouts/component-menu.html" import sideMenu %}
-{% from "components/redaction-tool.njk" import redactionTool %}
+{% from "layouts/pattern-menu.html" import sideMenu %}
+{% from "patterns/redaction-tool.njk" import redactionTool %}
 
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
-    {{ sideMenu("item1") }}
+    {{ sideMenu("item3") }}
   </div>
 
   <div class="govuk-grid-column-three-quarters">
@@ -158,30 +158,27 @@
       txtarea.value =
         allText.substring(0, start) + redactedText + allText.substring(finish);
 
-      // move cursor after redacted section
       txtarea.selectionStart = txtarea.selectionEnd = start + redactedText.length;
       txtarea.focus();
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-      // Hide the replace hint and show the button group
-      document.getElementById("replaceHint").classList.add("app-hidden");
-      document.querySelector(".govuk-button-group").classList.remove("app-hidden");
+      setTimeout(function () {
+        document.getElementById("replaceHint")?.classList.add("app-hidden");
+        document.querySelector(".govuk-button-group")?.classList.remove("app-hidden");
 
-      // Redact selected text
-      document.getElementById("redactButton").addEventListener("click", getSel);
+        document.getElementById("redactButton")?.addEventListener("click", getSel);
 
-      // Undo changes (revert to default value)
-      document.getElementById("undoButton").addEventListener("click", function () {
-        const textarea = document.getElementById("redactedComment");
-        textarea.value = textarea.defaultValue;
-      });
+        document.getElementById("undoButton")?.addEventListener("click", function () {
+          const textarea = document.getElementById("redactedComment");
+          textarea.value = textarea.defaultValue;
+        });
 
-      // Revert to original statement button
-      document.getElementById("revertButton").addEventListener("click", function () {
-        const textarea = document.getElementById("redactedComment");
-        textarea.value = textarea.defaultValue;
-      });
+        document.getElementById("revertButton")?.addEventListener("click", function () {
+          const textarea = document.getElementById("redactedComment");
+          textarea.value = textarea.defaultValue;
+        });
+      }, 0);
     });
   </script>
 {% endblock %}
