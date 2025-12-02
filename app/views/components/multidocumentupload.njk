@@ -4,41 +4,51 @@
   {% from "govuk/components/button/macro.njk" import govukButton %}
   {%- from "moj/components/multi-file-upload/macro.njk" import mojMultiFileUpload -%}
 
+  <h1 class="govuk-heading-l">
+    Upload documents
+  <h1>
+
   <p class="govuk-body">
-    Choose a single or multiple files to upload.
+    Choose one or more files to upload.
   </p>
 
-  <p class="govuk-hint">
-    The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
-  </p>
-
-  <p class="govuk-hint">
+  <p class="govuk-body">
     The total of your uploaded files must be smaller than 1 GB.
   </p>
 
-  {% set uploadHtml %}
-    {{ govukFileUpload({
-      id: "documents",
-      name: "documents",
-      classes: 'moj-multi-file-upload__input',
-      label: {
-      text: "Upload a file",
-      classes: 'govuk-visually-hidden'
-      },
-      attributes: { multiple: '' },
-      errorMessage: errorMessage
-    }) }}
+
+{% set uploadHtml %}
+  <div>
+    <h2 class="govuk-heading-m govuk-!-font-weight-bold">Upload files</h2>
+    <p class="govuk-hint">
+      The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
+    </p>
+
+    <div class="file-drop-area">
+      {{ govukFileUpload({
+        id: "documents",
+        name: "documents",
+        classes: 'moj-multi-file-upload__input',
+        attributes: { multiple: '' },
+        errorMessage: errorMessage
+      }) }}
+    </div>
 
     {{ govukButton({
       text: 'Upload file',
       classes: 'govuk-button--secondary moj-multi-file-upload__button'
     })}}
-  {% endset %}
+  </div>
+{% endset %}
+
 
   {{ mojMultiFileUpload({
     uploadedFiles: {
       heading: { text: 'Files added' },
       items: uploadedFiles
+    },
+    hint: {
+      text: "The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB"
     },
     uploadHtml: uploadHtml
   }) }}
