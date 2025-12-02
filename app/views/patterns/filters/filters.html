@@ -574,25 +574,4 @@
 </div>
 </div>
 
-<script>
-  function copyCode(button) {
-    const codeWrapper = button.closest('.code-wrapper');
-    const codeBlock = codeWrapper.querySelector('code');
-    const text = codeBlock.textContent;
-    
-    navigator.clipboard.writeText(text).then(() => {
-      const originalText = button.textContent;
-      button.textContent = 'Copied';
-      button.classList.remove('govuk-button--secondary');
-      button.classList.add('govuk-button--success');
-      
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.classList.remove('govuk-button--success');
-        button.classList.add('govuk-button--secondary');
-      }, 2000);
-    });
-  }
-</script>
-
 {% endblock %}
