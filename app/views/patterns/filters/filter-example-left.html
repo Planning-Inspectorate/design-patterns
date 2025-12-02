@@ -1,0 +1,148 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% block pageTitle %}
+Unbranded page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<!-- Custom component styles -->
+
+<style>
+    .govuk-details__summary::before {
+        clip-path: polygon(6.38% 22.63%, 49.5% 65.75%, 92.63% 22.63%, 100% 30%, 50% 80%, 0% 30%);
+        background-color: black;
+        color: black;
+        width: 3px;
+        height: 3px;
+    }
+
+    .govuk-details[open]>.govuk-details__summary::before {
+        clip-path: polygon(0% 71.88%, 49.5% 22.63%, 98.5% 71.88%, 91.63% 78.71%, 50% 36.88%, 7.37% 79.29%);
+        width: 3px;
+        height: 3px;
+    }
+</style>
+<!-- Filter HTML -->
+
+<h3 class="govuk-heading-s">Filters</h3>
+<div style="padding-bottom:10px;"><a href="#" id="toggle-filters" class="govuk-link">Show all filters</a></div>
+<details class="govuk-details govuk-!-margin-bottom-0" id="filter-panel">
+    <summary class="govuk-details__summary" style="padding:10px 30px;width:80%">
+        <a class="govuk-link">
+            Submitted by
+        </a>
+    </summary>
+    <div style="padding-left:30px;">
+        <form class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-grid-row">
+                    <div class="">
+                        <fieldset class="govuk-fieldset" aria-describedby="type-of-application-hint">
+                            <div class="govuk-checkboxes govuk-checkboxes--small">
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-1" name="type" type="checkbox"
+                                        value="Planning permission">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-1">
+                                        Interested party (23)
+                                    </label>
+                                </div>
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
+                                        value="Outline planning permission with some matters reserved">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                        Consultee (20)
+                                    </label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</details>
+<hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible">
+
+<details class="govuk-details govuk-!-margin-top-3 govuk-!-margin-padding-0 govuk-!-margin-bottom-0">
+    <summary class="govuk-details__summary" style="padding:10px 30px;width:80%">
+        <a class="govuk-link">
+            Contains attachments
+        </a>
+    </summary>
+    <div style="padding-left:30px;">
+        <form class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-grid-row">
+                    <div class="">
+                        <fieldset class="govuk-fieldset" aria-describedby="type-of-application-hint">
+                            <div class="govuk-checkboxes govuk-checkboxes--small">
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-1" name="type" type="checkbox"
+                                        value="Planning permission">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-1">
+                                        Yes (3)
+                                    </label>
+                                </div>
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
+                                        value="Outline planning permission with some matters reserved">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                        No (72)
+                                    </label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</details>
+<hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible">
+
+<a href="written-reps-selected" class="govuk-button" style="margin-top:20px; margin-bottom:0px;">
+    Apply filters
+</a>
+
+</div>
+
+<!-- Script to enable the Show/Hide functionality -->
+
+<script>
+    (function () {
+        var toggleLink = document.getElementById('toggle-filters');
+        if (!toggleLink) return;
+
+        var details = Array.prototype.slice.call(document.querySelectorAll('details.govuk-details'));
+
+        function allOpen() {
+            return details.length > 0 && details.every(function (d) { return d.open; });
+        }
+
+        function updateLinkText() {
+            toggleLink.textContent = allOpen() ? 'Hide all filters' : 'Show all filters';
+        }
+
+        toggleLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            var shouldClose = allOpen();
+            details.forEach(function (d) {
+                if (shouldClose) {
+                    d.removeAttribute('open');
+                } else {
+                    d.setAttribute('open', '');
+                }
+            });
+            updateLinkText();
+        });
+
+        details.forEach(function (d) { d.addEventListener('toggle', updateLinkText); });
+
+        updateLinkText();
+    }());
+</script>
+
+{% endblock %}
