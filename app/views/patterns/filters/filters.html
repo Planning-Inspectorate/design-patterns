@@ -4,6 +4,8 @@
 {% set pageName = "Filters" %}
 
 {% from "layouts/pattern-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+
 
 {% block content %}
 
@@ -56,11 +58,9 @@
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#left-tab-2">HTML</a>
         </li>
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#left-tab-3">Example image</a>
-        </li>
+        
         <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#left-tab-4">Example links</a>
+          <a class="govuk-tabs__tab" href="#left-tab-3">Example links</a>
         </li>
       </ul>
       <div class="govuk-tabs__panel" id="left-tab-1">
@@ -68,239 +68,531 @@
 
         </iframe>
       </div>
-      <div class="govuk-tabs__panel" id="left-tab-2">
+      <div class="govuk-tabs__panel" id="left-tab-2" style="padding-top: 0;">
+        {{ codeBlock('<!-- Custom styling -->
 
-      </div>
-      <div class="govuk-tabs__panel" id="left-tab-3">
-        <img src="/public/images/patterns/filters/filter-above-results.png"
-          alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
-      </div>
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="left-tab-4">
-        <h4 class="govuk-heading-s">NSIPs prototype</h4>
-        <ul class="govuk-list">
-          <li>
-            <a
-              href="https://github.com/Planning-Inspectorate/applications-service-prototype/blob/main/app/views/FrontOffice/Project_documents.html">GitHub
-              link</a>
-          </li>
-          <li>
-            <a
-              href="https://pins-app-prototype-applications-front-office.azurewebsites.net/FrontOffice/Project_documents">View
-              in prototype</a>
-          </li>
-        </ul>
+<style>
+    .govuk-details__summary::before {
+        clip-path: polygon(6.38% 22.63%, 49.5% 65.75%, 92.63% 22.63%, 100% 30%, 50% 80%, 0% 30%);
+        background-color: black;
+        color: black;
+        width: 3px;
+        height: 3px;
+    }
 
-        <h4 class="govuk-heading-s">Crown Developments prototype</h4>
-        <ul class="govuk-list">
-          <li>
-            <a
-              href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/written-reps.html">GitHub
-              link</a>
-          </li>
-          <li>
-            <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/written-reps">View
-              in prototype</a>
-          </li>
-        </ul>
-      </div>
+    .govuk-details[open]>.govuk-details__summary::before {
+        clip-path: polygon(0% 71.88%, 49.5% 22.63%, 98.5% 71.88%, 91.63% 78.71%, 50% 36.88%, 7.37% 79.29%);
+        width: 3px;
+        height: 3px;
+    }
+</style>
+
+<!-- Filter HTML -->
+
+<h3 class="govuk-heading-s">Filters</h3>
+<div style="padding-bottom:10px;"><a href="#" id="toggle-filters" class="govuk-link">Show all filters</a></div>
+<details class="govuk-details govuk-!-margin-bottom-0" id="filter-panel">
+    <summary class="govuk-details__summary" style="padding:10px 30px;width:80%">
+        <a class="govuk-link">
+            Submitted by
+        </a>
+    </summary>
+    <div style="padding-left:30px;">
+        <form class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-grid-row">
+                    <div class="">
+                        <fieldset class="govuk-fieldset">
+                            <div class="govuk-checkboxes govuk-checkboxes--small">
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-1" name="type" type="checkbox"
+                                        value="Planning permission">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-1">
+                                        Interested party (23)
+                                    </label>
+                                </div>
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
+                                        value="Outline planning permission with some matters reserved">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                        Consultee (20)
+                                    </label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
+</details>
+<hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible">
 
-    <p class="govuk-body">This pattern is based on the
-      <a
-        href="https://national-infrastructure-consenting.planninginspectorate.gov.uk/projects/EN010128/documents?itemsPerPage=25">Find
-        a National Infrastructure Project</a> filter, with updates based on user research and design guidance.
-    </p>
+<details class="govuk-details govuk-!-margin-top-3 govuk-!-margin-padding-0 govuk-!-margin-bottom-0">
+    <summary class="govuk-details__summary" style="padding:10px 30px;width:80%">
+        <a class="govuk-link">
+            Contains attachments
+        </a>
+    </summary>
+    <div style="padding-left:30px;">
+        <form class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-grid-row">
+                    <div class="">
+                        <fieldset class="govuk-fieldset">
+                            <div class="govuk-checkboxes govuk-checkboxes--small">
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-1" name="type" type="checkbox"
+                                        value="Planning permission">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-1">
+                                        Yes (3)
+                                    </label>
+                                </div>
+                                <div class="govuk-checkboxes__item">
+                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
+                                        value="Outline planning permission with some matters reserved">
+                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                        No (72)
+                                    </label>
+                                </div>
 
-    <h3 class="govuk-heading-m">Filters above results</h3>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</details>
+<hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible">
 
-    <p class="govuk-body">Show filters above the results when:</p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>the page layout does not allow for a left-hand panel</li>
-      <li>the results need to span the full width of the page</li>
-      <li>the left-hand column is used for other important content</li>
-    </ul>
+<a href="" class="govuk-button" style="margin-top:20px; margin-bottom:0px;">
+    Apply filters
+</a>
 
-    <div class="govuk-tabs" data-module="govuk-tabs">
-      <h2 class="govuk-tabs__title">Contents</h2>
-      <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#top-tab-1">Example</a>
+</div>'
+      , 'html') }}
+    </div>
+    
+    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="left-tab-3">
+      <h4 class="govuk-heading-s">NSIPs prototype</h4>
+      <ul class="govuk-list">
+        <li>
+          <a
+            href="https://github.com/Planning-Inspectorate/applications-service-prototype/blob/main/app/views/FrontOffice/Project_documents.html">GitHub
+            link</a>
         </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#top-tab-2">HTML</a>
-        </li>
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-          <a class="govuk-tabs__tab" href="#top-tab-3">Example image</a>
-        </li>
-        <li class="govuk-tabs__list-item">
-          <a class="govuk-tabs__tab" href="#top-tab-4">Example links</a>
+        <li>
+          <a
+            href="https://pins-app-prototype-applications-front-office.azurewebsites.net/FrontOffice/Project_documents">View
+            in prototype</a>
         </li>
       </ul>
-      <div class="govuk-tabs__panel" id="top-tab-1">
 
-      </div>
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-2">
-
-
-      </div>
-
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-3">
-        <img src="/public/images/patterns/filters/left-hand-filter-panel.png"
-          alt="A screenshot of a filter panel in the left-hand navigation of the Find a National Infrastructure Project service. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
-
-      </div>
-
-      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-4">
-        <h4 class="govuk-heading-s">Crown Developments prototype</h4>
-        <ul class="govuk-list">
-          <li>
-            <a
-              href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/applications.html">GitHub
-              link</a>
-          </li>
-          <li>
-            <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/applications">View
-              in prototype</a>
-          </li>
-        </ul>
-
-      </div>
+      <h4 class="govuk-heading-s">Crown Developments prototype</h4>
+      <ul class="govuk-list">
+        <li>
+          <a
+            href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/written-reps.html">GitHub
+            link</a>
+        </li>
+        <li>
+          <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/written-reps">View
+            in prototype</a>
+        </li>
+      </ul>
     </div>
-
-
-
-    <p class="govuk-body">This pattern is based on the
-      <a href="https://www.gov.uk/search">GOV.UK search</a>
-      filters.
-    </p>
-
-    <h2 class="govuk-heading-l">How to design filters</h2>
-
-    <h3 class="govuk-heading-m">Make filters relevant</h3>
-
-    <p class="govuk-body">Base filters on real user needs. Use language your users understand. Avoid technical terms or
-      internal labels.
-    </p>
-
-    <p class="govuk-body">Group related filters together and use clear headings.
-    </p>
-
-    <h3 class="govuk-heading-m">Keep filter lists short</h3>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>Show the most common or useful options first.</li>
-      <li>Keep lists scannable and avoid long, ungrouped lists</li>
-      <li>Consider grouping options into categories</li>
-    </ul>
-
-    <h3 class="govuk-heading-m">Show applied filters</h3>
-
-    <p class="govuk-body">When users apply filters:</p>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>show selected filters as removable tags or “chips”</li>
-      <li>provide a “Clear filters” option</li>
-      <li>update the results and filter counts dynamically</li>
-    </ul>
-
-    <img style="border:1px solid grey; margin-bottom: 30px" src="/public/images/patterns/filters/filtered-results.png"
-      alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
-
-    <h3 class="govuk-heading-m">Make filters work with search</h3>
-
-    <p class="govuk-body">Make it easy to remove filters or clear the search independently.
-    </p>
-
-    <h3 class="govuk-heading-m">No results</h3>
-
-    <p class="govuk-body">
-      If a user applies filters or enters a search and gets no results, help them recover:
-    </p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>show a clear message that no results were found</li>
-      <li>suggest how they can change or remove filters</li>
-      <li>offer a link to remove filters and clear search</li>
-    </ul>
-
-    <h3 class="govuk-heading-m">Allow users to show or hide filters</h3>
-
-    <p class="govuk-body">Let users expand or collapse individual filters. Include a “Show all filters” option to expand
-      or collapse all.</p>
-
-    <p class="govuk-body">If filters are in a panel, provide a clear “Show filters” and “Hide filters” button,
-      especially if the panel overlaps content like a map.</p>
-
-    <h2 class="govuk-heading-l">What not to do</h2>
-
-    <p class="govuk-body">Avoid:
-    </p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>long filter lists that scroll beyond the page content: use collapsible sections instead</li>
-      <li>scroll traps: do not allow endless scrolling inside filter panels</li>
-      <li>unusual input types: for example, avoid using radio buttons unless there’s a clear reason</li>
-    </ul>
-
-    <h2 class="govuk-heading-l">Mobile design</h2>
-
-    <p class="govuk-body">On mobile, filters are usually hidden behind a “Show filters” button to save space. When users
-      tap the button, the filter panel can expand as an accordion or appear as a full-screen overlay.
-    </p>
-
-    <div style="width:100%; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:20px; align-items:flex-start;">
-      <img style="border:1px solid grey; max-width:45%; height:auto;"
-        src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
-        alt="A screenshot of a mobile filter panel overlay on the Find a National Infrastructure Project service. The filter panel has a 'return to results' button at the top, and each filter can be expanded or collapsed. There is also an Apply filters button at the bottom.">
-
-      <img style="border:1px solid grey; max-width:49%; height:auto;"
-        src="/public/images/patterns/filters/filter-above-results-mobile.png"
-        alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
-    </div>
-
-    <p class="govuk-body">You can also
-      <a
-        href="https://design.education.gov.uk/design-system/components/filter#:~:text=when%20using%20filters-,Mobile%20design,-When%20using%20mobile">read
-        Department for Education guidance</a>
-      for designing filters on mobile.
-    </p>
-
-    <h2 class="govuk-heading-l">Accessibility</h2>
-
-    <p class="govuk-body">Make sure filters are:
-    </p>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>keyboard navigable</li>
-      <li>screen reader friendly</li>
-      <li>visually clear: use white backgrounds, simple arrows, and uncluttered layouts</li>
-    </ul>
-
-    <p class="govuk-body">Use simple visuals (for example, white backgrounds, uncluttered layouts, simple arrows).
-    </p>
-
-    <h2 class="govuk-heading-l">Research on this component</h2>
-
-    <p class="govuk-body">We’re currently doing user research on this pattern. We’ll update this page when findings are
-      available.
-    </p>
-
-    <h2 class="govuk-heading-l">Links to other design systems</h2>
-
-    <ul class="govuk-list govuk-list--bullet">
-      <li>
-        <a href="https://design-patterns.service.justice.gov.uk/components/filter/">Ministry of Justice (MOJ) filter
-          component
-        </a>
-      </li>
-      <li>
-        <a href="https://design.education.gov.uk/design-system/components/filter">Department for Education (DfE) filter
-          component
-        </a>
-      </li>
-      <li>
-        <a href="https://design-system.est.org.uk/patterns/filter.html">Energy Saving Trust (EST) filter pattern</a>
-      </li>
-    </ul>
-
   </div>
+
+  <p class="govuk-body">This pattern is based on the
+    <a
+      href="https://national-infrastructure-consenting.planninginspectorate.gov.uk/projects/EN010128/documents?itemsPerPage=25">Find
+      a National Infrastructure Project</a> filter, with updates based on user research and design guidance.
+  </p>
+
+  <h3 class="govuk-heading-m">Filters above results</h3>
+
+  <p class="govuk-body">Show filters above the results when:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>the page layout does not allow for a left-hand panel</li>
+    <li>the results need to span the full width of the page</li>
+    <li>the left-hand column is used for other important content</li>
+  </ul>
+
+  <div class="govuk-tabs" data-module="govuk-tabs">
+    <h2 class="govuk-tabs__title">Contents</h2>
+    <ul class="govuk-tabs__list">
+      <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+        <a class="govuk-tabs__tab" href="#top-tab-1">Example</a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#top-tab-2">HTML</a>
+      </li>
+      <li class="govuk-tabs__list-item">
+        <a class="govuk-tabs__tab" href="#top-tab-3">Example links</a>
+      </li>
+    </ul>
+    <div class="govuk-tabs__panel" id="top-tab-1">
+      <iframe height="400px" width="100%" src="filter-example-top.html">
+
+      </iframe>
+    </div>
+    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-2">
+      {{ codeBlock('<!--Custom styling-->
+<style>
+
+    .govuk-details__summary::before {
+        clip-path: polygon(6.38% 22.63%, 49.5% 65.75%, 92.63% 22.63%, 100% 30%, 50% 80%, 0% 30%);
+        background-color: black;
+        width: 3px;
+        height: 3px;
+    }
+
+    .govuk-details[open]>.govuk-details__summary::before {
+        clip-path: polygon(0% 71.88%, 49.5% 22.63%, 98.5% 71.88%, 91.63% 78.71%, 50% 36.88%, 7.37% 79.29%);
+        width: 3px;
+        height: 3px;
+    }
+</style>
+
+<!--Filter HTML-->
+
+<details class="govuk-details govuk-!-margin-top-3" id="filter-panel">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            Filter applications
+        </span>
+    </summary>
+    <div style="background-color:#F3F2F1; padding:20px;">
+        <details class="govuk-details govuk-!-margin-bottom-0">
+            <summary class="govuk-details__summary">
+                <h3 class="govuk-heading-s">
+                    Type of application
+                    </span>
+            </summary>
+            <div style="padding-left:30px;">
+                <form class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <div class="govuk-grid-row">
+                            <div class="">
+                                <fieldset class="govuk-fieldset" aria-describedby="type-of-application-hint">
+                                    <div class="govuk-checkboxes govuk-checkboxes--small">
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="type-3" name="type" type="checkbox"
+                                                value="Approval of reserved matters following outline approval">
+                                            <label class="govuk-label govuk-checkboxes__label" for="type-3">
+                                                Approval of reserved matters following outline approval
+                                                (0)
+                                            </label>
+                                        </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="type-4" name="type" type="checkbox"
+                                            value="Planning permission and listed building consent (LBC)">
+                                        <label class="govuk-label govuk-checkboxes__label" for="type-4">
+                                            Planning permission and listed building consent (LBC)
+                                            for alterations, extension or demolition of a listed
+                                            building (3)
+                                        </label>
+
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="type-2" name="type"
+                                            type="checkbox"
+                                            value="Outline planning permission with some matters reserved">
+                                        <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                            Outline planning permission with some matters reserved
+                                            (1)
+                                        </label>
+                                    </div>
+                                    <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
+                                            value="Outline planning permission with some matters reserved">
+                                        <label class="govuk-label govuk-checkboxes__label" for="type-2">
+                                            Outline planning permission with all matters reserved
+                                            (1)
+                                        </label>
+                                    </div>
+                                    
+                                        <div class="govuk-checkboxes__item">
+                                            
+                                            <input class="govuk-checkboxes__input" id="type-1" name="type"
+                                                type="checkbox" value="Planning permission">
+                                            <label class="govuk-label govuk-checkboxes__label" for="type-1">
+                                                Planning permission (20)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </details>
+        <hr class="govuk-section-break govuk-section-break--s govuk-section-break--visible">
+
+        <details class="govuk-details govuk-!-margin-top-3 govuk-!-margin-padding-0 govuk-!-margin-bottom-0"
+            id="filter-panel">
+            <summary class="govuk-details__summary">
+                <h3 class="govuk-heading-s">Stage</h3>
+            </summary>
+            <div style="padding-left:30px;">
+                <form class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <div class="govuk-grid-row">
+                            <div class="">
+                                <fieldset class="govuk-fieldset" aria-describedby="stage-hint">
+                                    <div class="govuk-checkboxes govuk-checkboxes--small">
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-accepted" name="stage"
+                                                type="checkbox" value="Accepted">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-accepted">
+                                                Accepted (0)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-consultation" name="stage"
+                                                type="checkbox" value="Consultation">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-consultation">
+                                                Consultation (2)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-procedure" name="stage"
+                                                type="checkbox" value="Procedure choice">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-procedure">
+                                                Procedure choice (0)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-written" name="stage"
+                                                type="checkbox" value="Written representations">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-written">
+                                                Written representations (2)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-inquiry" name="stage"
+                                                type="checkbox" value="Inquiry">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-inquiry">
+                                                Inquiry (0)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-hearing" name="stage"
+                                                type="checkbox" value="Hearing">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-hearing">
+                                                Hearing (1)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-decision" name="stage"
+                                                type="checkbox" value="Decision">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-decision">
+                                                Final decision (12)
+                                            </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input" id="stage-decision"
+                                                name="stage" type="checkbox" value="Decision">
+                                            <label class="govuk-label govuk-checkboxes__label" for="stage-decision">
+                                                Post-decision (0)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="govuk-grid-column-one-third"></div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+        </details>
+
+        <a href="applications-selected" class="govuk-button" style="margin-bottom:0px">
+            Apply filters
+        </a>
+    </div>
+</details>'
+, 'html') }}
+
+    </div>
+
+    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="top-tab-3">
+      <h4 class="govuk-heading-s">Crown Developments prototype</h4>
+      <ul class="govuk-list">
+        <li>
+          <a
+            href="https://github.com/Planning-Inspectorate/crown-developments-prototype/blob/main/app/views/features/filters/v3/applications.html">GitHub
+            link</a>
+        </li>
+        <li>
+          <a href="https://pins-app-prototype-crown-dev.azurewebsites.net/features/filters/v3/applications">View
+            in prototype</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+
+  <p class="govuk-body">This pattern is based on the
+    <a href="https://www.gov.uk/search">GOV.UK search</a>
+    filters.
+  </p>
+
+  <h2 class="govuk-heading-l">How to design filters</h2>
+
+  <h3 class="govuk-heading-m">Make filters relevant</h3>
+
+  <p class="govuk-body">Base filters on real user needs. Use language your users understand. Avoid technical terms or
+    internal labels.
+  </p>
+
+  <p class="govuk-body">Group related filters together and use clear headings.
+  </p>
+
+  <h3 class="govuk-heading-m">Keep filter lists short</h3>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>Show the most common or useful options first.</li>
+    <li>Keep lists scannable and avoid long, ungrouped lists</li>
+    <li>Consider grouping options into categories</li>
+  </ul>
+
+  <h3 class="govuk-heading-m">Show applied filters</h3>
+
+  <p class="govuk-body">When users apply filters:</p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>show selected filters as removable tags or “chips”</li>
+    <li>provide a “Clear filters” option</li>
+    <li>update the results and filter counts dynamically</li>
+  </ul>
+
+  <img style="border:1px solid grey; margin-bottom: 30px" src="/public/images/patterns/filters/filtered-results.png"
+    alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+
+  <h3 class="govuk-heading-m">Make filters work with search</h3>
+
+  <p class="govuk-body">Make it easy to remove filters or clear the search independently.
+  </p>
+
+  <h3 class="govuk-heading-m">No results</h3>
+
+  <p class="govuk-body">
+    If a user applies filters or enters a search and gets no results, help them recover:
+  </p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>show a clear message that no results were found</li>
+    <li>suggest how they can change or remove filters</li>
+    <li>offer a link to remove filters and clear search</li>
+  </ul>
+
+  <h3 class="govuk-heading-m">Allow users to show or hide filters</h3>
+
+  <p class="govuk-body">Let users expand or collapse individual filters. Include a “Show all filters” option to expand
+    or collapse all.</p>
+
+  <p class="govuk-body">If filters are in a panel, provide a clear “Show filters” and “Hide filters” button,
+    especially if the panel overlaps content like a map.</p>
+
+  <h2 class="govuk-heading-l">What not to do</h2>
+
+  <p class="govuk-body">Avoid:
+  </p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>long filter lists that scroll beyond the page content: use collapsible sections instead</li>
+    <li>scroll traps: do not allow endless scrolling inside filter panels</li>
+    <li>unusual input types: for example, avoid using radio buttons unless there’s a clear reason</li>
+  </ul>
+
+  <h2 class="govuk-heading-l">Mobile design</h2>
+
+  <p class="govuk-body">On mobile, filters are usually hidden behind a “Show filters” button to save space. When users
+    tap the button, the filter panel can expand as an accordion or appear as a full-screen overlay.
+  </p>
+
+  <div style="width:100%; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:20px; align-items:flex-start;">
+    <img style="border:1px solid grey; max-width:45%; height:auto;"
+      src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
+      alt="A screenshot of a mobile filter panel overlay on the Find a National Infrastructure Project service. The filter panel has a 'return to results' button at the top, and each filter can be expanded or collapsed. There is also an Apply filters button at the bottom.">
+
+    <img style="border:1px solid grey; max-width:49%; height:auto;"
+      src="/public/images/patterns/filters/filter-above-results-mobile.png"
+      alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+  </div>
+
+  <p class="govuk-body">You can also
+    <a
+      href="https://design.education.gov.uk/design-system/components/filter#:~:text=when%20using%20filters-,Mobile%20design,-When%20using%20mobile">read
+      Department for Education guidance</a>
+    for designing filters on mobile.
+  </p>
+
+  <h2 class="govuk-heading-l">Accessibility</h2>
+
+  <p class="govuk-body">Make sure filters are:
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>keyboard navigable</li>
+    <li>screen reader friendly</li>
+    <li>visually clear: use white backgrounds, simple arrows, and uncluttered layouts</li>
+  </ul>
+
+  <p class="govuk-body">Use simple visuals (for example, white backgrounds, uncluttered layouts, simple arrows).
+  </p>
+
+  <h2 class="govuk-heading-l">Research on this component</h2>
+
+  <p class="govuk-body">We’re currently doing user research on this pattern. We’ll update this page when findings are
+    available.
+  </p>
+
+  <h2 class="govuk-heading-l">Links to other design systems</h2>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      <a href="https://design-patterns.service.justice.gov.uk/components/filter/">Ministry of Justice (MOJ) filter
+        component
+      </a>
+    </li>
+    <li>
+      <a href="https://design.education.gov.uk/design-system/components/filter">Department for Education (DfE) filter
+        component
+      </a>
+    </li>
+    <li>
+      <a href="https://design-system.est.org.uk/patterns/filter.html">Energy Saving Trust (EST) filter pattern</a>
+    </li>
+  </ul>
+
 </div>
+</div>
+
+<script>
+  function copyCode(button) {
+    const codeWrapper = button.closest('.code-wrapper');
+    const codeBlock = codeWrapper.querySelector('code');
+    const text = codeBlock.textContent;
+    
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = button.textContent;
+      button.textContent = 'Copied';
+      button.classList.remove('govuk-button--secondary');
+      button.classList.add('govuk-button--success');
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('govuk-button--success');
+        button.classList.add('govuk-button--secondary');
+      }, 2000);
+    });
+  }
+</script>
+
 {% endblock %}

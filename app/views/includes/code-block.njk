@@ -1,6 +1,6 @@
 {% macro codeBlock(code, language="html") -%}
-    <div class="code-wrapper">
-        {# <button id="copycodebutton" class="govuk-button govuk-button--secondary govuk-button--code-copier" onclick="copyCode(this)">Copy code</button> #}
+    <div class="code-wrapper" style="position: relative;">
+        <button class="govuk-button govuk-button--secondary" id="copy-code-btn-{{ range(1, 999999) | random }}" style="position: absolute; top: 10px; right: 10px; z-index: 10;" onclick="copyCode(this)">Copy</button>
         <pre class="code-snippet"><code class="language-{{ language }}">{{ code | replace('\n  ', '\n') | escape }}</code></pre>
     </div>
 {%- endmacro %}

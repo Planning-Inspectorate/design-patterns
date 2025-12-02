@@ -8,3 +8,14 @@
 #original-statement .govuk-accordion__controls {
     display: none !important;
   }
+
+
+.code-wrapper {
+  overflow: hidden;
+}
+
+.code-snippet {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
