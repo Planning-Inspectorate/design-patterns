@@ -6,7 +6,17 @@
 // Add extra styles here
 
 #original-statement .govuk-accordion__controls {
-  display: none !important;
+    display: none !important;
+  }
+
+.code-wrapper {
+  overflow: hidden;
+}
+
+.code-snippet {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 @import "planning-inspectorate/upload-multiple-files";
