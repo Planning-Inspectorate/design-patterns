@@ -1,0 +1,25 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Loading spinner" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("item3") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+    <p>
+      <strong class="govuk-tag govuk-tag--orange">Experimental
+      </strong>
+      <strong class="govuk-tag govuk-tag--grey">Placeholder
+      </strong>
+    </p>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,14 +1,13 @@
 //
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+//
 
 // Add extra styles here
 
 #original-statement .govuk-accordion__controls {
     display: none !important;
   }
-
 
 .code-wrapper {
   overflow: hidden;
@@ -19,3 +18,5 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+@import "planning-inspectorate/upload-multiple-files";
