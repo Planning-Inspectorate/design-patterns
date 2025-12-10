@@ -10,7 +10,8 @@
   }
 
 .code-wrapper {
-  overflow: hidden;
+  max-height: 600px;
+  overflow: auto; 
 }
 
 .code-snippet {
