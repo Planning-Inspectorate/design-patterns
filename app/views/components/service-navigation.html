@@ -89,30 +89,77 @@
       </style>
     {% endset %}
     {% set codeHtml %}
-      {{ codeBlock('<!-- Custom styling -->\n\n
-    {% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}\n'
-    ~ '<style>\n'
-    ~ '.design-pins {\n  background: #f3f2f1;\n  padding: 20px 0;\n  border-bottom: 1px solid #b1b4b6;\n}\n'
-    ~ '.pins-service-navigation {\n  background: #f3f2f1;\n  border-bottom: 1px solid #b1b4b6;\n  padding: 0 15px;\n}\n'
-    ~ '.pins-service-navigation__container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 20px 15px;\n  font-family: Arial, sans-serif;\n  font-size: 16px;\n  color: #0b0c0c;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n'
-    ~ '.pins-service-navigation__service-name {\n  font-weight: bold;\n  margin-right: 30px;\n  color: #005ea5;\n  text-decoration: none;\n}\n'
-    ~ '.pins-service-navigation__list {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  gap: 20px;\n}\n'
-    ~ '.pins-service-navigation__item {\n  display: inline;\n}\n'
-    ~ '.pins-service-navigation__item--active .pins-service-navigation__link {\n  font-weight: bold;\n  text-decoration: underline;\n}\n'
-    ~ '.pins-service-navigation__link {\n  color: #005ea5;\n  text-decoration: underline;\n  transition: color 0.2s;\n}\n'
-    ~ '.pins-service-navigation__link:hover {\n  color: #003078;\n  text-decoration: none;\n}\n'
-    ~ '@media (max-width: 600px) {\n  .pins-service-navigation__container {\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 10px;\n  }\n}\n'
-    ~ '</style>\n'
-    ~ '<div class="design-pins">\n'
-    ~ '  {{ govukServiceNavigation({\n'
-    ~ '    serviceName: "PINS Service with a long title",\n'
-    ~ '    navigation: [\n'
-    ~ '      { href: "#", text: "Dashboard" },\n'
-    ~ '      { href: "#", text: "Assigned to me", active: true },\n'
-    ~ '      { href: "#", text: "Sign out" }\n'
-    ~ '    ]\n'
-    ~ '  }) }}\n'
-    ~ '</div>', 'njk') }}
+      {{ codeBlock('<!-- Custom styling -->
+<style>
+.govuk-service-navigation {
+  font-family: Arial, sans-serif;
+  background: #f3f2f1;
+  border-bottom: 1px solid #b1b4b6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #0b0c0c;
+}
+.govuk-service-navigation__service-name {
+  font-weight: bold;
+  margin-right: 30px;
+  color: #000;
+  text-decoration: none;
+  padding-left: 15px; /* Match header left padding */
+}
+.govuk-service-navigation__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+.govuk-service-navigation__item {
+  display: inline;
+}
+.govuk-service-navigation__item--active .govuk-service-navigation__link {
+  font-weight: bold;
+  text-decoration: underline;
+  border-bottom: 4px solid #000;
+}
+.govuk-service-navigation__link {
+  color: #000;
+  text-decoration: underline;
+  border-bottom: 4px solid transparent;
+  transition: color 0.2s, border-bottom-color 0.2s;
+}
+.govuk-service-navigation__link:hover {
+  color: #003078;
+  text-decoration: none;
+  border-bottom-color: #000;
+}
+@media (max-width: 600px) {
+  .govuk-service-navigation {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+</style>
+<nav class="govuk-service-navigation" aria-label="Service navigation">
+  <a href="#" class="govuk-service-navigation__service-name">PINS Service with a long title</a>
+  <ul class="govuk-service-navigation__list">
+    <li class="govuk-service-navigation__item">
+      <a href="#" class="govuk-service-navigation__link">Dashboard</a>
+    </li>
+    <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+      <a href="#" class="govuk-service-navigation__link">Assigned to me</a>
+    </li>
+    <li class="govuk-service-navigation__item">
+      <a href="#" class="govuk-service-navigation__link">Sign out</a>
+    </li>
+  </ul>
+</nav>
+', 'html') }}
     {% endset %}
     {{ govukTabs({
       id: "service-nav-tabs-1",

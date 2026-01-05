@@ -43,9 +43,28 @@
         </header>
       </div>
     {% endset -%}
-    {% set codeHtml1 %}
-      {{ codeBlock('<!-- Custom styling -->\n\n<div style="min-height:60px; padding-top:24px; background:#00625e; border-bottom:10px solid #13a19b; font-family:Helvetica Neue,Arial,sans-serif;">\n  <header role="banner">\n    <div style="max-width:960px; margin:0 auto;">\n         <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">\n      </div>\n    </div>\n  </header>\n</div>\n', 'html') }}
-    {% endset -%}
+{% set codeHtml1 %}
+{{ codeBlock('<!-- Custom styling -->
+<style>
+.pins-header-demo {
+  min-height: 60px;
+  padding-top: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #f3f2f1;
+  border-bottom: 10px solid #13A19B;
+  font-family: Helvetica Neue, Arial, sans-serif;
+}
+</style>
+<div class="pins-header-demo">
+  <header role="banner">
+    <div style="max-width:960px; margin:0 auto;">
+      <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">
+    </div>
+  </header>
+</div>
+', 'html') }}
+{% endset -%}
     {{ govukTabs({
       id: "header-tabs-1",
       items: [
@@ -81,9 +100,26 @@
       </div>
     {% endset -%}
     {% set codeHtml2 %}
-      <div class="code-block-bg-f3f2f1">
-        {{ codeBlock('<!-- Custom styling -->\n\n<div style="min-height:60px; padding-top:24px; background:#f3f2f1; border-bottom:10px solid #13a19b; font-family:Helvetica Neue,Arial,sans-serif;">\n  <header role="banner">\n    <div style="max-width:960px; margin:0 auto;">\n         <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">\n      </div>\n    </div>\n  </header>\n</div>\n', 'html') }}
-      </div>
+   {{ codeBlock('<!-- Custom styling -->
+<style>
+.pins-header-demo {
+  min-height: 60px;
+  padding-top: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #f3f2f1;
+  border-bottom: 10px solid #13a19b;
+  font-family: Helvetica Neue, Arial, sans-serif;
+}
+</style>
+<div class="pins-header-demo">
+  <header role="banner">
+    <div style="max-width:960px; margin:0 auto;">
+      <img src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">
+    </div>
+  </header>
+</div>
+', 'html') }}
     {% endset -%}
     {{ govukTabs({
       id: "header-tabs-2",

@@ -1,8 +1,4 @@
- .code-block-bg-f3f2f1 {
-  background: none;
-  border-radius: 4px;
-  padding: 1em 0;
-}
+
 // Minimal styles for code example tabs and copy button
 .app-tabs__container {
   background: #f8f8f8;
@@ -43,12 +39,29 @@ pre code.language-html {
   line-height: 1.5;
   padding: 0;
 }
+
+#original-statement .govuk-accordion__controls {
+    display: none !important;
+  }
+
+.code-snippet {
+  max-width: 100%;
+  max-height: 600px;
+  overflow-x: auto;
+  white-space: pre;
+  background: none;
+  padding: 1em;
+  border-radius: 4px;
+  font-size: 0.95em;
+  box-sizing: border-box;
+}
+
+// PINS header styles
 .header-example-pins .pins-header {
   min-height: 60px;
   padding-top: 24px;
   padding-left: 15px;
   padding-right: 15px;
-
   background: #f3f2f1;
   border-bottom: 10px solid #13a19b;
   font-family: Helvetica Neue, Arial, sans-serif;
@@ -70,18 +83,31 @@ pre code.language-html {
   font-family: Helvetica Neue, Arial, sans-serif;
 }
 
-// For guidance on how to add CSS and SCSS see:
-// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-//
+.govuk-header
+{
+  padding-left: 15px;
+}
+
+ // Footer styles
+ .code-block-bg-f3f2f1 {
+  background: none;
+  border-radius: 4px;
+  padding: 1em 0;
+}
+
+.govuk-footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
 // Extra styles for service navigation
 
-.design-b .govuk-service-navigation__item--active {
-  border-bottom: 4px solid #000 !important;
+.govuk-service-navigation {
+  padding-left: 15px;
 }
 
-.design-b .govuk-service-navigation {
-  font-family: Arial, sans-serif;
+.design-b .govuk-service-navigation__item--active {
+  border-bottom: 4px solid #000 !important;
 }
 
 
@@ -93,35 +119,13 @@ pre code.language-html {
 
 
 .design-b .govuk-service-navigation {
+  font-family: Arial, sans-serif;
   background: #f3f2f1;
   border-bottom: 1px solid #b1b4b6;
-  
+  padding-left: 15px;
 }
 
-.code-snippet {
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: pre;
-  background: none;
-  padding: 1em;
-  border-radius: 4px;
-  font-size: 0.95em;
-  box-sizing: border-box;
-}
+// Extra styles
 
-#original-statement .govuk-accordion__controls {
-    display: none !important;
-  }
-
-.code-wrapper {
-  max-height: 600px;
-  overflow: auto; 
-}
-
-.code-snippet {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
 
 @import "planning-inspectorate/upload-multiple-files";
