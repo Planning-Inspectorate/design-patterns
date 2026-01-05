@@ -1,146 +1,37 @@
-{% from "includes/code-block.njk" import codeBlock %}
-{% from "govuk/components/tabs/macro.njk" import govukTabs %}
-{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
 {% set currentPage = "components" %}
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Service Navigation" %}
+{% set pageName = "Service navigation" %}
 
 {% from "layouts/component-menu.html" import sideMenu %}
 
 {% block content %}
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
-    {{ sideMenu("item1") }}
+    {{ sideMenu("item4") }}
   </div>
+
   <div class="govuk-grid-column-three-quarters">
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
     <p>
-      <strong class="govuk-tag govuk-tag--yellow">Work in progress</strong>
+      <strong class="govuk-tag govuk-tag--yellow">Work in progress
+      </strong>
     </p>
-    <p class="govuk-body-l">Use the service navigation to help users move between key sections of your service. It should appear directly below the header.</p>
-    <p class="govuk-body">Use the GOV.UK service navigation for services hosted on service.gov.uk or gov.uk domains. Use the PINS service navigation for services hosted on planninginspectorate.gov.uk or internal domains.</p>
 
-    {% set exampleHtml %}
-      <div class="design-b">
-        {{ govukServiceNavigation({
-          serviceName: "PINS Service with a long title",
-          navigation: [
-            { href: "#", text: "Dashboard" },
-            { href: "#", text: "Assigned to me", active: true },
-            { href: "#", text: "Sign out" }
-          ]
-        }) }}
-      </div>
-      <style>
-        .pins-service-navigation {
-          background: #f3f2f1;
-          border-bottom: 1px solid #b1b4b6;
-          padding: 0 15px;
-        }
-        .pins-service-navigation__container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px 15px;
-          font-family: Arial, sans-serif;
-          font-size: 16px;
-          color: #0b0c0c;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .pins-service-navigation__service-name {
-          font-weight: bold;
-          margin-right: 30px;
-          color: #005ea5;
-          text-decoration: none;
-        }
-        .pins-service-navigation__list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          gap: 20px;
-        }
-        .pins-service-navigation__item {
-          display: inline;
-        }
-        .pins-service-navigation__item--active .pins-service-navigation__link {
-          font-weight: bold;
-          text-decoration: underline;
-        }
-        .pins-service-navigation__link {
-          color: #005ea5;
-          text-decoration: underline;
-          transition: color 0.2s;
-        }
-        .pins-service-navigation__link:hover {
-          color: #003078;
-          text-decoration: none;
-        }
-        @media (max-width: 600px) {
-          .pins-service-navigation__container {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-          }
-        }
-      </style>
-    {% endset %}
-    {% set codeHtml %}
-      {{ codeBlock('<!-- Custom styling -->\n\n
-    {% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}\n'
-    ~ '<style>\n'
-    ~ '.design-pins {\n  background: #f3f2f1;\n  padding: 20px 0;\n  border-bottom: 1px solid #b1b4b6;\n}\n'
-    ~ '.pins-service-navigation {\n  background: #f3f2f1;\n  border-bottom: 1px solid #b1b4b6;\n  padding: 0 15px;\n}\n'
-    ~ '.pins-service-navigation__container {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 20px 15px;\n  font-family: Arial, sans-serif;\n  font-size: 16px;\n  color: #0b0c0c;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n'
-    ~ '.pins-service-navigation__service-name {\n  font-weight: bold;\n  margin-right: 30px;\n  color: #005ea5;\n  text-decoration: none;\n}\n'
-    ~ '.pins-service-navigation__list {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  gap: 20px;\n}\n'
-    ~ '.pins-service-navigation__item {\n  display: inline;\n}\n'
-    ~ '.pins-service-navigation__item--active .pins-service-navigation__link {\n  font-weight: bold;\n  text-decoration: underline;\n}\n'
-    ~ '.pins-service-navigation__link {\n  color: #005ea5;\n  text-decoration: underline;\n  transition: color 0.2s;\n}\n'
-    ~ '.pins-service-navigation__link:hover {\n  color: #003078;\n  text-decoration: none;\n}\n'
-    ~ '@media (max-width: 600px) {\n  .pins-service-navigation__container {\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 10px;\n  }\n}\n'
-    ~ '</style>\n'
-    ~ '<div class="design-pins">\n'
-    ~ '  {{ govukServiceNavigation({\n'
-    ~ '    serviceName: "PINS Service with a long title",\n'
-    ~ '    navigation: [\n'
-    ~ '      { href: "#", text: "Dashboard" },\n'
-    ~ '      { href: "#", text: "Assigned to me", active: true },\n'
-    ~ '      { href: "#", text: "Sign out" }\n'
-    ~ '    ]\n'
-    ~ '  }) }}\n'
-    ~ '</div>', 'njk') }}
-    {% endset %}
-    {{ govukTabs({
-      id: "service-nav-tabs-1",
-      items: [
-        {
-          label: "Example",
-          id: "example",
-          panel: {
-            html: exampleHtml
-          }
-        },
-        {
-          label: "HTML",
-          id: "html",
-          panel: {
-            html: codeHtml
-          }
-        }
-      ]
-    }) }}
- 
+    <p class="govuk-body-l">Use the service navigation component to show the service name and provide links to key sections of the service. It helps users orient themselves and move between pages without cluttering the main header.</p>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>Use the <a href="https://design-system.service.gov.uk/components/service-navigation/">GOV.UK service navigation</a> for services hosted on GOV.UK domains where the GOV.UK header must remain minimal.</li>
+        <li>Use it for PINS-hosted services to provide consistent navigation across pages.</li>
+    </ul>
+
     <h2 class="govuk-heading-l">When not to use this component</h2>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>On single-page or linear journeys where navigation would distract from completing the task.</li>
-            <li>For links that belong in the footer (e.g., Privacy, Accessibility, Cookies).</li>
-            <li>To add GOV.UK branding or crown — this is not part of the service navigation.</li>
-            <li>For global navigation across multiple services. It is only for navigation within one service.</li>
-        </ul>
+    <ul class="govuk-list govuk-list--bullet">
+        <li>On single-page or linear journeys where navigation would distract from completing the task.</li>
+        <li>For links that belong in the footer (e.g., Privacy, Accessibility, Cookies).</li>
+        <li>To add GOV.UK branding or crown — this is not part of the service navigation.</li>
+        <li>For global navigation across multiple services. It is only for navigation within one service.</li>
+    </ul>
+    
     <h2 class="govuk-heading-l">How it works</h2>
     <ul class="govuk-list govuk-list--bullet">
         <li>Appears directly below the GOV.UK header or PINS header.</li>
@@ -158,45 +49,23 @@
 
     <h2 class="govuk-heading-m">Design rules</h2>
     <ul class="govuk-list govuk-list--bullet">
-        <li>Font: Match the header font (GDS Transport for GOV.UK services, Helvetica Neue, Arial or Sans Serif for PINS services).</li>
+        <li>Font: Match the header font (GDS Transport for GOV.UK services, Arial or Sans Serif for PINS services).</li>
         <li>Colour: Use GOV.UK blue for GOV.UK services; use PINS colour palette for PINS services.</li>
         <li>Colour palette for PINS services should align with MHCLG colourways.</li>
         <li>Accessibility: Links must have clear focus states and meet WCAG contrast requirements.</li>
-        <li>The service name should link to the homepage of your service (or the closest equivalent page). If your service does not have a dedicated homepage, it should link to either the GOV.UK start page for your service or the first question in the journey.</li>
-        <li>Responsive behaviour: Navigation should collapse into a menu on smaller screens.</li>
-        <li>Implementation details will be added once a shared approach is agreed.</li>
-          </ul>
+  <li>Responsive behaviour: Navigation should collapse into a menu on smaller screens.</li>
+  <li>Implementation details will be added once a shared approach is agreed.</li>
+    </ul>
+
+  
+
     <h2 class="govuk-heading-l">Examples</h2>
     <h3 class="govuk-heading-m">GOV.UK service navigation</h3>
-    <div class="design-a">
-      {% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
-      {{ govukServiceNavigation({
-        serviceName: "GOV.UK Service",
-        navigation: [
-          { href: "#", text: "Navigation item 1" },
-          { href: "#", text: "Navigation item 2", active: true },
-          { href: "#", text: "Navigation item 3" }
-        ]
-      }) }}
-    </div>
-    <br>
-    <br>
+    <image src="/public/images/components/service-navigation/service-navigation.png" alt="Example of GOV service header" class="govuk-!-margin-top-2 govuk-!-margin-bottom-6">
     <br>
     <h3 class="govuk-heading-m">PINS service navigation</h3>
-    <div class="design-b">
-      {% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
-      {{ govukServiceNavigation({
-        serviceName: "PINS Service with a long title",
-        navigation: [
-          { href: "#", text: "Dashboard" },
-          { href: "#", text: "Assigned to me", active: true },
-          { href: "#", text: "Sign out" }
-        ]
-      }) }}
-    </div>
-    <br>
-    <br>
-    <br>
+    <image src="/public/images/components/service-navigation/pins-service-nav.png" alt="Example of PINS service header" class="govuk-!-margin-top-2 govuk-!-margin-bottom-6">
+
     <h2 class="govuk-heading-l">Research on this component</h2>
 
     <p class="govuk-body">User research findings on this component are in progress and will be added here when available.
