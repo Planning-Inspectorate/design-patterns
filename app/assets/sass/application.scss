@@ -1,9 +1,113 @@
-//
+ .code-block-bg-f3f2f1 {
+  background: none;
+  border-radius: 4px;
+  padding: 1em 0;
+}
+// Minimal styles for code example tabs and copy button
+.app-tabs__container {
+  background: #f8f8f8;
+  border: 1px solid #b1b4b6;
+  border-radius: 4px;
+  margin-bottom: 2em;
+  padding: 1em;
+}
+.app-example__code {
+  position: relative;
+  background: none;
+  border-radius: 4px;
+  padding: 1em 1em 1em 2.5em;
+  font-size: 0.95em;
+  overflow-x: auto;
+}
+.app-copy-button {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  background: #fff;
+  border: 1px solid #b1b4b6;
+  border-radius: 3px;
+  padding: 0.25em 0.75em;
+  font-size: 0.9em;
+  cursor: pointer;
+  color: #0b0c0c;
+  transition: background 0.2s;
+}
+.app-copy-button:hover {
+  background: #e5e5e5;
+}
+pre code.language-html {
+  background: none;
+  color: #2a2a2a;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  font-size: 1em;
+  line-height: 1.5;
+  padding: 0;
+}
+.header-example-pins .pins-header {
+  min-height: 60px;
+  padding-top: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  background: #f3f2f1;
+  border-bottom: 10px solid #13a19b;
+  font-family: Helvetica Neue, Arial, sans-serif;
+}
+.header-example-pins .pins-header__logotype-text {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-left: 12px;
+  color: #222;
+}
+// Alternate PINS header variant
+.header-example-pins-alt .pins-header-alt {
+  min-height: 60px;
+  padding-top: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #00625e;
+  border-bottom: 10px solid #13A19B;
+  font-family: Helvetica Neue, Arial, sans-serif;
+}
+
 // For guidance on how to add CSS and SCSS see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
 
-// Add extra styles here
+// Extra styles for service navigation
+
+.design-b .govuk-service-navigation__item--active {
+  border-bottom: 4px solid #000 !important;
+}
+
+.design-b .govuk-service-navigation {
+  font-family: Arial, sans-serif;
+}
+
+
+.design-b .govuk-service-navigation__link,
+.design-b .govuk-service-navigation__item .govuk-service-navigation__link {
+  color: #000 !important;
+  border-bottom-color: #000 !important;
+}
+
+
+.design-b .govuk-service-navigation {
+  background: #f3f2f1;
+  border-bottom: 1px solid #b1b4b6;
+  
+}
+
+.code-snippet {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+  background: none;
+  padding: 1em;
+  border-radius: 4px;
+  font-size: 0.95em;
+  box-sizing: border-box;
+}
 
 #original-statement .govuk-accordion__controls {
     display: none !important;
