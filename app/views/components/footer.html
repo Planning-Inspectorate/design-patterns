@@ -94,8 +94,76 @@
       </footer>
     {% endset %}
     {% set codeHtml %}
-      {{ codeBlock('<!-- Custom styling -->\n\n<footer class="pins-footer" role="contentinfo">\n  <div class="govuk-width-container">\n    <div class="govuk-footer__meta">\n      <div>\n        <ul class="govuk-footer__inline-list">\n          <li class="govuk-footer__inline-list-item">\n            <a class="govuk-footer__link" href="/manage-prototype">Manage your prototype</a>\n          </li>\n          <li class="govuk-footer__inline-list-item">\n            <a class="govuk-footer__link" href="/manage-prototype/clear-data">Clear data</a>\n          </li>\n        </ul>\n      </div>\n      <div>\n        <span class="govuk-footer__copyright">© Planning Inspectorate</span>\n      </div>\n    </div>\n  </div>\n  <style>\n    .pins-footer {\n      background: #00625e;\n      padding: 20px 0;\n      font-family: Arial, sans-serif;\n      font-size: 16px;\n      color: #fff;\n    }\n    .govuk-width-container {\n      max-width: 1200px;\n      margin: 0 auto;\n      padding: 0 15px;\n    }\n    .govuk-footer__meta {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n    .govuk-footer__inline-list {\n      list-style: none;\n      padding: 0;\n      margin: 0;\n      display: flex;\n      gap: 20px;\n    }\n    .govuk-footer__inline-list-item {\n      display: inline;\n    }\n    .govuk-footer__link {\n      color: #fff;\n      text-decoration: underline;\n      transition: color 0.2s;\n    }\n    .govuk-footer__link:hover {\n      color: #b6e1dd;\n      text-decoration: none;\n    }\n    @media (max-width: 600px) {\n      .govuk-footer__meta {\n        flex-direction: column;\n        align-items: flex-start;\n        gap: 10px;\n      }\n    }\n  </style>\n</footer>\n', 'html') }}
-    {% endset -%}
+      {{ codeBlock('<!-- Custom styling -->
+<style>
+.pins-footer {
+  background: #f3f2f1;
+  border-top: 4px solid #13a19b !important;
+  padding: 0 15px;
+}
+.pins-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #0b0c0c;
+}
+.govuk-footer__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.govuk-footer__inline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+.govuk-footer__inline-list-item {
+  display: inline;
+}
+.govuk-footer__link {
+  color: #1d70b8;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.govuk-footer__link:hover {
+  color: #003078;
+  text-decoration: none;
+}
+@media (max-width: 600px) {
+  .govuk-footer__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+</style>
+<footer class="pins-footer" role="contentinfo">
+  <div class="pins-footer-row">
+    <div class="pins-footer-container">
+      <div class="govuk-footer__meta">
+        <div>
+          <ul class="govuk-footer__inline-list">
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="">Link 1</a>
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="">Link 2</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <span class="govuk-footer__copyright">© Planning Inspectorate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+', 'html') }}
+{% endset -%}
     {{ govukTabs({
       id: "footer-tabs-1",
       items: [
