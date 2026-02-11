@@ -94,7 +94,13 @@
       </footer>
     {% endset %}
     {% set codeHtml %}
-      {{ codeBlock('<!-- Custom styling -->
+    {{ codeBlock('
+<!-- Custom styling 
+Note: Sticky footer CSS cannot be used with the GOV.UK layout templates as it breaks the page layout and squashes content. 
+The required flexbox styles conflict with the template structure. Footers will sit naturally after page content, which is the standard GOV.UK pattern. 
+For standalone pages outside the template system, a sticky footer can be implemented using flexbox.
+-->
+
 <style>
 .pins-footer {
   background: #f3f2f1;
