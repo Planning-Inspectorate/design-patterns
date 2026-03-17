@@ -1,0 +1,78 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Manage a list" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+
+{% block content %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+            {{ sideMenu("item3") }}
+        </div>
+
+        <div class="govuk-grid-column-three-quarters">
+            <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+            <p>
+                <strong class="govuk-tag govuk-tag--yellow">Work in progress
+                </strong>
+            </p>
+
+            <p class="govuk-body-l">This pattern is used to help users manage and organise lists of items.</p>
+
+            <h2 class="govuk-heading-l">When to use this pattern</h2>
+
+            <p class="govuk-body">Use this pattern when users need to:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>add and remove items from a list</li>
+                <li>organise items in a specific order</li>
+                <li>perform actions on multiple items at once</li>
+            </ul>
+            <h2 class="govuk-heading-l">Basic example</h2>
+            <iframe height="400px" width="100%" style="margin-bottom: 20px;" src="manage-list-example.html"></iframe>
+
+            <h2 class="govuk-heading-l">How it works</h2>
+            <p class="govuk-body">Users can manage a list using a
+                <a href="https://design-system.service.gov.uk/patterns/check-answers/">'Check your answers'-style component</a>. They can change or remove items by selected the button next to each item.</p>
+
+            <p>Users can add items to the list by selecting the 'Add another' button. This will take them to a form where they can enter the details of the item they want to add. Once they have added the item, they will be taken back to the list where they can see the new item added.</p>
+
+            <h2 class="govuk-heading-l">Customisation</h2>
+
+            <p class="govuk-body">The 'Manage a list' pattern can be customised to fit the needs of your service. You can change the layout and design of the list, as well as the actions that users can perform on the items in the list.</p>
+
+            <p class="govuk-body">You can use the sortable table component to allow users to reorder items in the list.</p>
+
+            <iframe height="550px" width="100%" style="margin-bottom: 20px;" src="mpesc-example.html"></iframe>
+
+            <p class="govuk-body">You can add additional details for each item:</p>
+
+            <iframe height="420px" width="100%" style="margin-bottom: 20px;" src="nsip-example.html"></iframe>
+    </ul>
+    <h2 class="govuk-heading-l">Accessibility and mobile </h2>
+
+    <p class="govuk-body">
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Make sure that where repeated 'Remove' and 'Change' buttons are used, they are clearly labelled for screen readers and accessible via keyboard navigation.</li>
+            <li>Ensure that the 'Add another' button is easily identifiable and accessible on mobile devices.</li>
+            <li>Ensure that pages are optimised for mobile devices and that all interactive elements are easily accessible on smaller screens.</li>
+        </ul>
+    </p>
+
+    <h2 class="govuk-heading-l">Research on this component</h2>
+
+    <p class="govuk-body">We are currently conducting research on this component to better understand how users interact with it in different scenarios.</p>
+
+    <h2 class="govuk-heading-l">Links to other design systems</h2>
+
+    <ul class="govuk-list govuk-list--bullet">
+        <li>
+            <a href="https://design.homeoffice.gov.uk/design-system/patterns/help-users-to/add-multiple-things">Home Office - Add multiple things</a>
+        </li>
+
+    </ul>
+</div>
+</div>
+
+{% endblock %}
