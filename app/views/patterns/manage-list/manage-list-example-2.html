@@ -1,60 +1,62 @@
 {% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 
 {% block pageTitle %}
-    Unbranded page template –
-    {{ serviceName }}
-    – GOV.UK Prototype Kit
+Unbranded page template –
+{{ serviceName }}
+– GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
-    <h1 class="govuk-heading-l">Check applicant details</h1>
-    <dl class="govuk-summary-list">
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key" style="width: 60%;">Applicants</dt>
-            <dt class="govuk-summary-list__key govuk-summary-list__actions">Actions</dt>
-        </div>
-        <div class="govuk-summary-list__row">
+<h1 class="govuk-heading-l">Check applicant details</h1>
 
-            <dd class="govuk-summary-list__value">
-                Department for Sustainable Infrastructure
-            </dd>
-            <dd class="govuk-summary-list__actions">
-                <ul class="govuk-summary-list__actions-list">
-                    <li class="govuk-summary-list__actions-list-item">
-                        <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
-                                applicant</span></a>
-                    </li>
-                    <li class="govuk-summary-list__actions-list-item">
-                        <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
-                                applicant</span></a>
-                    </li>
-                </ul>
-            </dd>
 
-        </div>
-        <div class="govuk-summary-list__row">
-              <dd class="govuk-summary-list__value">
-                Office for Community Resilience
-            </dd>
-            <dd class="govuk-summary-list__actions">
-                <ul class="govuk-summary-list__actions-list">
-                    <li class="govuk-summary-list__actions-list-item">
-                        <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
-                                applicant</span></a>
-                    </li>
-                    <li class="govuk-summary-list__actions-list-item">
-                        <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
-                                applicant</span></a>
-                    </li>
-                </ul>
-            </dd>
-        </div>
+<div style="padding-bottom: 20px;"><a href="manage-list-example-1.html" class="govuk-body govuk-link">Add applicant</a>
+</div>
 
-    </dl>
-    <div class="govuk-form-group">
-        <a href="manage-list-example-1.html" class="govuk-body govuk-link">Add details</a>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key" style="width: 60%;">Applicants</dt>
+        <dt class="govuk-summary-list__key govuk-summary-list__actions">Actions</dt>
+    </div>
+    <div class="govuk-summary-list__row">
+
+        <dd class="govuk-summary-list__value">
+            Department for Sustainable Infrastructure
+        </dd>
+        <dd class="govuk-summary-list__actions">
+            <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                            applicant</span></a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                            applicant</span></a>
+                </li>
+            </ul>
+        </dd>
+
+    </div>
+    <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">
+            Office for Community Resilience
+        </dd>
+        <dd class="govuk-summary-list__actions">
+            <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                            applicant</span></a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                            applicant</span></a>
+                </li>
+            </ul>
+        </dd>
     </div>
 
-    <a href="" class="govuk-button">Save</a>
+</dl>
+
+<a href="" class="govuk-button">Save</a>
 
 {% endblock %}
