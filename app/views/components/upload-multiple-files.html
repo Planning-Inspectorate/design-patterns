@@ -4,7 +4,6 @@
 {% set pageName = "Upload multiple files" %}
 
 {% from "layouts/component-menu.html" import sideMenu %}
-
 {% from "components/multidocumentupload.njk" import multiDocumentUpload %}
 
 {% block content %}
@@ -13,137 +12,68 @@
     {{ sideMenu("item5") }}
   </div>
 
-    <div class="govuk-grid-column-three-quarters">
-      <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="personal-list">
-        {{ pageName }}
-      </h1>
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
 
-      <p>
-        <strong class="govuk-tag govuk-tag--yellow govuk-!-margin-bottom-5">Work in progress</strong>
-      </p>
+    <p>
+      <strong class="govuk-tag govuk-tag--yellow">Work in progress</strong>
+    </p>
 
-      <p class="govuk-body-l">
-        Use this component to show how users can upload several files. This component is based on <a href="https://design-patterns.service.justice.gov.uk/components/multi-file-upload/" target="_blank">the MOJ multi file upload component</a>.
-      </p>
+    <p class="govuk-body-l">
+      Use this component to show how users can upload several files. This component is based on the <a
+        href="https://design-patterns.service.justice.gov.uk/components/multi-file-upload/">MOJ multi file upload
+        component</a>.
+    </p>
 
-      {% set exampleHtml %}
+    {% set exampleHtml %}
+    <div id="multi-upload-example">
+      <form method="post">
+        {{ multiDocumentUpload({
+        caption: "Appeal 12345678",
+        heading: "Upload cross-team correspondence"
+        }) }}
 
-
-        <div id="multi-upload-example">
-
-          <!-- example of upload here -->
-          
-          {% set uploadHtml %}
-
-            {{ govukFileUpload({
-              id: 'costs-upload',
-              name: 'costs-upload',
-              classes: 'moj-multi-file-upload__input',
-              label: {
-                text: 'Upload files',
-                classes: 'govuk-label--m'
-              },
-              hint: {
-                text: 'Each file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB'
-              }
-            }) }}
-
-            {{govukButton({
-              text: 'Upload files',
-              classes: 'govuk-button--secondary moj-multi-file-upload__button'
-            })}}
-
-          {% endset %}
-
-          {{ mojMultiFileUpload({
-            uploadedFiles: {
-              heading: { text: 'File added' },
-              items: []
-            },
-            uploadHtml: uploadHtml
-          }) }}
-
-        </div>
-
-      {% endset -%}
-
-      {% set codeHtml %}
-        <pre class="code-snippet"><code>{% raw -%}{{ multiDocumentUpload () }}
-  {% endraw %}
-  </code></pre>
-
-      {% endset -%}
-
-      {{ govukTabs({
-        items: [
-          {
-            label: "Example",
-            id: "example",
-            panel: {
-              html: exampleHtml
-            }
-          },
-          {
-            label: "Nunjucks",
-            id: "nunjucks",
-            panel: {
-              html: codeHtml
-            }
-          }
-        ]
-      }) }}
-
-      <h2 class="govuk-heading-l">
-        When to use this pattern
-      </h2>
-
-      <p>
-        Use the multi file upload component when you want users to be able to upload more than one file.
-      </p>
-
-      <h2 class="govuk-heading-l">
-        How it works
-      </h2>
-
-      <p>
-        You can use this component as a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> macro.
-      </p>
-
-      <p>
-        It should be nested in a ‘two-thirds’ grid layout and an HTML form element. You will need to add a GOV.UK button after the component.
-      </p>
-
+        {{ govukButton({ text: "Continue" }) }}
+      </form>
     </div>
-  </div>
+    {% endset %}
 
+    {% set codeHtml %}
+    <pre class="code-snippet"><code>{% raw %}
+{{ multiDocumentUpload({
+  caption: "Appeal 12345678",
+  heading: "Upload cross-team correspondence"
+}) }}
+{% endraw %}</code></pre>
+    {% endset %}
+
+    {{ govukTabs({
+    items: [
+    { label: "Example", id: "example", panel: { html: exampleHtml } },
+    { label: "Nunjucks", id: "nunjucks", panel: { html: codeHtml } }
+    ]
+    }) }}
+
+    <h2 class="govuk-heading-l">When to use this pattern</h2>
+    <p class="govuk-body">Use the multi file upload component when you want users to be able to upload more than one file.
+    </p>
+
+    <h2 class="govuk-heading-l">How it works
+    </h2>
+    <p class="govuk-body">You can use this component as a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> macro.
+    </p>
+
+    <p>It should be nested in a ‘two-thirds’ grid layout and an HTML form element. You will need to add a GOV.UK button after the component.
+    </p>
+
+  </div>
+</div>
 {% endblock %}
 
-
 {% block pageScripts %}
-
-  <script>
-
-    // Hacky hacky single file
-    $('.moj-multi-file-upload__dropzone .govuk-body').text('Drag and drop a file here or ')
-    $('.moj-multi-file-upload__dropzone .govuk-button').text('Select file')
-    $('.moj-multi-file__uploaded-files').on('fileAdded', function() {
-      $('.moj-multi-file-upload__upload').hide()
-    });
-
-    $('.moj-multi-file__uploaded-files').click(function() {
-      $('.moj-multi-file-upload__upload').show()
-    });
-
-    // I really should learn how the MOJ upload works, however, a hack to get all the files passed into data
-    $('form').submit(function(e) {
-      e.preventDefault();
-
-      $('.moj-multi-file-upload__filename').each(function() {
-        $('<input name="costs-upload" type="checkbox" value="'+ $(this).text() +'" checked="true" style="display: none">').insertBefore('.govuk-heading-l');
-      });
-
-      $(this).unbind('submit').submit();
-    })
-  </script>
-
+<script>
+  $(document).ready(function () {
+    MOJFrontend.MultiFileUpload.initAll()
+  });
+</script>
 {% endblock %}

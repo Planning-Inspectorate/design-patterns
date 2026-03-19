@@ -1,56 +1,40 @@
-{% macro multiDocumentUpload() %}
+{% macro multiDocumentUpload(params = {}) %}
 
-  {%- from "govuk/components/file-upload/macro.njk" import govukFileUpload -%}
-  {% from "govuk/components/button/macro.njk" import govukButton %}
-  {%- from "moj/components/multi-file-upload/macro.njk" import mojMultiFileUpload -%}
+<span class="govuk-caption-l">{{ params.caption or "Appeal 12345678" }}</span>
 
-  <h1 class="govuk-heading-l">
-    Upload documents
-  <h1>
+<h1 class="govuk-heading-l">{{ params.heading or "Upload cross-team correspondence" }}</h1>
 
-  <p class="govuk-body">
-    Choose one or more files to upload.
-  </p>
+<p>
+  Each file must be a PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, MSG, JPG, JPEG, MPEG, MP3, MP4, MOV, PNG, TIF or TIFF
+  and smaller than 250MB.
+</p>
 
-  <p class="govuk-body">
-    The total of your uploaded files must be smaller than 1 GB.
-  </p>
+<p>The total size of your uploaded files must be smaller than 1GB.</p>
 
+<div class="moj-multi-file-upload" data-module="multi-file-upload">
 
-{% set uploadHtml %}
-  <div>
-    <h2 class="govuk-heading-m govuk-!-font-weight-bold">Upload files</h2>
-    <p class="govuk-hint">
-      The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
-    </p>
-
-    <div class="file-drop-area">
-      {{ govukFileUpload({
-        id: "documents",
-        name: "documents",
-        classes: 'moj-multi-file-upload__input',
-        attributes: { multiple: '' },
-        errorMessage: errorMessage
-      }) }}
+  <!-- Dashed box upload area -->
+  <div class="moj-multi-file-upload__upload"
+       style="border: 2px dashed #b1b4b6; padding: 60px 16px; display: flex; align-items: center; background-color: #ffffff; margin-bottom: 30px;">
+    <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
+      <label class="govuk-button govuk-button--secondary" for="documents" style="margin-bottom: 0; cursor: pointer;">
+        Choose files
+      </label>
+      <p class="govuk-body" style="margin: 0; margin-left: 10px;">or drop files</p>
+      <input
+        class="govuk-file-upload moj-multi-file-upload__input"
+        id="documents"
+        name="documents"
+        type="file"
+        multiple
+        style="position: absolute; left: -9999px;">
     </div>
-
-    {{ govukButton({
-      text: 'Upload file',
-      classes: 'govuk-button--secondary moj-multi-file-upload__button'
-    })}}
   </div>
-{% endset %}
+  <!-- End dashed box upload area -->
 
+  <!-- THIS IS REQUIRED: placeholder for progress bars and file list -->
+       <div class="moj-multi-file__uploaded-files"></div>
 
-  {{ mojMultiFileUpload({
-    uploadedFiles: {
-      heading: { text: 'Files added' },
-      items: uploadedFiles
-    },
-    hint: {
-      text: "The files must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB"
-    },
-    uploadHtml: uploadHtml
-  }) }}
+</div>
 
 {% endmacro %}
