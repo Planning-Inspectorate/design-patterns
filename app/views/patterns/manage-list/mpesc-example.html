@@ -1,0 +1,134 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{%- from "govuk/components/table/macro.njk" import govukTable -%}
+
+{% block pageTitle %}
+  Unbranded page template –
+  {{ serviceName }}
+  – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+  <table class="govuk-table" data-module="moj-sortable-table">
+    <caption class="govuk-table__caption govuk-table__caption--m">
+      Check inspector details
+    </caption>
+
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header" aria-sort="none">
+          Inspector role
+        </th>
+        <th scope="col" class="govuk-table__header" aria-sort="none">
+          Name
+        </th>
+        <th scope="col" class="govuk-table__header" aria-sort="ascending">
+          Date appointed
+        </th>
+        <th scope="col" class="govuk-table__header">
+          Actions
+        </th>
+      </tr>
+    </thead>
+
+    <tbody class="govuk-table__body">
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Inspector</td>
+        <td class="govuk-table__cell">Paul Smith</td>
+        <td class="govuk-table__cell" data-sort-value="2025-10-06">6 October 2025</td>
+        <td class="govuk-table__cell govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Previous inspector</td>
+        <td class="govuk-table__cell">Jane Doe</td>
+        <td class="govuk-table__cell" data-sort-value="2025-09-03">3 September 2025</td>
+        <td class="govuk-table__cell govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Previous inspector</td>
+        <td class="govuk-table__cell">Pauline Brown</td>
+        <td class="govuk-table__cell" data-sort-value="2025-08-28">28 August 2025</td>
+         <td class="govuk-table__cell govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Inspector</td>
+        <td class="govuk-table__cell">Tunde Oppong</td>
+        <td class="govuk-table__cell" data-sort-value="2025-08-09">9 August 2025</td>
+        <td class="govuk-table__cell govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">Assistant inspector</td>
+        <td class="govuk-table__cell">Peter Cooper</td>
+        <td class="govuk-table__cell" data-sort-value="2025-07-16">16 July 2025</td>
+         <td class="govuk-table__cell govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Remove<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="">Change<span class="govuk-visually-hidden">
+                  applicant</span></a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <div class="govuk-form-group">
+    <a href="" class="govuk-button govuk-button--secondary">Add details</a>
+    <a href="" class="govuk-button">Save and continue</a>
+  </div>
+{% endblock %}
