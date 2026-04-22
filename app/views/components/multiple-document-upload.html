@@ -1,0 +1,397 @@
+<!-- Dashed box upload area -->
+    <label class="govuk-label govuk-label--m" for="documents">
+      Upload a file
+    </label>
+    <div class="moj-multi-file-upload__upload"
+      tabindex="0"
+      role="button"
+      aria-label="Upload area. Press Enter or Space to choose files, or drag and drop files here."
+      style="border: 2px dashed #b1b4b6;padding-left: 16px; padding-top: 60px; padding-bottom: 60px; align-items: center; background-color: #ffffff; margin-bottom: 30px; display: flex; cursor: pointer;">
+      <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
+        <label class="govuk-button govuk-button--secondary" for="documents" style="margin-bottom: 0; cursor: pointer;">
+          Choose files
+        </label>
+        <p class="govuk-body" style="margin: 0; margin-left: 10px;">or drop files</p>
+        <input
+          class="govuk-file-upload moj-multi-file-upload__input"
+          id="documents"
+          name="documents"
+          type="file"
+          multiple
+          style="position: absolute; left: -9999px;">
+      </div>
+    </div>
+    <p class="govuk-error-message" id="fileValidationError" style="display: none;">
+      <span class="govuk-visually-hidden">Error:</span> The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB
+    </p>
+
+    <!-- Table to show uploaded files -->
+    <div class="govuk-form-group" id="filesTableGroup" style="display: none;">
+      <label class="govuk-label govuk-label--m" id="filesAddedLabel" for="filesTable" style="display: none;">
+        Files added
+      </label>
+      <p class="govuk-error-message" id="filesTableError" style="display: none;">
+        <span class="govuk-visually-hidden">Error:</span> Wait for all files to finish uploading
+      </p>
+      <table class="govuk-table" id="filesTable" style="table-layout: fixed; width: 100%; margin-bottom: 0;">
+        <colgroup>
+          <col>
+          <col style="width: 180px;">
+          <col style="width: 80px;">
+        </colgroup>
+
+        <tbody class="govuk-table__body">
+        </tbody>
+      </table>
+    </div>
+
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Continue
+    </button>
+
+<script>
+  const fileInput = document.getElementById('documents');
+  const uploadArea = document.querySelector('.moj-multi-file-upload__upload');
+  const chooseFilesButton = uploadArea.querySelector('label[for="documents"]');
+  const tableBody = document.querySelector('#filesTable tbody');
+  const filesTableGroup = document.getElementById('filesTableGroup');
+  const filesTableError = document.getElementById('filesTableError');
+  const fileValidationError = document.getElementById('fileValidationError');
+  const filesAddedLabel = document.getElementById('filesAddedLabel');
+  const form = uploadArea.closest('form') || document.querySelector('form');
+  const uploadedFiles = new Set(); // Track successfully uploaded files
+  const allowedExtensions = ['doc', 'docx', 'pdf', 'tif', 'jpg', 'png'];
+  const maxFileSizeBytes = 25 * 1024 * 1024;
+  let hasValidationError = false;
+
+  function getFileExtension(fileName) {
+    const parts = fileName.toLowerCase().split('.');
+    return parts.length > 1 ? parts.pop() : '';
+  }
+
+  function isValidFile(file) {
+    const extension = getFileExtension(file.name);
+    return allowedExtensions.includes(extension) && file.size <= maxFileSizeBytes;
+  }
+
+  function getUploadingCount() {
+    const uploadingRows = document.querySelectorAll('.uploading-row');
+    return Array.from(uploadingRows).filter(row => {
+      const progressEl = row.querySelector('.progress-percent');
+      return progressEl && parseInt(progressEl.textContent, 10) < 100;
+    }).length;
+  }
+
+  function updateFilesSummaryVisibility() {
+    const hasRows = tableBody.children.length > 0;
+    filesTableGroup.style.display = hasRows ? 'block' : 'none';
+    filesAddedLabel.style.display = hasRows ? 'block' : 'none';
+  }
+
+  //  Functions for hover and focus states
+  function setChooseFilesHoverState() {
+    chooseFilesButton.style.backgroundColor = '#dbdad9';
+    chooseFilesButton.style.boxShadow = '0 2px 0 #929191';
+  }
+
+  function setChooseFilesFocusState() {
+    chooseFilesButton.style.backgroundColor = '#ffdd00';
+    chooseFilesButton.style.color = '#0b0c0c';
+    chooseFilesButton.style.boxShadow = '0 2px 0 #0b0c0c';
+    chooseFilesButton.style.outline = '3px solid transparent';
+  }
+
+  function resetChooseFilesHoverState() {
+    chooseFilesButton.style.backgroundColor = '';
+    chooseFilesButton.style.color = '';
+    chooseFilesButton.style.boxShadow = '';
+    chooseFilesButton.style.outline = '';
+  }
+
+  updateFilesSummaryVisibility();
+
+  // Helper function to show error
+  function showUploadingError() {
+    // Remove any existing error summary
+    const existingError = document.querySelector('.govuk-error-summary');
+    if (existingError) {
+      return; // Error already showing
+    }
+
+    // Create error summary matching GOV.UK styling
+    const errorSummary = document.createElement('div');
+    errorSummary.className = 'govuk-error-summary';
+    errorSummary.setAttribute('data-module', 'govuk-error-summary');
+    errorSummary.setAttribute('role', 'alert');
+    errorSummary.setAttribute('aria-labelledby', 'error-summary-title');
+    errorSummary.style.cssText = 'border: 5px solid #d4351c; padding: 20px; margin-bottom: 20px; background-color: #f8f8f8;';
+    
+    errorSummary.innerHTML = `
+      <h2 class="govuk-error-summary__title" id="error-summary-title" style="color: #d4351c; margin: 0 0 15px 0; font-size: 19px; font-weight: bold;">
+        There is a problem
+      </h2>
+      <div class="govuk-error-summary__body">
+        <ul class="govuk-list govuk-error-summary__list" style="margin: 0; padding-left: 20px;">
+          <li><a href="#filesTable" style="color: #d4351c; text-decoration: underline;">Wait for all files to finish uploading</a></li>
+        </ul>
+      </div>
+    `;
+    
+    // Insert at the top of the upload section
+    const uploadSection = document.querySelector('.moj-multi-file-upload__upload');
+    uploadSection.parentNode.insertBefore(errorSummary, uploadSection);
+    errorSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (filesTableGroup && filesTableError) {
+      filesTableGroup.classList.add('govuk-form-group--error');
+      filesTableError.style.display = 'block';
+    }
+  }
+
+  // Helper function to hide error
+  function hideUploadingError() {
+    const existingError = document.querySelector('.govuk-error-summary');
+    if (existingError) {
+      existingError.remove();
+    }
+
+    if (filesTableGroup && filesTableError) {
+      filesTableGroup.classList.remove('govuk-form-group--error');
+      filesTableError.style.display = 'none';
+    }
+  }
+
+  // Handle file selection
+  fileInput.addEventListener('change', function (e) {
+    const files = Array.from(e.target.files);
+    
+    if (files.length === 0) {
+      return;
+    }
+
+    // Add rows for each selected file
+    files.forEach((file, index) => {
+      const row = document.createElement('tr');
+      row.className = 'govuk-table__row uploading-row';
+      row.dataset.file = file.name;
+
+      row.innerHTML = `
+        <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
+          ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)
+        </td>
+        <td class="govuk-table__cell">
+          Uploading: <span class="progress-percent">0%</span>
+        </td>
+        <td class="govuk-table__cell">
+          <a href="#" class="govuk-link">Cancel</a>
+        </td>
+      `;
+
+      tableBody.appendChild(row);
+
+      // Trigger animation for this row
+      animateUpload(row, index, file);
+    });
+
+    updateFilesSummaryVisibility();
+
+    // Clear the input so the same files can be selected again
+    fileInput.value = '';
+  });
+
+  // Clicking anywhere in the upload area triggers the file input
+  uploadArea.addEventListener('click', function (e) {
+    if (e.target !== fileInput && e.target !== chooseFilesButton) {
+      fileInput.click();
+    }
+  });
+
+  // GOV.UK keyboard focus state for upload area
+  uploadArea.addEventListener('focus', function () {
+    setChooseFilesFocusState();
+  });
+
+  uploadArea.addEventListener('blur', function () {
+    resetChooseFilesHoverState();
+  });
+
+  uploadArea.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  // Handle drag and drop
+  uploadArea.addEventListener('mouseenter', function () {
+    uploadArea.style.borderColor = '#858686';
+    uploadArea.style.backgroundColor = '#f3f3f3';
+    setChooseFilesHoverState();
+  });
+
+  uploadArea.addEventListener('mouseleave', function () {
+    uploadArea.style.borderColor = '#b1b4b6';
+    uploadArea.style.backgroundColor = '#ffffff';
+    resetChooseFilesHoverState();
+  });
+
+  uploadArea.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#cecece';
+    uploadArea.style.backgroundColor = '#f3f3f3';
+    setChooseFilesHoverState();
+  });
+
+  uploadArea.addEventListener('dragleave', function (e) {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#b1b4b6';
+    uploadArea.style.backgroundColor = '#ffffff';
+    resetChooseFilesHoverState();
+  });
+
+  uploadArea.addEventListener('drop', function (e) {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#b1b4b6';
+    uploadArea.style.backgroundColor = '#ffffff';
+    resetChooseFilesHoverState();
+
+    const files = Array.from(e.dataTransfer.files);
+
+    if (files.length === 0) {
+      return;
+    }
+
+    // Add rows for each dropped file
+    files.forEach((file, index) => {
+      const row = document.createElement('tr');
+      row.className = 'govuk-table__row uploading-row';
+      row.dataset.file = file.name;
+
+      row.innerHTML = `
+        <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
+          ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)
+        </td>
+        <td class="govuk-table__cell">
+          Uploading: <span class="progress-percent">0%</span>
+        </td>
+        <td class="govuk-table__cell">
+          <a href="#" class="govuk-link">Cancel</a>
+        </td>
+      `;
+
+      tableBody.appendChild(row);
+
+      // Trigger animation for this row
+      animateUpload(row, index, file);
+    });
+
+    updateFilesSummaryVisibility();
+  });
+
+  // Function to animate upload progress
+  function animateUpload(row, index, file) {
+    let percent = 0;
+    const progressEl = row.querySelector('.progress-percent');
+
+    const interval = setInterval(() => {
+      percent++;
+      progressEl.textContent = percent + '%';
+
+      if (percent >= 100) {
+        clearInterval(interval);
+
+        const fileName = row.dataset.file;
+
+        // Mark file as successfully uploaded
+        uploadedFiles.add(fileName);
+
+        row.innerHTML = `
+          <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
+            <a href="#" class="govuk-link" style="overflow-wrap: anywhere; word-break: break-word;">${fileName}</a>
+          </td>
+          <td class="govuk-table__cell">
+            <strong class="govuk-tag govuk-tag--green">Uploaded</strong>
+          </td>
+          <td class="govuk-table__cell">
+            <a href="#" class="govuk-link remove-link">Remove</a>
+          </td>
+        `;
+
+        // If an error is showing and all uploads are done, hide it
+        const uploadingRows = document.querySelectorAll('.uploading-row');
+        const stillUploading = Array.from(uploadingRows).some(r => {
+          const progressEl = r.querySelector('.progress-percent');
+          return progressEl && parseInt(progressEl.textContent, 10) < 100;
+        });
+
+        if (!stillUploading) {
+          hideUploadingError();
+        }
+      }
+    }, 40 + index * 20);
+  }
+
+  // Handle Cancel / Remove clicks
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('.govuk-link');
+
+    if (!link) return;
+
+    const text = link.textContent.trim();
+
+    if (text === 'Cancel' || text === 'Remove') {
+      e.preventDefault();
+
+      const row = link.closest('.govuk-table__row');
+
+      if (row) {
+        const fileName = row.dataset.file;
+        uploadedFiles.delete(fileName);
+        row.remove();
+        updateFilesSummaryVisibility();
+
+              // Check if all files are done uploading
+              const uploadingRows = document.querySelectorAll('.uploading-row');
+              const stillUploading = Array.from(uploadingRows).some(r => {
+                const progressEl = r.querySelector('.progress-percent');
+                return progressEl && parseInt(progressEl.textContent, 10) < 100;
+              });
+
+              if (!stillUploading) {
+                hideUploadingError();
+              }
+      }
+    }
+  });
+
+  // Handle form submission - save uploaded files
+  if (form) {
+    form.addEventListener('submit', function (e) {
+    // Check if any files are still uploading
+    const uploadingRows = document.querySelectorAll('.uploading-row');
+    const uploadingCount = Array.from(uploadingRows).filter(row => {
+      const progressEl = row.querySelector('.progress-percent');
+      return progressEl && parseInt(progressEl.textContent, 10) < 100;
+    }).length;
+
+    if (uploadingCount > 0) {
+      e.preventDefault();
+      showUploadingError();
+      return;
+    }
+
+    // All files done, hide error if showing
+    hideUploadingError();
+
+    // Create hidden inputs for each uploaded file
+    uploadedFiles.forEach((fileName) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      const dataKey = '{{ uploadDataKey }}' || 'uploadedFiles';
+      input.name = dataKey;
+      input.value = fileName;
+      form.appendChild(input);
+    });
+    });
+  }
+</script>

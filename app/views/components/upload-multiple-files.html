@@ -28,12 +28,7 @@
     {% set exampleHtml %}
     <div id="multi-upload-example">
       <form method="post">
-        {{ multiDocumentUpload({
-        caption: "Appeal 12345678",
-        heading: "Upload cross-team correspondence"
-        }) }}
-
-        {{ govukButton({ text: "Continue" }) }}
+          {% include 'components/multiple-document-upload.html' %}
       </form>
     </div>
     {% endset %}
