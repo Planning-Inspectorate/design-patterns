@@ -81,7 +81,7 @@
     </h2>
     <p class="govuk-body">If a user attempts to continue before all files have finished uploading, display the following error summary and message: "Wait for all files to finish uploading".
     </p>
-    <p class="govuk-body">If a user attempts to upload an incorrect file format, display the format requirements in the error summary box and the file that failed to upload is shown beneath the upload area with the message 'The selected file could not be uploaded.'.
+    <p class="govuk-body">If a user attempts to upload an incorrect file format, display the format requirements in the error summary box and the file that failed to upload is shown beneath the upload area with the message 'The selected file must be a [list of file types]​’'.
     </p>
     <p class="govuk-body"><a href="https://pins-ds.atlassian.net/wiki/spaces/BO/pages/edit-v2/1598718005#File-upload" style="color: #1d70b8;">See Appeals error messages here</a></p>
 
@@ -105,6 +105,8 @@
       </div>
 
       <div class="govuk-form-group">
+         <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Upload a file</label>
+        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</p>
         <div class="multi-file-dropzone" style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; background-color: #fff; margin-bottom: 30px; display: flex;">
           <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
             <span class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" aria-disabled="true">Choose files</span>
@@ -145,6 +147,7 @@
 
     <h3 class="govuk-heading-m">Example error: invalid file type</h3>
     <div class="govuk-!-margin-bottom-7" style="border: 1px solid #b1b4b6; padding: 20px; background: #ffffff;">
+      
       <div class="govuk-error-summary" aria-labelledby="filetype-error-summary-title">
         <div role="alert">
           <h2 class="govuk-error-summary__title" id="filetype-error-summary-title">
@@ -153,7 +156,7 @@
           <div class="govuk-error-summary__body">
             <ul class="govuk-list govuk-error-summary__list">
               <li>
-                <span class="govuk-link" style="color: #d4351c; text-decoration: underline;"><strong>The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</strong></span>
+                <span class="govuk-link" style="color: #d4351c; text-decoration: underline;"><strong>The file must be a DOC, DOCX, PDF, TIF, JPG or PNG</strong></span>
               </li>
             </ul>
           </div>
@@ -174,7 +177,7 @@
         <ul class="govuk-list" style="margin: 0 0 30px 0; padding-left: 0; list-style: none;">
           <li>
             <span class="govuk-label-s" style="color: #000000;"><strong>Photos-3-001.zip</strong></span>
-            <p class="govuk-error-message" style="margin-top: 4px;"><strong>The selected file could not be uploaded</strong></p>
+            <p class="govuk-error-message" style="margin-top: 4px;"><strong>The selected file must be a DOC, DOCX, PDF, TIF, JPG or PNG</strong></p>
           </li>
         </ul>
       </div>
