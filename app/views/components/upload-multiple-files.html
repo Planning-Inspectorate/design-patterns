@@ -4,7 +4,7 @@
 {% set pageName = "Upload multiple files" %}
 
 {% from "layouts/component-menu.html" import sideMenu %}
-{% from "components/multidocumentupload.njk" import multiDocumentUpload %}
+{% from "components/multi-file-upload.njk" import uploadArea %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -19,32 +19,33 @@
       <strong class="govuk-tag govuk-tag--yellow">Work in progress</strong>
     </p>
 
-    <p class="govuk-body-l">
-      Use this component to show how users can upload several files. This component is based on the <a
-        href="https://design-patterns.service.justice.gov.uk/components/multi-file-upload/">MOJ multi file upload
-        component</a>.
-    </p>
+    <h3 class="govuk-body-l">
+      Use this component to allow users to upload multiple files. This component is based on the <a href="https://design.tax.service.gov.uk/hmrc-design-patterns/file-upload/">HMRC</a> and <a href="https://design-patterns.service.justice.gov.uk/components/multi-file-upload/">MOJ</a> file upload components.
+    </h3>
 
     {% set exampleHtml %}
-    <div id="multi-upload-example">
-      <form method="post">
-        {{ multiDocumentUpload({
-        caption: "Appeal 12345678",
-        heading: "Upload cross-team correspondence"
-        }) }}
+    {% from "components/multi-file-upload.njk" import uploadArea %}
+    <form method="post" enctype="multipart/form-data">
+      {{ uploadArea({
+        id: "documents",
+        name: "documents",
+        label: "Upload a file",
+        dataKey: uploadDataKey
+      }) }}
 
-        {{ govukButton({ text: "Continue" }) }}
-      </form>
-    </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
     {% endset %}
 
     {% set codeHtml %}
-    <pre class="code-snippet"><code>{% raw %}
-{{ multiDocumentUpload({
-  caption: "Appeal 12345678",
-  heading: "Upload cross-team correspondence"
-}) }}
-{% endraw %}</code></pre>
+    <p class="govuk-body">Use this component by copying the multi-file-upload.njk file from the <a href="https://github.com/Planning-Inspectorate/design-patterns">PINS design-patterns repository</a> and pasting into your prototypes' components folder.
+</p>
+<p class="govuk-body">Then add the Nunjucks item to your page using
+</p>
+    <pre class="code-snippet" style="max-width: 100%; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere;"><code>{% raw %}{% from "components/multi-file-upload.njk" import uploadArea %}{% endraw %}</code></pre>
+
     {% endset %}
 
     {{ govukTabs({
@@ -65,17 +66,153 @@
       macro.
     </p>
 
-    <p class="govuk-body">It should be nested in a ‘two-thirds’ grid layout and an HTML form element. You will need to add a GOV.UK button
-      after the component.
+    <p class="govuk-body">You can access it by copying the <code>multi-file-upload.njk</code> file from the <a href="https://github.com/Planning-Inspectorate/design-patterns">PINS design-patterns repository</a> and pasting into your prototypes' components folder.
+    </p>
+
+    <p class="govuk-body">Call the Nunjucks item using</p>
+    <p>
+      <code>{% raw %}{% from "components/multi-file-upload.njk" import uploadArea %}{% endraw %}</code>
+    </p>
+
+    <p class="govuk-body">It should be nested in a ‘two-thirds’ grid layout.
     </p>
 
     <h2 class="govuk-heading-l">Error messaging
     </h2>
+    <p class="govuk-body">If a user attempts to continue before all files have finished uploading, display the following error summary and message: "Wait for all files to finish uploading".
+    </p>
+    <p class="govuk-body">If a user attempts to upload an incorrect file format, display the format requirements in the error summary box and the file that failed to upload is shown beneath the upload area with the message 'The selected file must be a [list of file types]​’'.
+    </p>
+    <p class="govuk-body"><a href="https://pins-ds.atlassian.net/wiki/spaces/BO/pages/edit-v2/1598718005#File-upload" style="color: #1d70b8;">See Appeals error messages here</a></p>
 
-    <p class="govuk-body">If a user attempts to continue before all files have finished uploading, display the following error summary and message: "Wait for all file to finish uploading".
+    
+
+    <h3 class="govuk-heading-m">Example error: files still uploading</h3>
+    <div class="govuk-!-margin-bottom-7" style="border: 1px solid #b1b4b6; padding: 20px; background: #ffffff;">
+      <div class="govuk-error-summary" aria-labelledby="uploading-error-summary-title">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title" id="uploading-error-summary-title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              <li>
+                <span class="govuk-link" style="color: #d4351c; text-decoration: underline;"><strong>Wait for all files to finish uploading</strong></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-form-group">
+         <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Upload a file</label>
+        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</p>
+        <div class="multi-file-dropzone" style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; background-color: #fff; margin-bottom: 30px; display: flex;">
+          <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
+            <span class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" aria-disabled="true">Choose files</span>
+            <p class="govuk-body" style="margin: 0 0 0 10px;">or drop files</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-form-group govuk-form-group--error">
+        <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Files added</label>
+        <p class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>
+          <strong>Wait for all files to finish uploading</strong>
+        </p>
+        <table class="govuk-table" style="table-layout: fixed; width: 100%; margin-bottom: 20px;">
+          <colgroup>
+            <col>
+            <col style="width: 180px;">
+            <col style="width: 80px;">
+          </colgroup>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><a href="#" class="govuk-link" style="color: #1d70b8;">Receipt-1.pdf</a></td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Uploaded</strong></td>
+              <td class="govuk-table__cell"><a href="#" class="govuk-link" style="color: #1d70b8;">Remove</a></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">Apellant-email-23.04.26.docx (0.02MB)</td>
+              <td class="govuk-table__cell">Uploading: 67%</td>
+              <td class="govuk-table__cell"><a href="#" class="govuk-link" style="color: #1d70b8;">Cancel</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="govuk-button" aria-disabled="true">Continue</span>
+    </div>
+
+    <h3 class="govuk-heading-m">Example error: invalid file type</h3>
+    <div class="govuk-!-margin-bottom-7" style="border: 1px solid #b1b4b6; padding: 20px; background: #ffffff;">
+      
+      <div class="govuk-error-summary" aria-labelledby="filetype-error-summary-title">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title" id="filetype-error-summary-title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              <li>
+                <span class="govuk-link" style="color: #d4351c; text-decoration: underline;"><strong>The file must be a DOC, DOCX, PDF, TIF, JPG or PNG</strong></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-form-group govuk-form-group--error">
+        <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Upload a file</label>
+        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</p>
+
+        <div class="multi-file-dropzone" style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; background-color: #fff; margin-bottom: 15px; display: flex;">
+          <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
+            <span class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" aria-disabled="true">Choose files</span>
+            <p class="govuk-body" style="margin: 0 0 0 10px;">or drop files</p>
+          </div>
+        </div>
+
+        <ul class="govuk-list" style="margin: 0 0 30px 0; padding-left: 0; list-style: none;">
+          <li>
+            <span class="govuk-label-s" style="color: #000000;"><strong>Photos-3-001.zip</strong></span>
+            <p class="govuk-error-message" style="margin-top: 4px;"><strong>The selected file must be a DOC, DOCX, PDF, TIF, JPG or PNG</strong></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Files added</label>
+        <table class="govuk-table" style="table-layout: fixed; width: 100%; margin-bottom: 20px;">
+          <colgroup>
+            <col>
+            <col style="width: 180px;">
+            <col style="width: 80px;">
+          </colgroup>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell"><a href="#" class="govuk-link" style="color: #1d70b8;">Receipt-1.pdf</a></td>
+              <td class="govuk-table__cell"><strong class="govuk-tag govuk-tag--green">Uploaded</strong></td>
+              <td class="govuk-table__cell"><a href="#" class="govuk-link" style="color: #1d70b8;">Remove</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <span class="govuk-button" aria-disabled="true">Continue</span>
+    </div>
+
+    <h2 class="govuk-heading-l">Design history</h2>
+    <p class="govuk-body">Internal Planning Inspectorate users can <a href="https://pins-ds.atlassian.net/wiki/x/iIQDn" style="color: #1d70b8;">read how user research influenced our decisions</a> in creating this component.</p>
+
+    <h2 class="govuk-heading-l">Discussion</h2>
+    <p class="govuk-body">Help improve this component</p>
+    <p class="govuk-body">To help make sure that this page is useful, relevant and up to date, you can:</p>
+    <p class="govuk-body">
+        Take part in the <a href="#" style="color: #1d70b8;">Multiple file upload discussion on GitHub</a> and share your research
     </p>
 
-    <p class="govuk-body"><a href="https://pins-ds.atlassian.net/wiki/spaces/BO/pages/edit-v2/1598718005#File-upload">See Appeals error messages here</a></p>
 
   </div>
 </div>
