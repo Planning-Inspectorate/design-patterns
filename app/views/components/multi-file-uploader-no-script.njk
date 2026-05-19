@@ -1,0 +1,24 @@
+{# No-JS uploader markup. Wrap in <noscript> by default unless used as an always-visible example. #}
+{% set renderWithoutNoscript = renderWithoutNoscript or false %}
+{% set hint = hint or "The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB" %}
+{% set accept = accept or ".doc,.docx,.pdf,.tif,.tiff,.jpg,.jpeg,.png" %}
+
+{% if not renderWithoutNoscript %}
+<noscript>
+{% endif %}
+  <form method="post" enctype="multipart/form-data" action="/upload">
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="document-noscript">
+        Upload a file
+      </label>
+      <p class="govuk-hint">{{ hint }}</p>
+      <input class="govuk-file-upload" id="document-noscript" 
+             name="documents" type="file" accept="{{ accept }}">
+    </div>
+    <button type="submit" class="govuk-button govuk-button--secondary">
+      Upload file
+    </button>
+  </form>
+{% if not renderWithoutNoscript %}
+</noscript>
+{% endif %}
