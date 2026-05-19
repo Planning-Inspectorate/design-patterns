@@ -55,6 +55,8 @@
     ]
     }) }}
 
+
+
     <h2 class="govuk-heading-l">When to use this pattern</h2>
     <p class="govuk-body">Use the multi file upload component when you want users to be able to upload more than one
       file.
@@ -106,7 +108,7 @@
 
       <div class="govuk-form-group">
          <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Upload a file</label>
-        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</p>
+        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 50MB</p>
         <div class="multi-file-dropzone" style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; background-color: #fff; margin-bottom: 30px; display: flex;">
           <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
             <span class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" aria-disabled="true">Choose files</span>
@@ -165,7 +167,7 @@
 
       <div class="govuk-form-group govuk-form-group--error">
         <label class="govuk-label govuk-label--m" style="color: #0b0c0c;">Upload a file</label>
-        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB</p>
+        <p class="govuk-hint">The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 50MB</p>
 
         <div class="multi-file-dropzone" style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; background-color: #fff; margin-bottom: 15px; display: flex;">
           <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
@@ -205,6 +207,20 @@
 
     <h2 class="govuk-heading-l">Design history</h2>
     <p class="govuk-body">Internal Planning Inspectorate users can <a href="https://pins-ds.atlassian.net/wiki/x/iIQDn" style="color: #1d70b8;">read how user research influenced our decisions</a> in creating this component.</p>
+
+    <h2 class="govuk-heading-l">Non-JavaScript uploader</h2>
+    <p class="govuk-body">A version of the multi-file uploader needs to be created for situations where javascript is not available. The non-javascript version of the multi-file upload has not been finished yet.</p>
+    <p class="govuk-body">multi-file-upload.njk is JavaScript-dependent by design.</p>
+    <p class="govuk-body">Without JavaScript, it fails functionally because:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>the visible upload UI is a custom dropzone, not a native control.</li>
+      <li>the native file input is visually hidden and only triggered by JS click/keyboard handlers.</li>
+      <li>file rows, progress (Uploading: %), cancel/remove actions, and error states are all rendered/updated in JS.</li>
+    <li>“continue” logic (blocking while uploading, filtering invalid files) is JS-only.</li>
+   <li>hidden inputs for submitted uploaded filenames are created in JS before submit.</li> 
+  </ul>
+  <p class="govuk-body">So if JS is off and you render only multi-file-upload.njk, users will not get the intended uploader behaviour.
+That is why you need the separate non-JS fallback. A file for this is available but has not been finished yet (multi-file-uploader-no-script.njk).</p>
 
     <h2 class="govuk-heading-l">Discussion</h2>
     <p class="govuk-body">Help improve this component</p>

@@ -1,4 +1,6 @@
+{# Nunjucks macro for reusable multi-file upload component #}
 {% macro uploadArea(params) %}
+  {# Set up component parameters with sensible defaults #}
   {% set id = params.id or "documents" %}
   {% set name = params.name or "documents" %}
   {% set label = params.label or "Upload a file" %}
@@ -10,6 +12,7 @@
   {% set dataKey = params.dataKey or "uploadedFiles" %}
   {% set errorMessage = params.errorMessage
     or "The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB" %}
+
 
   <div class="govuk-form-group" id="{{ id }}-upload-group">
     <label class="govuk-label govuk-label--m" for="{{ id }}">
@@ -77,7 +80,9 @@
 
   <script>
     (function () {
-      // Cached DOM references and component state
+      {# Immediately Invoked Function Expression (IIFE) to create isolated scope for component state #}
+      
+      {# Cache DOM elements for efficient access #}
       const fileInput = document.getElementById('{{ id }}');
       if (!fileInput) return;
 
@@ -91,13 +96,18 @@
       const filesAddedLabel = document.getElementById('{{ id }}-files-label');
       const tableBody = document.querySelector('#{{ id }}-files-table tbody');
       const form = uploadArea.closest('form') || document.querySelector('form');
-      const uploadedFiles = new Set();
+      
+      {# Component state tracking #}
+      const uploadedFiles = new Set();  {# Track names of successfully uploaded files #}
       const allowedExtensions = '{{ allowedExtensions | join(",") }}'.toLowerCase().split(',').map((ext) => ext.trim()).filter(Boolean);
       const maxFileSizeBytes = {{ maxFileSizeMB }} * 1024 * 1024;
-      let failedFileNames = [];
-      let showUploadingWarning = false;
+      let failedFileNames = [];  {# Track files that failed validation #}
+      let showUploadingWarning = false;  {# Flag to control uploading error state #}
 
-      // Setting the visibility of the summary list
+
+      {# ===== UI States ===== #}
+      
+      {# Visibility of the summary list based on whether rows exist #}
       function updateFilesSummaryVisibility() {
         const hasRows = tableBody.children.length > 0;
         filesTableGroup.style.display = hasRows ? 'block' : 'none';
@@ -109,6 +119,7 @@
         chooseFilesButton.style.boxShadow = '0 2px 0 #929191';
       }
 
+      {# Button focus state styling - GOV.UK yellow focus style #}
       function setChooseFilesFocusState() {
         chooseFilesButton.style.backgroundColor = '#ffdd00';
         chooseFilesButton.style.color = '#0b0c0c';
@@ -123,6 +134,7 @@
         chooseFilesButton.style.outline = '';
       }
 
+      {# Check if any files failed validation #}
       function hasFailedFiles() {
         return failedFileNames.length > 0;
       }
@@ -132,6 +144,7 @@
         uploadArea.style.backgroundColor = '#ffffff';
       }
 
+      {# Validation error message visibility #}
       function setValidationErrorVisibility(showError) {
         fileValidationError.style.display = 'none';
       }
@@ -144,6 +157,9 @@
         }).length;
       }
 
+      {# ===== Error Handling Functions ===== #}
+      
+      {# Create/update GOV.UK error summary at top of form showing file type and uploading errors #}
       function renderTopErrorSummary(scrollToTop) {
         const summaryId = '{{ id }}-file-type-error-summary';
         let errorSummary = document.getElementById(summaryId);
@@ -190,6 +206,7 @@
           </div>
         `;
 
+
         if (scrollToTop) {
           errorSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -219,6 +236,7 @@
         failedFilesContainer.style.display = 'block';
       }
 
+      {# Update UI when file type validation errors occur #}
       function updateFileTypeErrorUi(scrollToTop) {
         const hasErrors = hasFailedFiles();
         uploadGroup.classList.toggle('govuk-form-group--error', hasErrors);
@@ -228,26 +246,35 @@
         resetDropzoneBaseStyles();
       }
 
+      {# ===== File Validation Functions ===== #}
+      
+      {# Check if file extension is in allowed list #}
       function isAllowedFileType(file) {
         const fileName = (file.name || '').toLowerCase();
         const extension = fileName.includes('.') ? fileName.split('.').pop() : '';
         return !!extension && allowedExtensions.includes(extension);
       }
 
+      {# Check if file size is within maximum limit #}
       function isAllowedFileSize(file) {
         return typeof file.size === 'number' && file.size <= maxFileSizeBytes;
       }
 
+      {# Combined validation - must pass both type and size checks #}
       function isAllowedFile(file) {
         return isAllowedFileType(file) && isAllowedFileSize(file);
       }
 
+      {# ===== File Table Management Functions ===== #}
+      
+      {# Add valid files to the table and start upload animation #}
       function addFilesToTable(files) {
         files.forEach((file, index) => {
           const row = document.createElement('tr');
           row.className = 'govuk-table__row uploading-row';
           row.dataset.file = file.name;
 
+          {# Initial row with filename, size, and progress indicator #}
           row.innerHTML = `
             <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
               ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)
@@ -267,7 +294,7 @@
         updateFilesSummaryVisibility();
       }
 
-      // Error handling
+      {# Show uploading error when user attempts to submit with in-progress uploads #}
       function showUploadingError() {
         showUploadingWarning = true;
         filesTableGroup.classList.add('govuk-form-group--error');
@@ -282,12 +309,14 @@
         renderTopErrorSummary(false);
       }
 
-      // Setting initial load state
+      {# Setting intial load state #}
       updateFilesSummaryVisibility();
       setValidationErrorVisibility(false);
       updateFileTypeErrorUi(false);
 
-      // File picker change handling
+      {# ===== Event Listeners ===== #}
+      
+      {# Handle files selected via file picker dialog #}
       fileInput.addEventListener('change', function (e) {
         const files = Array.from(e.target.files);
 
@@ -309,21 +338,24 @@
         fileInput.value = '';
       });
 
-      // Keyboard and pointer interaction handlers (for hover and focus states)
+      {# Click handler - trigger file picker when clicking dropzone #}
       uploadArea.addEventListener('click', function (e) {
         if (e.target !== fileInput && e.target !== chooseFilesButton) {
           fileInput.click();
         }
       });
 
+      {# Focus handler - show focus state styling #}
       uploadArea.addEventListener('focus', function () {
         setChooseFilesFocusState();
       });
 
+      {# Blur handler - reset styling when focus leaves #}
       uploadArea.addEventListener('blur', function () {
         resetChooseFilesHoverState();
       });
 
+      {# Keyboard handler - allow Enter/Space to trigger file picker #}
       uploadArea.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -331,17 +363,20 @@
         }
       });
 
+      {# Mouse enter - highlight dropzone on hover #}
       uploadArea.addEventListener('mouseenter', function () {
         uploadArea.style.borderColor = '#858686';
         uploadArea.style.backgroundColor = '#f3f3f3';
         setChooseFilesHoverState();
       });
 
+      {# Mouse leave - reset dropzone to default state #}
       uploadArea.addEventListener('mouseleave', function () {
         resetDropzoneBaseStyles();
         resetChooseFilesHoverState();
       });
 
+      {# Drag over - highlight dropzone when files are dragged over it #}
       uploadArea.addEventListener('dragover', function (e) {
         e.preventDefault();
         uploadArea.style.borderColor = '#cecece';
@@ -349,12 +384,14 @@
         setChooseFilesHoverState();
       });
 
+      {# Drag leave - reset when drag leaves the dropzone #}
       uploadArea.addEventListener('dragleave', function (e) {
         e.preventDefault();
         resetDropzoneBaseStyles();
         resetChooseFilesHoverState();
       });
 
+      {# Drop handler - process dropped files #}
       uploadArea.addEventListener('drop', function (e) {
         e.preventDefault();
         resetDropzoneBaseStyles();
@@ -377,15 +414,19 @@
         updateFileTypeErrorUi(failedFileNames.length > 0);
       });
 
-      // Upload progress animation simulation
+      {# ===== Upload Animation Function ===== #}
+      
+      {# Simulate file upload progress and transition row to completed state #}
       function animateUpload(row, index) {
         let percent = 0;
         const progressEl = row.querySelector('.progress-percent');
 
+        {# Increment progress by 1% every 40-60ms (varies based on file index) #}
         const interval = setInterval(() => {
           percent++;
           progressEl.textContent = percent + '%';
 
+          {# When upload reaches 100%, update row to show completed state #}
           if (percent >= 100) {
             clearInterval(interval);
 
@@ -404,12 +445,14 @@
               </td>
             `;
 
+            {# Check if all uploads are complete #}
             const uploadingRows = tableBody.querySelectorAll('.uploading-row');
             const stillUploading = Array.from(uploadingRows).some(r => {
               const currentProgress = r.querySelector('.progress-percent');
               return currentProgress && parseInt(currentProgress.textContent, 10) < 100;
             });
 
+            {# Hide uploading error once all files finish #}
             if (!stillUploading) {
               hideUploadingError();
             }
@@ -417,7 +460,9 @@
         }, 40 + index * 20);
       }
 
-      // Cancel/remove link handling
+      {# ===== File Removal Functions ===== #}
+      
+      {# Handle Cancel and Remove link clicks #}
       document.addEventListener('click', function (e) {
         const link = e.target.closest('.govuk-link');
         if (!link || !tableBody.contains(link)) return;
@@ -447,7 +492,9 @@
         }
       });
 
-      // Form submit validation and hidden input mapping
+      {# ===== Form Submit Handler ===== #}
+      
+      {# Prevent submit if uploads are in progress; create hidden inputs - which log files names - for submitted files #}
       if (form) {
         form.addEventListener('submit', function (e) {
           const uploadingCount = getUploadingCount();
