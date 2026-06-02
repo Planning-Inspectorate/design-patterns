@@ -5,3 +5,10 @@
   margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
+
+.moj-multi-file-upload__upload:focus {
+  border: $govuk-focus-width solid $govuk-text-colour !important;
+  outline: $govuk-focus-width solid $govuk-focus-colour;
+  outline-offset: 0;
+  box-shadow: none;
+}

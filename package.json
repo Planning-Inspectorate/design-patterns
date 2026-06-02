@@ -9,7 +9,7 @@
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "^2.0.1",
     "@ministryofjustice/frontend": "^5.2.1",
-    "govuk-frontend": "^5.13.0",
+    "govuk-frontend": "^5.14.0",
     "govuk-prototype-kit": "^13.18.1",
     "moment": "^2.30.1"
   }
