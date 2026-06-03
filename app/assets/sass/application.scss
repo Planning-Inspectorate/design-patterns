@@ -50,10 +50,17 @@ pre code.language-html {
   overflow-x: auto;
   white-space: pre;
   background: none;
-  padding: 1em;
+  padding: 0, 1em;
   border-radius: 4px;
   font-size: 0.95em;
   box-sizing: border-box;
+  margin: 0;
+  line-height: 1.8rem;
+}
+
+.code-snippet code {
+  white-space: pre;
+  display: block;
 }
 
 // PINS header styles
