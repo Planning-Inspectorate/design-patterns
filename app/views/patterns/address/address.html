@@ -7,6 +7,9 @@
 
 {% from "layouts/pattern-menu.html" import sideMenu %}
 
+{# Example Nunjucks code for the address form #}
+{% set exampleNunjucks -%}  {{ '{{ address (country = true) }}' }}{%- endset %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
@@ -33,21 +36,9 @@
     </p>
 
     {% set exampleHtml %}
-      {{ address (
-        country = true
-      ) }}
+      {{ address (country = true) }}
     {% endset -%}
-    {% set codeHtml %}
-
-    <pre class="code-snippet"><code>{% raw -%}{{ address () }}
-
-{{ address (
-// address with an extra field for country
-country = true
-) }}
-{% endraw %}
-      </code></pre>
-    {% endset -%}
+    {% set codeHtml %}<pre class="code-snippet"><code>{{ exampleNunjucks }}</code></pre>{% endset -%}
 
     {{ govukTabs({
       items: [
