@@ -1,16 +1,19 @@
 {% set currentPage = "patterns" %}
 {% extends "layouts/main.html" %}
 
-{% from "patterns/address.njk" import address %}
+{% from "patterns/address/address.njk" import address %}
 
 {% set pageName = "Address" %}
 
 {% from "layouts/pattern-menu.html" import sideMenu %}
 
+{# Example Nunjucks code for the address form #}
+{% set exampleNunjucks -%}  {{ '{{ address (country = true) }}' }}{%- endset %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
-    {{ sideMenu("item1") }}
+    {{ sideMenu("address") }}
   </div>
 
   <div class="govuk-grid-column-three-quarters">
@@ -33,21 +36,9 @@
     </p>
 
     {% set exampleHtml %}
-      {{ address (
-        country = true
-      ) }}
+      {{ address (country = true) }}
     {% endset -%}
-    {% set codeHtml %}
-
-    <pre class="code-snippet"><code>{% raw -%}{{ address () }}
-
-{{ address (
-// address with an extra field for country
-country = true
-) }}
-{% endraw %}
-      </code></pre>
-    {% endset -%}
+    {% set codeHtml %}<pre class="code-snippet"><code>{{ exampleNunjucks }}</code></pre>{% endset -%}
 
     {{ govukTabs({
       items: [
