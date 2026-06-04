@@ -32,15 +32,23 @@
         -webkit-transform-origin: 0 0;
     }
 
-    .wra-mobile {
-        width: 50%;
+    .wrap-mobile {
+        width: 49%;
         padding: 0;
         overflow: hidden;
         height: 620px;
+        margin-bottom: 20px;
+    }
+
+
+    @media (max-width: 600px) {
+        .wrap-mobile {
+            width: 100%;
+        }
     }
 
     .frame-mobile {
-        width: 133%;
+        width: 120%;
         height: 55rem;
         border: 1px solid rgb(172, 172, 172);
     }
@@ -743,22 +751,13 @@
 
         <h2 class="govuk-heading-l">Mobile design</h2>
 
-        <p class="govuk-body">On mobile, filters are usually hidden behind a “Show filters” button to save space.
-            When
-            users
-            tap the button, the filter panel can expand as an accordion or appear as a full-screen overlay.
+        <p class="govuk-body">On mobile, filters should be hidden within an accordion button and
+            expand as needed.
         </p>
 
-        <div style="width:100%; display:flex; flex-wrap:wrap; gap:20px; padding-bottom:20px; align-items:flex-start;">
-            <img style="border:1px solid grey; max-width:45%; height:auto;"
-                src="/public/images/patterns/filters/left-hand-mobile-expanded.png"
-                alt="A screenshot of a mobile filter panel overlay on the Find a National Infrastructure Project service. The filter panel has a 'return to results' button at the top, and each filter can be expanded or collapsed. There is also an Apply filters button at the bottom.">
-
-            <img style="border:1px solid grey; max-width:49%; height:auto;"
-                src="/public/images/patterns/filters/filter-above-results-mobile.png"
-                alt="A screenshot of a collapsible filter panel above the Crown Developments applications list. Each filter can be expanded or collapsed, and there is a button to apply the filters.">
+        <div class="wrap-mobile">
+            <iframe class="frame-mobile" src="filter-example-top.html"></iframe>
         </div>
-
 
         <h2 class="govuk-heading-l">Accessibility</h2>
 
