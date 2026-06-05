@@ -1,6 +1,18 @@
 {% macro codeBlock(code, language="html") -%}
     <div class="code-wrapper" style="position: relative;">
-        <button class="govuk-button govuk-button--secondary" id="copy-code-btn-{{ range(1, 999999) | random }}" style="position: absolute; top: 10px; right: 10px; z-index: 10;" onclick="copyCode(this)">Copy</button>
+        <button class="govuk-button govuk-button--secondary code-block__copy-btn" id="copy-code-btn-{{ range(1, 999999) | random }}" style="position: absolute; top: 10px; right: 10px; z-index: 10;" onclick="copyCode(this)">Copy</button>
+        <style>
+            @media (max-width: 600px) {
+                .code-block__copy-btn {
+                    position: relative !important;
+                    margin-left: 20px;
+                    width: 95% !important;
+                }
+            }
+            .code-wrapper {
+                border: 1px solid #f2f3f2;
+            }
+        </style>
         <pre class="code-snippet"><code class="language-{{ language }}">{{ code | replace('\n  ', '\n') | escape }}</code></pre>
     </div>
 {%- endmacro %}
