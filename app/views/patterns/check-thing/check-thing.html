@@ -45,8 +45,8 @@ items: [
     </h1>
     <p>
       {{govukTag({
-        text: "Work in progress",
-        classes: "govuk-tag--yellow"
+        text: "Pattern in use",
+        classes: "govuk-tag--green"
       })}}
     </p>
 
@@ -55,23 +55,15 @@ items: [
     </p>
 
     <p class="govuk-body">
-      If they say they have it, ask them for it.
-    </p>
-
-    <h2 class="govuk-heading-l">
-      Why not use a skip button?
-    </h2>
-
-    <p class="govuk-body">
-      Do not use a skip button on pages that ask for important evidence.
-    </p>
-
-    <p class="govuk-body">
-      A skip option can make something feel optional or less important.
+      Allow users to provide something if they have it, or send it later without making it seem like it’s unimportant or a step they can skip if they feel like it.
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
       In research, people said they might skip uploading a document if a skip button is there, even if they have it, because it is easier.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+      Ask if they have it. If they say yes, ask them to provide it in the following screen.
     </p>
 
     {% set exampleHtml -%}{{ govukRadios({
