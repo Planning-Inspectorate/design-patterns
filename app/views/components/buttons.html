@@ -1,0 +1,351 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Buttons" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+
+
+{% set currentPage = "components" %}
+
+{% set pageName = "Buttons" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu('item6') }}
+  </div>
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+      <p>
+        <strong class="govuk-tag govuk-tag--yellow">Work in progress
+        </strong>
+      </p>
+    <p class="govuk-body-l">Use the button component to help users carry out an action like starting an application or saving their information.</p>
+    <p class="govuk-body">Refer to the guidance on <a href="https://design-system.service.gov.uk/components/button/">GOV.UK buttons</a> for the components themselves.</p>
+    
+    <h3 class="govuk-heading-m">Primary button</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+      {% set exampleHtml1 %}
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Save and continue
+        </button>
+      {% endset -%}
+      {% set codeHtml1 %}
+      {{ codeBlock('
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Save and continue
+  </button>
+      ', 'html') }}
+      {% endset -%}
+      {{ govukTabs({
+        id: "header-tabs-1",
+        items: [
+          {
+            label: "Example",
+            id: "example1",
+            panel: {
+              html: exampleHtml1
+            }
+          },
+          {
+            label: "HTML",
+            id: "html1",
+            panel: {
+              html: codeHtml1
+            }
+          }
+        ]
+      }) }}
+    </div>
+    <p class="govuk-body">Primary buttons should be used for core actions that will progress the user towards their user journey, and you should avoid having more than one on a page at a time to avoid confusing the user. For example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Save and continue</li>
+      <li>Save and return</li>
+      <li>Sign in</li>
+      <li>Confirm and send</li>
+      <li>Publish</li>
+    </ul>
+    <p class="govuk-body">The button text should be sentence case, and should describe the exact action it completes when clicked. For example, if the button does not save any information, do not use 'save'.</p>
+    <p class="govuk-body">The buttons should be left aligned and easily scannable when reviewing the page and not hidden in other components.</p>
+    <p class="govuk-body">Consider where the button should go with regards to the rest of the page content. If they are completing a form, place the button beneath the form content to ensure they do not advance without completing the form. Avoid putting any essential content below a button as it may be missed by a screen reader who is quickly scanning the page and looking to progress with the journey.</p>
+    <p class="govuk-body">If the button is not directly completing the action, consider using a secondary button or a button link. For example, on a project page you may have an 'upload documents' button to take the user to a sub-page to upload documents. The sub-page should use a primary button as it will be the action to add it to the system, whereas the button on the project page is only used to start the process so should be a secondary button.</p>
+    <br>
+    
+    <h3 class="govuk-heading-m">Secondary button</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+      {% set exampleHtml1 %}
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Save as draft
+        </button>
+      {% endset -%}
+      {% set codeHtml1 %}
+      {{ codeBlock('
+  <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+    Save as draft
+  </button>
+      ', 'html') }}
+      {% endset -%}
+      {{ govukTabs({
+        id: "header-tabs-1",
+        items: [
+          {
+            label: "Example",
+            id: "example1",
+            panel: {
+              html: exampleHtml1
+            }
+          },
+          {
+            label: "HTML",
+            id: "html1",
+            panel: {
+              html: codeHtml1
+            }
+          }
+        ]
+      }) }}
+    </div>
+    <p class="govuk-body">Secondary buttons should be used for secondary or tertiary actions on the page. Interacting with the secondary buttons will either complete actions on the page or take the user down a sub-journey that when completed will return the user to their previous position on the page.</p>
+    <h4 class="govuk-heading-s">Secondary actions</h4>
+    <p class="govuk-body">They can be used to diverge them onto a new sub-journey, such as to add more information without significantly progressing the key user journey, for example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Add document</li>
+      <li>Add another</li>
+      <li>Upload new version</li>
+      <li>Save as draft</li>
+      <li>Open</li>
+    </ul>
+    <h4 class="govuk-heading-s">Tertiary actions</h4>
+
+    <p class="govuk-body">They can also be used to supplement the core user journey on the page by allowing the user to optionally refine the information on the page to support their needs. For example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Apply filters</li>
+      <li>Find address</li>
+    </ul>
+
+    <br>
+
+    <h3 class="govuk-heading-m">Warning button</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+      {% set exampleHtml1 %}
+  <button type="submit" class="govuk-button govuk-button--warning" data-module="govuk-button">
+    Delete account
+  </button>
+      {% endset -%}
+      {% set codeHtml1 %}
+      {{ codeBlock('
+  <button type="submit" class="govuk-button govuk-button--warning" data-module="govuk-button">
+    Delete account
+  </button>
+      ', 'html') }}
+      {% endset -%}
+      {{ govukTabs({
+        id: "header-tabs-1",
+        items: [
+          {
+            label: "Example",
+            id: "example1",
+            panel: {
+              html: exampleHtml1
+            }
+          },
+          {
+            label: "HTML",
+            id: "html1",
+            panel: {
+              html: codeHtml1
+            }
+          }
+        ]
+      }) }}
+    </div>
+    <p class="govuk-body">Warning buttons should be used exclusively for destructive actions. An action can be considered destructive if it is irreversible or may result in the loss of data or significant progress, for example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Remove user</li>
+      <li>Delete document</li>
+    </ul>
+    <p class="govuk-body">The warning button text used should be specific and direct, and refer only to the action it will complete for example, "Remove user" or "Delete document".</p>
+    <p class="govuk-body">They should be used sparingly (with no more than one on a page at a time) as the strong red colour can be stress inducing. The warning button should be used only for the decisive final action of a journey, such as on the confirmation page of deleting a document rather than the button on the properties page itself.</p>
+    <p class="govuk-body">The warning button should be used only for the decisive final action of a journey, such as on the confirmation page of deleting a document rather than the button on the properties page itself.</p>
+
+    <br>
+
+    <h3 class="govuk-heading-m">Link (button)</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+    {% set exampleHtml1 %}
+<a class="govuk-link" href="#">View publishing queue</a>
+    {% endset -%}
+    {% set codeHtml1 %}
+    {{ codeBlock('
+<a class="govuk-link" href="#">View publishing queue</a>
+    ', 'html') }}
+    {% endset -%}
+    {{ govukTabs({
+      id: "header-tabs-1",
+      items: [
+        {
+          label: "Example",
+          id: "example1",
+          panel: {
+            html: exampleHtml1
+          }
+        },
+        {
+          label: "HTML",
+          id: "html1",
+          panel: {
+            html: codeHtml1
+          }
+        }
+      ]
+    }) }}
+    </div>
+    <p class="govuk-body">Links may be used on their own or as part of a button group exclusively for supporting navigation without completing an action itself, for example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Skip</li>
+      <li>View publishing queue</li>
+      <li>View decision</li>
+      <li>Download</li>
+      <li>Give your feedback (opens in a new tab)</li>
+    </ul>
+    <p class="govuk-body">Situationally, it may be preferable to open the new page in a new tab to ensure the user does not lose information added to the previous page, or if having both pages open is essential to task completion. In this situation the link content should include "(opens in a new tab)" after the main text.</p>
+    <p class="govuk-body">If there are a series of links that all open in a new tab you may opt to make the '(opens in a new tab)' visually hidden with the "govuk-visually-hidden" class tag, and instead mention above the list that each following link opens in a new tab.</p>
+    <p class="govuk-body">If a link is being used on it's own outside of body text, punctuation (such as full stops) is not required and only use sentence case. If it is inside body text you should use punctuation, but the fullstops should be outside of the clickable link, like<a href="#"> this</a>.</p>
+    <br>
+
+    <h3 class="govuk-heading-m">Start button</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+    {% set exampleHtml1 %}
+<a href="#" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+  Start now
+  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+  </svg>
+</a>
+    {% endset -%}
+    {% set codeHtml1 %}
+    {{ codeBlock('
+<a href="#" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+  Start now
+  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+  </svg>
+</a>
+    ', 'html') }}
+    {% endset -%}
+    {{ govukTabs({
+      id: "header-tabs-1",
+      items: [
+        {
+          label: "Example",
+          id: "example1",
+          panel: {
+            html: exampleHtml1
+          }
+        },
+        {
+          label: "HTML",
+          id: "html1",
+          panel: {
+            html: codeHtml1
+          }
+        }
+      ]
+    }) }}
+    </div>
+    <p class="govuk-body">Start buttons should be used to initiate the start of a new journey. Technically they are link HTML elements as they are only used navigate the user to the beginning of a new journey, and will not complete any actions or submit any form data. For example:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Start now</li>
+    </ul>
+    <p class="govuk-body">Avoid using more than one per page, and do not use the start button as part of a button group.</p>
+    <br>
+
+    <h3 class="govuk-heading-m">Button groups</h3>
+    <div> <!--HTML EXAMPLE-->
+
+
+    {% set exampleHtml1 %}
+<div class="govuk-button-group">
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Save and continue
+  </button>
+  <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+    Add another
+  </button>
+  <a class="govuk-link" href="#">Cancel</a>
+</div>
+    {% endset -%}
+    {% set codeHtml1 %}
+    {{ codeBlock('
+<div class="govuk-button-group">
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Save and continue
+  </button>
+  <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+    Add another
+  </button>
+  <a class="govuk-link" href="#">Cancel</a>
+</div>
+    ', 'html') }}
+    {% endset -%}
+    {{ govukTabs({
+      id: "header-tabs-1",
+      items: [
+        {
+          label: "Example",
+          id: "example1",
+          panel: {
+            html: exampleHtml1
+          }
+        },
+        {
+          label: "HTML",
+          id: "html1",
+          panel: {
+            html: codeHtml1
+          }
+        }
+      ]
+    }) }}
+    </div>
+    <p class="govuk-body">Button groups should be used to group multiple actions together that directly relate to one another. If used on a form any buttons should directly relate to the form content and main header.</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Save and continue | Save as draft</li>
+      <li>Continue | Cancel</li>
+    </ul>
+    <p class="govuk-body">They should always be ordered with the primary actions on the left followed by any secondary, then tertiary actions on the right.</p>
+    <p class="govuk-body">Avoid using more than one primary button in a button group.</p>
+    <p class="govuk-body">Avoid using more than one link in a button group. If there are multiple links needed, consider a list component with links.</p>
+    <br>
+
+    
+    <h2 class="govuk-heading-l">When not to use this component</h2>
+    <p class="govuk-body">Do not use button HTML elements in place of links, and link HTML elements in place of buttons. This can have an impact on screenreader users.</p>
+    <p class="govuk-body">There may be situations where styling a button to look like a link or a link to look like a button is needed, and this is fine when validated with research. However, it is essential that buttons (that do actions) are tagged as HTML buttons elements, and links (that only take people places) are tagged as HTML link elements even when styled otherwise.</p>
+
+    <h2 class="govuk-heading-l">Accessiblity</h2>
+    <p class="govuk-body">Link colours and button colours must pass contrast checks between the text and the background color.</p>
+    <p class="govuk-body">Text size for links should be standard govuk-body-m or govuk-body-s and should match the size preset of other body text in the same container.</p>
+    <h2 class="govuk-heading-l">Research on this component</h2>
+    <p class="govuk-body">User research findings on this component are in progress and will be added here when available.</p>
+  </div>
+</div>
+{% endblock %}
+
+
