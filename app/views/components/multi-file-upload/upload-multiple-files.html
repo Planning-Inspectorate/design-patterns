@@ -4,7 +4,7 @@
 {% set pageName = "Upload multiple files" %}
 
 {% from "layouts/component-menu.html" import sideMenu %}
-{% from "components/multi-file-upload.njk" import uploadArea %}
+{% from "components/multi-file-upload/multi-file-upload.njk" import uploadArea %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -16,7 +16,7 @@
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
 
     <p>
-      <strong class="govuk-tag govuk-tag--yellow">Work in progress</strong>
+      <strong class="govuk-tag govuk-tag--light-blue">In development</strong>
     </p>
 
     <h3 class="govuk-body-l">
@@ -24,7 +24,7 @@
     </h3>
 
     {% set exampleHtml %}
-    {% from "components/multi-file-upload.njk" import uploadArea %}
+    {% from "components/multi-file-upload/multi-file-upload.njk" import uploadArea %}
     <form method="post" enctype="multipart/form-data">
       {{ uploadArea({
         id: "documents",
@@ -207,6 +207,19 @@
 
     <h2 class="govuk-heading-l">Design history</h2>
     <p class="govuk-body">Internal Planning Inspectorate users can <a href="https://pins-ds.atlassian.net/wiki/x/iIQDn" style="color: #1d70b8;">read how user research influenced our decisions</a> in creating this component.</p>
+
+    <h2 class="govuk-heading-l">Accessibility</h2>
+    <p class="govuk-body">As part of the Local Plans Alpha, we brought our prototype to the Solirius Accessibility Lab, which uses this multi-file upload component. The lab testing identified 2 key issues:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>screen readers were not informed of upload status or progress, so screen reader users had no way of knowing when a file had finished uploading</li>
+      <li>the 'Remove' and 'Change' links did not have visually hidden text, so screen reader users could not tell which file each link related to</li>
+    </ul>
+    <p class="govuk-body">We made the following changes to the component to fix these issues:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>added visually hidden text to the 'Remove' link so it announces the associated file name, for example "Remove Receipt-1.pdf"</li>
+      <li>added a visually hidden, <code>aria-live="polite"</code> status region that announces "Upload in progress" and "Upload successful" so screen reader users are told when uploads start and finish</li>
+    </ul>
+
 
     <h2 class="govuk-heading-l">Non-JavaScript uploader</h2>
     <p class="govuk-body">A version of the multi-file uploader needs to be created for situations where javascript is not available. The non-javascript version of the multi-file upload has not been finished yet.</p>
