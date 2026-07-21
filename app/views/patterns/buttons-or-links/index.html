@@ -1,0 +1,86 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% from "patterns/address/address.njk" import address %}
+
+{% set pageName = "Buttons or links" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("buttons-or-links") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="case-heading">
+      {{ pageName }}
+    </h1>
+    <p>
+      {{govukTag({
+        text: "Work in progress",
+        classes: "govuk-tag--yellow"
+      })}}
+    </p>
+
+    <p class="govuk-body-l">
+      When should we use buttons? When should we use links?
+    </p>
+
+    <p class="govuk-body">
+      <a href="https://design-system.service.gov.uk/components/button/" class="govuk-link">A button is used to perform an action</a>, such as submitting a form or saving data. A link is used to navigate to another page or resource.
+    </p>
+
+    <p class="govuk-body">
+      Put simply:
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+      <li>a button = action happens immediately</li>
+      <li>a link = takes user somewhere to do the action</li>
+    </ul>
+
+    <h2 class="govuk-heading-l">
+      Why is this important?
+    </h2>
+
+    <p class="govuk-body">
+      Buttons and links may sometimes look similar, but they communicate different things to users and assistive technologies. This is important for accessibility and for users who rely on assistive technologies.
+    </p>
+
+    <p class="govuk-body">
+      Assistive technologies announce links and buttons differently.
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+      <li>a link communicates, ‘this will take me somewhere else‘</li>
+      <li>a button communicates, ‘this will do something‘</li>
+    </ul>
+
+    <p class="govuk-body">
+      Users rely on these cues to understand what will happen when they interact with a control.
+    </p>
+
+    <p class="govuk-body">
+      WCAG focuses on the following principles for buttons and links:
+    </p>
+
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-6">
+      <li>correct semantics (whether assistive technologies can identify what it is)</li>
+      <li>consistent behaviour</li>
+    </ul>
+
+    <p class="govuk-body">
+      <a href="https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html target="_blank" class="govuk-link">
+        WCAG 2.1 Understanding Name, Role, Value (opens new tab)
+      </a>
+    </p>
+
+    <p class="govuk-body">
+      If a control is announced as a button but takes the user to another page, or is announced as a link but performs an action immediately, the interface can become confusing. This is why the underlying HTML element matters, not just the styling.
+    </p>
+
+  </div>
+</div>
+{% endblock %}
