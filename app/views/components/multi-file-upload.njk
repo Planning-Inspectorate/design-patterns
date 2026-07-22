@@ -14,37 +14,52 @@
     or "The file must be a DOC, DOCX, PDF, TIF, JPG or PNG and be smaller than 25MB" %}
 
 
+<div
+  id="{{ id }}-upload-status"
+  role="status"
+  aria-live="assertive"
+  aria-atomic="true"
+  tabindex="-1"
+  class="govuk-visually-hidden">
+</div>
+{# Live region end #}
+
   <div class="govuk-form-group" id="{{ id }}-upload-group">
-    <label class="govuk-label govuk-label--m" for="{{ id }}">
+    <label class="govuk-label govuk-label--m" for="{{ id }}-choose-button">
       {{ label }}
     </label>
-   <p class="govuk-hint">{{ hint }}</p>
+    <p class="govuk-hint">{{ hint }}</p>
 
+    
     <div
       class="multi-file-dropzone"
-      tabindex="0"
-      role="button"
-      aria-label="Upload area. Press Enter or Space to choose files, or drag and drop files here."
       data-upload-key="{{ dataKey }}"
-      style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; align-items: center; background-color: #fff; margin-bottom: 15px; display: flex; cursor: pointer;"
+      style="border: 2px dashed #b1b4b6; padding: 60px 0 60px 16px; align-items: center; background-color: #fff; margin-bottom: 15px; display: flex;"
     >
       <div class="govuk-form-group" style="margin-bottom: 0; display: flex; align-items: center;">
-        <label class="govuk-button govuk-button--secondary" for="{{ id }}" style="margin-bottom: 0;">
+        <button
+          type="button"
+          class="govuk-button govuk-button--secondary"
+          id="{{ id }}-choose-button"
+          style="margin-bottom: 0;"
+        >
           Choose files
-        </label>
+        </button>
 
         <p class="govuk-body" style="margin: 0 0 0 10px;">
           or drop files
         </p>
 
+      
         <input
-          class="govuk-file-upload multi-file-dropzone__input"
+          class="govuk-file-upload govuk-visually-hidden multi-file-dropzone__input"
           id="{{ id }}"
           name="{{ name }}"
           type="file"
           accept="{{ accept }}"
           multiple
-          style="position: absolute; left: -9999px;"
+          tabindex="-1"
+          aria-hidden="true"
         >
       </div>
     </div>
@@ -81,14 +96,15 @@
   <script>
     (function () {
       {# Immediately Invoked Function Expression (IIFE) to create isolated scope for component state #}
-      
+
       {# Cache DOM elements for efficient access #}
+
       const fileInput = document.getElementById('{{ id }}');
       if (!fileInput) return;
 
       const uploadArea = fileInput.closest('.multi-file-dropzone');
       const uploadGroup = document.getElementById('{{ id }}-upload-group');
-      const chooseFilesButton = uploadArea.querySelector('label[for="{{ id }}"]');
+      const chooseFilesButton = document.getElementById('{{ id }}-choose-button');
       const filesTableGroup = document.getElementById('{{ id }}-files-group');
       const filesTableError = document.getElementById('{{ id }}-files-error');
       const fileValidationError = document.getElementById('{{ id }}-validation-error');
@@ -96,7 +112,10 @@
       const filesAddedLabel = document.getElementById('{{ id }}-files-label');
       const tableBody = document.querySelector('#{{ id }}-files-table tbody');
       const form = uploadArea.closest('form') || document.querySelector('form');
-      
+      {# upload status live region #}
+      const uploadStatus = document.getElementById('{{ id }}-upload-status');
+
+
       {# Component state tracking #}
       const uploadedFiles = new Set();  {# Track names of successfully uploaded files #}
       const allowedExtensions = '{{ allowedExtensions | join(",") }}'.toLowerCase().split(',').map((ext) => ext.trim()).filter(Boolean);
@@ -104,10 +123,23 @@
       let failedFileNames = [];  {# Track files that failed validation #}
       let showUploadingWarning = false;  {# Flag to control uploading error state #}
 
+      {#
+   
+      function announceUploadStatus(message) {
+        if (!uploadStatus) return;
+
+        uploadStatus.textContent = '';
+        uploadStatus.focus();
+
+        setTimeout(() => {
+          uploadStatus.textContent = message;
+        }, 50);
+      }
+
 
       {# ===== UI States ===== #}
+
       
-      {# Visibility of the summary list based on whether rows exist #}
       function updateFilesSummaryVisibility() {
         const hasRows = tableBody.children.length > 0;
         filesTableGroup.style.display = hasRows ? 'block' : 'none';
@@ -158,7 +190,7 @@
       }
 
       {# ===== Error Handling Functions ===== #}
-      
+
       {# Create/update GOV.UK error summary at top of form showing file type and uploading errors #}
       function renderTopErrorSummary(scrollToTop) {
         const summaryId = '{{ id }}-file-type-error-summary';
@@ -175,7 +207,7 @@
 
         const errorItems = [];
         if (hasFileTypeErrors) {
-          errorItems.push('<li><a href="#{{ id }}">{{ errorMessage }}</a></li>');
+          errorItems.push('<li><a href="#{{ id }}-choose-button">{{ errorMessage }}</a></li>');
         }
         if (hasUploadingErrors) {
           errorItems.push('<li><a href="#{{ id }}-files-table">Wait for all files to finish uploading</a></li>');
@@ -247,7 +279,7 @@
       }
 
       {# ===== File Validation Functions ===== #}
-      
+
       {# Check if file extension is in allowed list #}
       function isAllowedFileType(file) {
         const fileName = (file.name || '').toLowerCase();
@@ -266,15 +298,24 @@
       }
 
       {# ===== File Table Management Functions ===== #}
-      
+
       {# Add valid files to the table and start upload animation #}
       function addFilesToTable(files) {
+
+        announceUploadStatus('Uploading files');
+
+
         files.forEach((file, index) => {
           const row = document.createElement('tr');
           row.className = 'govuk-table__row uploading-row';
           row.dataset.file = file.name;
 
-          {# Initial row with filename, size, and progress indicator #}
+          {#
+            Cancel link now carries the file name as visually-hidden text
+            so screen readers read "Cancel 'filename'" instead of just
+            "Cancel" - matching the pattern already used on the "Remove"
+            link once a file finishes uploading.
+          #}
           row.innerHTML = `
             <td class="govuk-table__cell" style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
               ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)
@@ -283,7 +324,7 @@
               Uploading: <span class="progress-percent">0%</span>
             </td>
             <td class="govuk-table__cell">
-              <a href="#" class="govuk-link">Cancel</a>
+              <a href="#" class="govuk-link">Cancel<span class="govuk-visually-hidden"> '${file.name}'</span></a>
             </td>
           `;
 
@@ -315,7 +356,7 @@
       updateFileTypeErrorUi(false);
 
       {# ===== Event Listeners ===== #}
-      
+
       {# Handle files selected via file picker dialog #}
       fileInput.addEventListener('change', function (e) {
         const files = Array.from(e.target.files);
@@ -338,29 +379,34 @@
         fileInput.value = '';
       });
 
-      {# Click handler - trigger file picker when clicking dropzone #}
+      {# "Choose files" is now a real <button>, so it already receives
+         click and Enter/Space activation from the browser with no custom
+         code required. We just wire its click through to the hidden
+         input. #}
+      chooseFilesButton.addEventListener('click', function () {
+        fileInput.click();
+      });
+
+      {# Click handler for the dropzone itself - lets mouse users click
+         anywhere in the drop area (outside the button) to open the file
+         picker. The dropzone has no role/tabindex, so this is a mouse-only
+         convenience and does not affect keyboard or screen reader users. #}
       uploadArea.addEventListener('click', function (e) {
-        if (e.target !== fileInput && e.target !== chooseFilesButton) {
+        if (e.target !== fileInput && e.target !== chooseFilesButton && !chooseFilesButton.contains(e.target)) {
           fileInput.click();
         }
       });
 
-      {# Focus handler - show focus state styling #}
-      uploadArea.addEventListener('focus', function () {
+      {# Focus/blur handlers moved to the real button so the GOV.UK yellow
+         focus style shows whenever it is genuinely focused (by keyboard,
+         mouse, or a screen reader), instead of relying on a synthetic
+         focus/blur on a non-interactive wrapping div. #}
+      chooseFilesButton.addEventListener('focus', function () {
         setChooseFilesFocusState();
       });
 
-      {# Blur handler - reset styling when focus leaves #}
-      uploadArea.addEventListener('blur', function () {
+      chooseFilesButton.addEventListener('blur', function () {
         resetChooseFilesHoverState();
-      });
-
-      {# Keyboard handler - allow Enter/Space to trigger file picker #}
-      uploadArea.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          fileInput.click();
-        }
       });
 
       {# Mouse enter - highlight dropzone on hover #}
@@ -415,7 +461,7 @@
       });
 
       {# ===== Upload Animation Function ===== #}
-      
+
       {# Simulate file upload progress and transition row to completed state #}
       function animateUpload(row, index) {
         let percent = 0;
@@ -441,7 +487,7 @@
                 <strong class="govuk-tag govuk-tag--green">Uploaded</strong>
               </td>
               <td class="govuk-table__cell">
-                <a href="#" class="govuk-link remove-link">Remove</a>
+                <a href="#" class="govuk-link remove-link">Remove<span class="govuk-visually-hidden">${fileName}</span></a>
               </td>
             `;
 
@@ -452,23 +498,27 @@
               return currentProgress && parseInt(currentProgress.textContent, 10) < 100;
             });
 
-            {# Hide uploading error once all files finish #}
+            {# Only two announcements should ever reach the screen reader:
+               "Uploading files" at the start of a batch, and "Upload
+               complete" once every file in the batch has finished. No
+               per-file announcement here, by design. #}
             if (!stillUploading) {
               hideUploadingError();
+              announceUploadStatus('Upload complete');
             }
           }
         }, 40 + index * 20);
       }
 
       {# ===== File Removal Functions ===== #}
-      
+
       {# Handle Cancel and Remove link clicks #}
       document.addEventListener('click', function (e) {
         const link = e.target.closest('.govuk-link');
         if (!link || !tableBody.contains(link)) return;
 
         const text = link.textContent.trim();
-        if (text === 'Cancel' || text === 'Remove') {
+        if (text.startsWith('Cancel') || text.startsWith('Remove')) {
           e.preventDefault();
 
           const row = link.closest('.govuk-table__row');
@@ -493,7 +543,7 @@
       });
 
       {# ===== Form Submit Handler ===== #}
-      
+
       {# Prevent submit if uploads are in progress; create hidden inputs - which log files names - for submitted files #}
       if (form) {
         form.addEventListener('submit', function (e) {
