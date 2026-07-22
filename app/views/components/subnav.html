@@ -1,0 +1,289 @@
+{% extends "layouts/main.html" %}
+{% set currentPage = "components" %}
+{% set pageName = "Sub navigation" %}
+{% from "layouts/component-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock %}
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+        {{ sideMenu("item7") }}
+    </div>
+
+    <div class="govuk-grid-column-three-quarters">
+
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">{{ pageName }}</h1>
+
+        <p>
+            <strong class="govuk-tag govuk-tag--green">
+                Tested with users
+            </strong>
+        </p>
+
+        <p class="govuk-body-l">
+            Use sub navigation to help users move between related sections within a service area.
+            It is designed for back office services where users need to switch between multiple
+            pages and tasks.
+        </p>
+
+        <p class="govuk-body">
+            The Planning Inspectorate uses the <a
+                href="https://design-patterns.service.justice.gov.uk/components/sub-navigation/">Ministry of Justice sub
+                navigation component</a> with a
+            Planning Inspectorate active state. The active item uses bold text and a teal underline
+            (<span class="govuk-tag govuk-tag--grey"><code>#10847E</code></span>) instead of the default MoJ colour.
+        </p>
+
+        {% set exampleHtml %}
+        {% set currentPage = "overview" %}
+
+        <style>
+            .external::after {}
+
+            .moj-sub-navigation__item--active .moj-sub-navigation__link {
+                font-weight: bold;
+                border-bottom: #11A19A 5px solid;
+            }
+
+            .moj-sub-navigation__link[aria-current=page]::before {
+                background-color: #ffffff;
+            }
+        </style>
+
+        <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'overview' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" {% if currentPage=='overview' %} aria-current="page" {% endif
+                        %}href="/features/bo-redesign/v3/back-office/manage-application">Overview</a>
+                </li>
+
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'updates' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/updates" {% if
+                        currentPage=='updates' %} aria-current="page" {% endif %}>Updates</a>
+                </li>
+
+
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'case-team' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/case-team" {%
+                        if currentPage=='case-team' %} aria-current="page" {% endif %}>Case team</a>
+                </li>
+
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'Procedure' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/Procedure" {%
+                        if currentPage=='Procedure' %} aria-current="page" {% endif %}>Procedure</a>
+                </li>
+                {% if currentPage == 'hearing' %}
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'hearing' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/hearing" {% if
+                        currentPage=='hearing' %} aria-current="page" {% endif %}>Hearing</a>
+                </li>
+                {% endif %}
+
+                {% if currentPage == 'inquiry' %}
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'inquiry' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/inquiry" {% if
+                        currentPage=='inquiry' %} aria-current="page" {% endif %}>Inquiry</a>
+                </li>
+                {% endif %}
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'fee' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/fee" {% if
+                        currentPage=='fee' %} aria-current="page" {% endif %}>Fee</a>
+                </li>
+                <li
+                    class="moj-sub-navigation__item {% if currentPage == 'history' %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/history" {% if
+                        currentPage=='history' %} aria-current="page" {% endif %}>History</a>
+                </li>
+
+            </ul>
+
+        </nav>
+        {% endset %}
+
+        {% set codeHtml %}
+        {{ codeBlock('
+        <style>
+            .external::after {}
+
+            .moj-sub-navigation__item--active .moj-sub-navigation__link {
+                font-weight: bold;
+                border-bottom: #11A19A 5px solid;
+            }
+
+            .moj-sub-navigation__link[aria-current=page]::before {
+                background-color: #ffffff;
+            }
+        </style>
+
+        <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+                <li class="moj-sub-navigation__item {% if currentPage == " overview"
+                    %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" {% if currentPage=="overview" %} aria-current="page" {% endif
+                        %}href="/features/bo-redesign/v3/back-office/manage-application">Overview</a>
+                </li>
+
+                <li class="moj-sub-navigation__item {% if currentPage == " updates" %}moj-sub-navigation__item--active{%
+                    endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/updates" {% if
+                        currentPage=="updates" %} aria-current="page" {% endif %}>Updates</a>
+                </li>
+
+
+                <li class="moj-sub-navigation__item {% if currentPage == " case-team"
+                    %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/case-team" {%
+                        if currentPage=="case-team" %} aria-current="page" {% endif %}>Case team</a>
+                </li>
+
+                <li class="moj-sub-navigation__item {% if currentPage == " Procedure"
+                    %}moj-sub-navigation__item--active{% endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/Procedure" {%
+                        if currentPage=="Procedure" %} aria-current="page" {% endif %}>Procedure</a>
+                </li>
+                {% if currentPage == "hearing" %}
+                <li class="moj-sub-navigation__item {% if currentPage == " hearing" %}moj-sub-navigation__item--active{%
+                    endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/hearing" {% if
+                        currentPage=="hearing" %} aria-current="page" {% endif %}>Hearing</a>
+                </li>
+                {% endif %}
+
+                {% if currentPage == "inquiry" %}
+                <li class="moj-sub-navigation__item {% if currentPage == " inquiry" %}moj-sub-navigation__item--active{%
+                    endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/inquiry" {% if
+                        currentPage=="inquiry" %} aria-current="page" {% endif %}>Inquiry</a>
+                </li>
+                {% endif %}
+                <li class="moj-sub-navigation__item {% if currentPage == " fee" %}moj-sub-navigation__item--active{%
+                    endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/fee" {% if
+                        currentPage=="fee" %} aria-current="page" {% endif %}>Fee</a>
+                </li>
+                <li class="moj-sub-navigation__item {% if currentPage == " history" %}moj-sub-navigation__item--active{%
+                    endif %}">
+                    <a class="moj-sub-navigation__link" href="/features/bo-redesign/v3/back-office/manage/history" {% if
+                        currentPage=="history" %} aria-current="page" {% endif %}>History</a>
+                </li>
+
+            </ul>
+
+        </nav>
+        ', 'html') }}
+        {% endset %}
+
+        {{ govukTabs({
+        id: "sub-nav-tabs",
+        items: [
+        {
+        label: "Example",
+        id: "example",
+        panel: {
+        html: exampleHtml
+        }
+        },
+        {
+        label: "HTML",
+        id: "html",
+        panel: {
+        html: codeHtml
+        }
+        }
+        ]
+        }) }}
+
+        <h2 class="govuk-heading-l">When to use this component</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>For navigation within a section of a back office service.</li>
+            <li>When users need to move between related pages and return to them frequently.</li>
+            <li>For operational services with multiple tasks, documents or case management areas.</li>
+            <li>Alongside the service navigation component where an additional navigation level is needed.</li>
+        </ul>
+
+        <h2 class="govuk-heading-l">When not to use this component</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>For primary service navigation.</li>
+            <li>For simple journeys with only a small number of pages.</li>
+            <li>As a substitute for breadcrumbs.</li>
+            <li>To show progress through a task or form.</li>
+        </ul>
+
+        <h2 class="govuk-heading-l">How it works</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Appears on the top side of the page underneath the h1.</li>
+            <li>Groups related pages under a section heading.</li>
+            <li>Clearly indicates the current page.</li>
+            <li>Uses the MoJ sub navigation pattern.</li>
+            <li>Uses the Planning Inspectorate teal active indicator (<span
+                    class="govuk-tag govuk-tag--grey"><code>#10847E</code></span>).</li>
+        </ul>
+
+        <h2 class="govuk-heading-l">Accessibility</h2>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Use <code>aria-current="page"</code> on the active link.</li>
+            <li>Ensure active states are not communicated through colour alone.</li>
+            <li>Maintain keyboard access to all navigation items.</li>
+            <li>Meet WCAG 2.2 AA requirements.</li>
+        </ul>
+
+        <h2 class="govuk-heading-l">Research on this component</h2>
+
+        <p class="govuk-body">
+            Users were able to complete tasks successfully using the sub navigation and
+            found the content structure clear. Some users preferred this approach because
+            it reduced scrolling and made sections easier to locate.
+        </p>
+
+        <p class="govuk-body">
+            Users preferred horizontal navigation because it felt more
+            familiar and made better use of available screen space.
+        </p>
+
+        <p class="govuk-body">
+            This component was tested with users of complex back office services where users need to move between
+            sections
+            regularly.
+        </p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.moj-sub-navigation__link');
+
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                // remove existing active state
+                document
+                    .querySelectorAll('.moj-sub-navigation__item')
+                    .forEach(item => item.classList.remove('moj-sub-navigation__item--active'));
+
+                document
+                    .querySelectorAll('.moj-sub-navigation__link')
+                    .forEach(link => link.removeAttribute('aria-current'));
+
+                // add active state to clicked item
+                link.parentElement.classList.add('moj-sub-navigation__item--active');
+                link.setAttribute('aria-current', 'page');
+
+                console.log('currentPage =', link.dataset.page);
+            });
+        });
+    });
+</script>
+{% endblock %}
