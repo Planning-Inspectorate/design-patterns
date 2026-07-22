@@ -1,0 +1,22 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% block pageTitle %}
+    Unbranded page template –
+    {{ serviceName }}
+    – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+    <a href="javascript:history.back()" class="govuk-back-link">Back</a>
+
+                <h1 class="govuk-heading-l">What is the name of the applicant?</h1>
+                <div class="govuk-form-group">
+
+                    <input class="govuk-input" id="event-name" name="eventName" type="text" value="Office for Community Resilience">
+                </div>
+
+                <a href="manage-list-example-2.html" class="govuk-button">Continue</a>
+
+
+    {% endblock %}

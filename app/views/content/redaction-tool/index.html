@@ -1,0 +1,183 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Redaction tool" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+{% from "patterns/redaction-tool/redaction-tool.njk" import redactionTool %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("redaction-tool") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="personal-list">
+      {{ pageName }}
+    </h1>
+
+    <p>
+      <strong class="govuk-tag govuk-tag--yellow govuk-!-margin-bottom-5">Work in progress</strong>
+    </p>
+
+    <p class="govuk-body-l">Use the redaction tool to hide personal or sensitive information before publishing content.
+      Redaction replaces characters with a block symbol (█). This means the information cannot be read once published online.</p>
+
+    {% set exampleHtml %}
+
+    {{ redactionTool(
+      "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees.
+      ",
+      "Having reviewed the proposal I would like to raise strong objections based on the scale of the proposed buildings so close to a residential area. Residents have not been consulted on this and our views of the greenbelt adjacent to the estate will be ruined if this goes ahead. David Newton at number 6 The Grove also agrees.
+      "
+    ) }}
+
+    {% endset -%}
+
+    {% set codeHtml %}
+
+    <pre class="code-snippet"><code>{% raw -%}
+{{ redactionTool 
+
+("statement goes here", "statement goes here") 
+
+}}
+{% endraw %}
+      </code></pre>
+    {% endset -%}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Example",
+          id: "example",
+          panel: {
+            html: exampleHtml
+          }
+        },
+        {
+          label: "Nunjucks",
+          id: "nunjucks",
+          panel: {
+            html: codeHtml
+          }
+        }
+      ]
+    }) }}
+
+    <section id="redaction-pattern" class="govuk-!-margin-bottom-6">
+      <h2 class="govuk-heading-l">When to use this pattern</h2>
+    
+      <p class="govuk-body">Use this tool when users need to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>remove personal details from statements or written representations</li>
+        <li>hide sensitive or inflammatory information before publishing</li>
+      </ul>
+    
+      <h2 class="govuk-heading-l">When not to use this pattern</h2>
+      <p class="govuk-body">Do not use this tool when:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>users are editing content for clarity or correction</li>
+        <li>personal data should not have been collected in the first place (follow data minimisation policies)</li>
+        <li>to merge written representations or statements - follow the proper process for doing so instead</li>
+      </ul>
+    
+      <h2 class="govuk-heading-l">How it works</h2>
+      <p class="govuk-body">Users:</p>
+      <ol class="govuk-list govuk-list--number">
+        <li>Highlight the text they want to hide</li>
+        <li>Choose <strong>Redact selected text</strong></li>
+        <li>Review the redacted statement</li>
+        <li>Continue to the next step</li>
+      </ol>
+      <p class="govuk-body">Users can revert to the original statement before submitting, or undo all redactions made during the current session.</p>
+
+      <p class="govuk-body">Any changes should be saved to the case history, including who made them and when.</p>
+    
+      <h2 class="govuk-heading-l">Displaying the original statement</h2>
+    
+      <p class="govuk-body">The accordion component with a single item is being used here as an alternative to the standard details component, which is not designed to handle large volumes of text.</p>
+
+      <p class="govuk-body">Earlier design iterations explored a side-by-side layout so users could view the original and redacted versions at the same time. However, research showed that users do not need the original statement visible continuously.</p>
+
+      <p class="govuk-body">The accordion offers a way to keep the original text accessible without overwhelming the page or competing with the redaction task. This approach is experimental and should be tested with users to confirm whether it supports their workflow effectively.</p>
+    
+      <h2 class="govuk-heading-l">Accessibility considerations</h2>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <strong>Screen readers:</strong> announce “redacted” for each hidden character or group of characters. Render a visible redaction glyph with a screen-reader label, for example:
+          <pre class="govuk-body govuk-!-margin-top-2 govuk-!-margin-bottom-0" tabindex="0">
+            <span aria-label="redacted">██████</span>
+          </pre>
+          This makes the visual redaction obvious while providing an informative label to assistive technology.
+        </li>
+    
+        <li><strong>Keyboard access:</strong> ensure users can select text with the keyboard (shift + arrow keys) and activate all buttons (Enter/Space).</li>
+      </ul>
+
+      <h2 class="govuk-heading-l">AI assisted redactions</h2>
+
+      <p class="govuk-body">The Planning Inspectorate is exploring the use of AI to suggest redactions for users to review and confirm. Guidance will follow after further research, but note it’s already used in some services.</p>
+
+      <h2 class="govuk-heading-l">Existing research</h2>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/AS2/pages/2458878009/AZURE+AI+REDACTION+TOOL+Usability+Test">NSIP Applications user research findings</a>
+        </li>
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/BO/pages/2190180392/Rule+6+Party+Findings">Appeals Rule 6 user research findings</a>
+        </li>
+        <li>
+          <a href="https://pins-ds.atlassian.net.mcas.ms/wiki/spaces/BO/pages/1362395137/POST+MVP+-+Statement+redaction+and+Crosscopy">Appeals S78 statement redcation user research findings</a>
+        </li>
+      </ul>
+    
+    </section>
+
+    
+  </div>
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+  {{ super() }}
+  <script>
+    function getSel() {
+      const txtarea = document.getElementById("redactedComment");
+      const start = txtarea.selectionStart;
+      const finish = txtarea.selectionEnd;
+      const allText = txtarea.value;
+      const redactedText = "█".repeat(finish - start);
+
+      txtarea.value =
+        allText.substring(0, start) + redactedText + allText.substring(finish);
+
+      txtarea.selectionStart = txtarea.selectionEnd = start + redactedText.length;
+      txtarea.focus();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        document.getElementById("replaceHint")?.classList.add("app-hidden");
+        document.querySelector(".govuk-button-group")?.classList.remove("app-hidden");
+
+        document.getElementById("redactButton")?.addEventListener("click", getSel);
+
+        document.getElementById("undoButton")?.addEventListener("click", function () {
+          const textarea = document.getElementById("redactedComment");
+          textarea.value = textarea.defaultValue;
+        });
+
+        document.getElementById("revertButton")?.addEventListener("click", function () {
+          const textarea = document.getElementById("redactedComment");
+          textarea.value = textarea.defaultValue;
+        });
+      }, 0);
+    });
+  </script>
+{% endblock %}

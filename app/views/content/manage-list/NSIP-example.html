@@ -1,0 +1,82 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% block pageTitle %}
+    Unbranded page template –
+    {{ serviceName }}
+    – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+    <table class="govuk-table">
+  <caption class="govuk-table__caption govuk-table__caption--m">Fees</caption>
+
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Stage</th>
+      <th scope="col" class="govuk-table__header">Amount</th>
+      <th scope="col" class="govuk-table__header">Invoice number</th>
+      <th scope="col" class="govuk-table__header">Status</th>
+      <th scope="col" class="govuk-table__header">Action</th>
+    </tr>
+  </thead>
+
+  <tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Pre-application</th>
+      <td class="govuk-table__cell">£63,410</td>
+      <td class="govuk-table__cell">1800004419</td>
+      <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Paid</span></td>
+      <td class="govuk-table__cell">
+        <a class="govuk-link" href="#">Review</a>
+      </td>
+    </tr>
+
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Acceptance</th>
+      <td class="govuk-table__cell">£9,410</td>
+      <td class="govuk-table__cell">1800004420</td>
+      <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--green">Paid</span></td>
+      <td class="govuk-table__cell">
+        <a class="govuk-link" href="#">Review</a>
+      </td>
+    </tr>
+
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Pre-examination</th>
+      <td class="govuk-table__cell">£63,410</td>
+      <td class="govuk-table__cell">1800004421</td>
+      <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--red">Due</span></td>
+      <td class="govuk-table__cell">
+        <a class="govuk-link" href="#">Review</a>
+      </td>
+    </tr>
+
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Initial examination</th>
+      <td class="govuk-table__cell">£63,410</td>
+      <td class="govuk-table__cell">1800004422</td>
+      <td class="govuk-table__cell"><span class="govuk-tag govuk-tag--yellow">Issued</span></td>
+      <td class="govuk-table__cell">
+        <a class="govuk-link" href="#">Review</a>
+      </td>
+    </tr>
+
+    <tr class="govuk-table__row">
+      <th scope="row" class="govuk-table__header">Final examination</th>
+      <td class="govuk-table__cell">£63,410</td>
+      <td class="govuk-table__cell">1800004423</td>
+      <td class="govuk-table__cell"><span class="govuk-tag">Refunded</span></td>
+      <td class="govuk-table__cell">
+        <a class="govuk-link" href="#">Review</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="govuk-!-margin-top-4">
+  <a href="#" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+    Add new fee
+  </a>
+</p>
+
+{% endblock %}

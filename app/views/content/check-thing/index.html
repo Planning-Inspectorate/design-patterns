@@ -1,0 +1,135 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% from "patterns/address/address.njk" import address %}
+
+{% set pageName = "Check a thing" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+
+{# Example Nunjucks code for the radio buttons #}
+{% set exampleNunjucks -%}  {{ '{{ govukRadios({' }}
+name: "check-thing",
+fieldset: {
+  legend: {
+    text: "Have you got a juggling licence?",
+    isPageHeading: true,
+    classes: "govuk-fieldset__legend--l"
+  }
+},
+hint: {
+  text: "You would have received this from the juggling authority"
+},
+items: [
+  {
+    value: "Yes, I have a juggling licence",
+    text: "Yes, I have a juggling licence"
+  },
+  {
+    value: "No, I don’t have a juggling licence",
+    text: "No, I don’t have a juggling licence"
+  }
+]
+}) }}{%- endset %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("check-thing") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="case-heading">
+      {{ pageName }}
+    </h1>
+    <p>
+      {{govukTag({
+        text: "Pattern in use",
+        classes: "govuk-tag--green"
+      })}}
+    </p>
+
+    <p class="govuk-body-l">
+      Allow a user to provide something if they have it.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+      Research shows that people might use a skip button, even if they have what we are asking for, because it feels optional.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+      Ask if they have it. If they say yes, ask them to provide it in the following screen.
+    </p>
+
+    {% set exampleHtml -%}{{ govukRadios({
+        name: "check-thing",
+        fieldset: {
+          legend: {
+            text: "Have you got a juggling licence?",
+            isPageHeading: true,
+            classes: "govuk-fieldset__legend--l"
+          }
+        },
+        hint: {
+          text: "You would have received this from the juggling authority"
+        },
+        items: [
+          {
+            value: "Yes, I have a juggling licence",
+            text: "Yes, I have a juggling licence"
+          },
+          {
+            value: "No, I don’t have a juggling licence",
+            text: "No, I don’t have a juggling licence"
+          }
+        ]
+      }) }}
+    {%- endset %}
+
+    {% set codeHtml %}
+      <pre class="code-snippet"><code>{{ exampleNunjucks }}</code></pre>
+    {% endset %}
+
+    {{ govukTabs({
+      items: [
+        {
+          label: "Example",
+          id: "example",
+          panel: {
+            html: exampleHtml
+          }
+        },
+        {
+          label: "Nunjucks",
+          id: "nunjucks",
+          panel: {
+            html: codeHtml
+          }
+        }
+      ]
+    }) }}
+
+    <h2 class="govuk-heading-l">
+      When to use this pattern
+    </h2>
+
+    <p>
+      Use this pattern to check if the user has something important, such as a document or some data.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      How it works
+    </h2>
+
+    <p class="govuk-body">
+      You can use the GDS core pattern <a href="https://design-system.service.gov.uk/components/radios/">radio options</a> to check whether the user has something you want.
+    </p>
+
+    <p class="govuk-body">
+      If the user confirms they have, show them a mandatory question asking for the thing. This helps us get something if the user has it.
+    </p>
+
+  </div>
+</div>
+{% endblock %}

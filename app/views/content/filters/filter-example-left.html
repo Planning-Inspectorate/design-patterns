@@ -1,0 +1,485 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+
+{% block content %}
+
+<style>
+    .selected-filter-tag {
+        display: inline-flex !important;
+        width: auto !important;
+        max-width: none !important;
+        margin: 0px;
+        border-radius: 5px;
+        background: #f3f2f1;
+        color: #0b0c0c;
+        border-radius: 4px;
+        padding: 4px 10px !important;
+        border: 1px solid #b1b4b6;
+        box-shadow: none !important;
+    }
+
+    .clear-link {
+        margin-top: 20px;
+        padding: 4px;
+    }
+
+    .active-filters {
+        margin-bottom: 20px;
+    }
+
+    .active-filters__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+</style>
+
+<!-- Filter HTML -->
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Filter documents</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+
+        <h2 class="govuk-heading-m">Filters</h2>
+
+        <div class="govuk-accordion" data-module="govuk-accordion">
+            <div class="govuk-accordion__section">
+                <div class="govuk-accordion__section-header">
+                    <h3 class="govuk-accordion__section-heading">
+                        <span class="govuk-accordion__section-button">
+                            Type
+                        </span>
+                    </h3>
+                </div>
+                <div class="govuk-accordion__section-content">
+                    <div style="padding-left:30px;">
+                        <form class="govuk-form-group">
+                            <fieldset class="govuk-fieldset">
+                                <div class="govuk-grid-row">
+                                    <div class="">
+                                        <fieldset class="govuk-fieldset" aria-describedby="type-hint">
+                                            <div class="govuk-checkboxes govuk-checkboxes--small">
+                                                <div class="govuk-checkboxes__item">
+                                                    <input class="govuk-checkboxes__input" id="type-pdf" name="type"
+                                                        type="checkbox" value="PDF">
+                                                    <label class="govuk-label govuk-checkboxes__label" for="type-pdf">
+                                                        PDF (<span class="type-count" data-type-count="PDF">3</span>)
+                                                    </label>
+                                                </div>
+                                                <div class="govuk-checkboxes__item">
+                                                    <input class="govuk-checkboxes__input" id="type-doc" name="type"
+                                                        type="checkbox" value="DOC">
+                                                    <label class="govuk-label govuk-checkboxes__label" for="type-doc">
+                                                        DOC, DOCX (<span class="type-count"
+                                                            data-type-count="DOC">1</span>)
+                                                    </label>
+                                                </div>
+                                                <div class="govuk-checkboxes__item">
+                                                    <input class="govuk-checkboxes__input" id="type-jpg" name="type"
+                                                        type="checkbox" value="JPG">
+                                                    <label class="govuk-label govuk-checkboxes__label" for="type-jpg">
+                                                        JPG (<span class="type-count" data-type-count="JPG">2</span>)
+                                                    </label>
+                                                </div>
+                                                <div class="govuk-checkboxes__item">
+                                                    <input class="govuk-checkboxes__input" id="type-xlsx" name="type"
+                                                        type="checkbox" value="XLSX">
+                                                    <label class="govuk-label govuk-checkboxes__label" for="type-xlsx">
+                                                        XLX, XLSX (<span class="type-count"
+                                                            data-type-count="XLSX">0</span>)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-accordion__section">
+                <div class="govuk-accordion__section-header">
+                    <h2 class="govuk-accordion__section-heading">
+                        <span class="govuk-accordion__section-button">
+                            Date published
+                        </span>
+                    </h2>
+                </div>
+                <div class="govuk-accordion__section-content">
+                    <div style="padding-left:30px;">
+                        <fieldset class="govuk-fieldset">
+
+                            <div class="govuk-fieldset__legend govuk-fieldset__legend--xs">
+                                <h4 class="govuk-fieldset__heading">From</h4>
+                            </div>
+                            <div class="govuk-hint">For example, 5 7 2022</div>
+                            <div class="govuk-date-input">
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Day</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="date-from-day" name="date-from-day" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Month</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="date-from-month" name="date-from-month" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Year</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                            id="date-from-year" name="date-from-year" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="govuk-fieldset__legend govuk-fieldset__legend--xs" style="margin-top:20px">
+                                <h4 class="govuk-fieldset__heading">To</h4>
+                            </div>
+                            <div class="govuk-hint">For example, 27 3 2023</div>
+                            <div class="govuk-date-input">
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Day</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="date-to-day" name="date-to-day" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Month</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-2"
+                                            id="date-to-month" name="date-to-month" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                                <div class="govuk-date-input__item">
+                                    <div class="govuk-form-group">
+                                        <span class="govuk-label govuk-date-input__label">Year</span>
+                                        <input class="govuk-input govuk-date-input__input govuk-input--width-4"
+                                            id="date-to-year" name="date-to-year" type="text" inputmode="numeric">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="govuk-button" id="apply-filters-button" type="button">Apply
+            filters</button>
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+
+        <div id="active-filters-section" class="active-filters" style="display: none;">
+            <h3 class="govuk-heading-s">Active filters</h3>
+            <div id="active-filters-list" class="active-filters__list"></div>
+            <div class="clear-link">
+                <p class="govuk-body">
+                    <a href="#" id="clear-filters-link" class="govuk-link">Clear filters</a>
+                </p>
+            </div>
+        </div>
+
+        <h2 class="govuk-heading-m">Results</h2>
+        <div class="filter-item">
+            <div class="filter-result" data-type="PDF" data-stage="Consultation" data-date="2026-05-27">
+                <ul class="govuk-list">
+                    <li><a href="">Document-1.PDF</a></li>
+                    <li>27 May 2026</li>
+                    <li>PDF, 223KB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+        <div class="filter-item">
+            <div class="filter-result" data-type="PDF" data-stage="Consultation" data-date="2026-05-27">
+                <ul class="govuk-list">
+                    <li><a href="">Document-2.PDF</a></li>
+                    <li>27 May 2026</li>
+                    <li>PDF, 6KB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+        <div class="filter-item">
+            <div class="filter-result" data-type="DOC" data-stage="Hearing" data-date="2025-11-27">
+                <ul class="govuk-list">
+                    <li><a href="">Document-3.doc</a></li>
+                    <li>27 November 2025</li>
+                    <li>DOC, 22MB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+        <div class="filter-item">
+            <div class="filter-result" data-type="PDF" data-stage="Decision" data-date="2025-11-27">
+                <ul class="govuk-list">
+                    <li><a href="">Document-4.PDF</a></li>
+                    <li>27 November 2025</li>
+                    <li>PDF, 2KB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+        <div class="filter-item">
+            <div class="filter-result" data-type="JPG" data-stage="Written representations" data-date="2026-03-02">
+                <ul class="govuk-list">
+                    <li><a href="">Document-5.jpeg</a></li>
+                    <li>2 March 2026</li>
+                    <li>JPG, 24KB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+        <div class="filter-item">
+            <div class="filter-result" data-type="JPG" data-stage="Written representations" data-date="2026-04-05">
+                <ul class="govuk-list">
+                    <li><a href="">Document-6.jpg</a></li>
+                    <li>5 April 2026</li>
+                    <li>JPG, 2KB</li>
+                </ul>
+            </div>
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            const applyButton = document.getElementById('apply-filters-button');
+            const clearFiltersLink = document.getElementById('clear-filters-link');
+            const activeFiltersSection = document.getElementById('active-filters-section');
+            const activeFiltersList = document.getElementById('active-filters-list');
+            const typeInputs = Array.from(document.querySelectorAll('input[name="type"][type="checkbox"]'));
+            const stageInputs = Array.from(document.querySelectorAll('input[name="stage"][type="checkbox"]'));
+            const results = Array.from(document.querySelectorAll('.filter-result'));
+            const filtersDetails = document.querySelector('details.govuk-details');
+
+            function getCheckedValues(inputs) {
+                return inputs.filter(function (input) {
+                    return input.checked;
+                }).map(function (input) {
+                    return input.value;
+                });
+            }
+
+            function getDateFromInputs(dayInput, monthInput, yearInput) {
+                var day = parseInt(dayInput.value, 10);
+                var month = parseInt(monthInput.value, 10);
+                var year = parseInt(yearInput.value, 10);
+
+                if (!day || !month || !year) {
+                    return null;
+                }
+
+                var date = new Date(year, month - 1, day);
+                if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
+                    return null;
+                }
+
+                return date;
+            }
+
+            function formatDateLabel(date) {
+                var months = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+            }
+
+            function removeFilterButton(event) {
+                const button = event.currentTarget;
+                const filterName = button.dataset.filterName;
+                const filterValue = button.dataset.filterValue;
+
+                if (!filterName) {
+                    return;
+                }
+
+                if (filterName === 'date-from') {
+                    document.getElementById('date-from-day').value = '';
+                    document.getElementById('date-from-month').value = '';
+                    document.getElementById('date-from-year').value = '';
+                } else if (filterName === 'date-to') {
+                    document.getElementById('date-to-day').value = '';
+                    document.getElementById('date-to-month').value = '';
+                    document.getElementById('date-to-year').value = '';
+                } else {
+                    const input = document.querySelector('input[name="' + filterName + '"][value="' + filterValue + '"]');
+                    if (input) {
+                        input.checked = false;
+                    }
+                }
+
+                filterResults();
+            }
+
+            function updateTypeCounts(selectedStages, selectedFrom, selectedTo) {
+                const countMap = {
+                    PDF: 0,
+                    DOC: 0,
+                    JPG: 0,
+                    XLSX: 0
+                };
+
+                results.forEach(function (result) {
+                    const resultType = result.dataset.type;
+                    const resultStage = result.dataset.stage;
+                    const resultDate = result.dataset.date ? new Date(result.dataset.date) : null;
+                    const matchesStage = !selectedStages.length || selectedStages.includes(resultStage);
+                    const matchesFrom = !selectedFrom || !resultDate || resultDate >= selectedFrom;
+                    const matchesTo = !selectedTo || !resultDate || resultDate <= selectedTo;
+
+                    if (matchesStage && matchesFrom && matchesTo && countMap.hasOwnProperty(resultType)) {
+                        countMap[resultType] += 1;
+                    }
+                });
+
+                Object.keys(countMap).forEach(function (type) {
+                    var span = document.querySelector('[data-type-count="' + type + '"]');
+                    if (span) {
+                        span.textContent = countMap[type];
+                    }
+                });
+            }
+
+            function renderActiveFilters(selectedTypes, selectedStages, selectedFrom, selectedTo) {
+                activeFiltersList.innerHTML = '';
+
+                selectedTypes.forEach(function (value) {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'govuk-button govuk-button--secondary selected-filter-tag';
+                    button.dataset.filterName = 'type';
+                    button.dataset.filterValue = value;
+                    button.textContent = '× Document type: ' + value;
+                    button.addEventListener('click', removeFilterButton);
+                    activeFiltersList.appendChild(button);
+                });
+
+                selectedStages.forEach(function (value) {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'govuk-button govuk-button--secondary selected-filter-tag';
+                    button.dataset.filterName = 'stage';
+                    button.dataset.filterValue = value;
+                    button.textContent = '× Stage: ' + value;
+                    button.addEventListener('click', removeFilterButton);
+                    activeFiltersList.appendChild(button);
+                });
+
+                if (selectedFrom) {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'govuk-button govuk-button--secondary selected-filter-tag';
+                    button.dataset.filterName = 'date-from';
+                    button.textContent = '× Date from: ' + formatDateLabel(selectedFrom);
+                    button.addEventListener('click', removeFilterButton);
+                    activeFiltersList.appendChild(button);
+                }
+
+                if (selectedTo) {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'govuk-button govuk-button--secondary selected-filter-tag';
+                    button.dataset.filterName = 'date-to';
+                    button.textContent = '× Date to: ' + formatDateLabel(selectedTo);
+                    button.addEventListener('click', removeFilterButton);
+                    activeFiltersList.appendChild(button);
+                }
+
+                activeFiltersSection.style.display = selectedTypes.length || selectedStages.length || selectedFrom || selectedTo ? '' : 'none';
+            }
+
+            function filterResults() {
+                const selectedTypes = getCheckedValues(typeInputs);
+                const selectedStages = getCheckedValues(stageInputs);
+                const selectedFrom = getDateFromInputs(
+                    document.getElementById('date-from-day'),
+                    document.getElementById('date-from-month'),
+                    document.getElementById('date-from-year')
+                );
+                const selectedTo = getDateFromInputs(
+                    document.getElementById('date-to-day'),
+                    document.getElementById('date-to-month'),
+                    document.getElementById('date-to-year')
+                );
+
+                results.forEach(function (result) {
+                    const resultType = result.dataset.type;
+                    const resultStage = result.dataset.stage;
+                    const resultDate = result.dataset.date ? new Date(result.dataset.date) : null;
+                    const matchesType = selectedTypes.length === 0 || selectedTypes.includes(resultType);
+                    const matchesStage = selectedStages.length === 0 || selectedStages.includes(resultStage);
+                    const matchesFrom = !selectedFrom || !resultDate || resultDate >= selectedFrom;
+                    const matchesTo = !selectedTo || !resultDate || resultDate <= selectedTo;
+                    const item = result.closest('.filter-item');
+
+                    if (item) {
+                        item.style.display = matchesType && matchesStage && matchesFrom && matchesTo ? '' : 'none';
+                    }
+                });
+
+                renderActiveFilters(selectedTypes, selectedStages, selectedFrom, selectedTo);
+                updateTypeCounts(selectedStages, selectedFrom, selectedTo);
+            }
+
+            function clearFilters(event) {
+                if (event) {
+                    event.preventDefault();
+                }
+
+                typeInputs.forEach(function (input) {
+                    input.checked = false;
+                });
+                stageInputs.forEach(function (input) {
+                    input.checked = false;
+                });
+                document.getElementById('date-from-day').value = '';
+                document.getElementById('date-from-month').value = '';
+                document.getElementById('date-from-year').value = '';
+                document.getElementById('date-to-day').value = '';
+                document.getElementById('date-to-month').value = '';
+                document.getElementById('date-to-year').value = '';
+
+                filterResults();
+            }
+
+            if (applyButton) {
+                applyButton.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    filterResults();
+
+                    if (filtersDetails) {
+                        filtersDetails.removeAttribute('open');
+                    }
+                });
+            }
+
+            if (clearFiltersLink) {
+                clearFiltersLink.addEventListener('click', clearFilters);
+            }
+
+            filterResults();
+        })();
+    </script>
+
+    {% endblock %}

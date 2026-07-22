@@ -1,0 +1,67 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% macro address(country) %}
+
+  {{ govukInput({
+    id: 'address-line-1',
+    name: 'address-line-1',
+    value: data['address-line-1'],
+    label: {
+      html: 'Address line 1'
+    }
+  }) }}
+
+  {{ govukInput({
+    id: 'address-line-2',
+    name: 'address-line-2',
+    value: data['address-line-2'],
+    label: {
+      html: 'Address line 2 (optional)'
+    }
+  }) }}
+
+  {{ govukInput({
+    id: 'address-town',
+    name: 'address-town',
+    value: data['address-town'],
+    classes: 'govuk-!-width-two-thirds',
+    label: {
+      html: 'Town or city'
+    }
+  }) }}
+
+  {{ govukInput({
+    id: 'address-county',
+    name: 'address-county',
+    value: data['address-county'],
+    classes: 'govuk-!-width-two-thirds',
+    label: {
+      html: 'County (optional)'
+    }
+  }) }}
+
+  {{ govukInput({
+    id: 'address-postcode',
+    name: 'address-postcode',
+    value: data['address-postcode'],
+    classes: 'govuk-input--width-10',
+    label: {
+      html: 'Postcode'
+    }
+  }) }}
+
+  {% if country %}
+
+    {{ govukInput({
+      id: 'address-country',
+      name: 'address-country',
+      value: data['address-country'],
+      classes: 'govuk-!-width-two-thirds',
+      label: {
+        html: 'Country'
+      }
+    }) }}
+
+  {% endif %}
+
+{% endmacro %}
