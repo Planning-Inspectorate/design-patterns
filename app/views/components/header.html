@@ -30,14 +30,17 @@
     <p class="govuk-body">Use the <a href="https://design-system.service.gov.uk/components/header/">GOV.UK header</a> for services hosted on service.gov.uk or gov.uk domains.</p>
     <p class="govuk-body">Use the PINS header for services hosted on planninginspectorate.gov.uk or internal domains.</p>
 
-    <h3 class="govuk-heading-m">Front office</h3>
+    <h2 class="govuk-heading-m">Front office</h2>
     {# First tab block #}
     {% set exampleHtml1 %}
       <div class="header-example-pins-alt">
-        <header class="pins-header-alt" role="banner">
+        <header class="pins-header-alt">
           <div class="pins-header__container govuk-width-container">
             <div class="pins-header__logo">
-              <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto;vertical-align:middle;">
+              <a href="#" class="govuk-header__link govuk-header__link--homepage back-office-header__logo-link back-office-header__logo-link--internal">
+                <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate logo" height="40" style="width:auto;vertical-align:middle;">
+                <img class="back-office-header__logo-image back-office-header__logo-image--focus" src="/public/images/components/header/pins-logo-landscape.png" alt="" aria-hidden="true" height="40" style="width:auto;vertical-align:middle;">
+              </a>
             </div>
           </div>
         </header>
@@ -45,21 +48,13 @@
     {% endset -%}
 {% set codeHtml1 %}
 {{ codeBlock('<!-- Custom styling -->
-<style>
-.pins-header-demo {
-  min-height: 60px;
-  padding-top: 24px;
-  padding-left: 15px;
-  padding-right: 15px;
-  background: #f3f2f1;
-  border-bottom: 10px solid #13A19B;
-  font-family: Helvetica Neue, Arial, sans-serif;
-}
-</style>
 <div class="pins-header-demo">
-  <header role="banner">
-    <div style="max-width:960px; margin:0 auto;">
-      <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">
+  <header>
+    <div>
+      <a href="#" class="govuk-header__link govuk-header__link--homepage back-office-header__logo-link back-office-header__logo-link--internal">
+        <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate logo" height="40" style="width:auto; vertical-align:middle;">
+        <img class="back-office-header__logo-image back-office-header__logo-image--focus" src="/public/images/components/header/pins-logo-landscape.png" alt="" aria-hidden="true" height="40" style="width:auto; vertical-align:middle;">
+      </a>
     </div>
   </header>
 </div>
@@ -86,14 +81,16 @@
     }) }}
 
     <br>
-    <h3 class="govuk-heading-m">Back office</h3>
+    <h2 class="govuk-heading-m">Back office</h2>
     {# Second tab block #}
     {% set exampleHtml2 %}
-      <div class="header-example-pins-alt">
-        <header class="pins-header-alt" role="banner" style="background:#f3f2f1;">
+      <div class="header-example-pins-alt header-example-pins-back-office">
+        <header class="pins-header-alt" style="background:#f3f2f1;">
           <div class="pins-header__container govuk-width-container">
             <div class="pins-header__logo">
-              <img src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate black logo" background:#f3f2f1; height="40" style="width:auto;vertical-align:middle;">
+              <a href="#" class="back-office-header__logo-link">
+                <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate logo" background:#f3f2f1; height="40" style="width:auto;vertical-align:middle;">
+              </a>
             </div>
           </div>
         </header>
@@ -101,21 +98,13 @@
     {% endset -%}
     {% set codeHtml2 %}
    {{ codeBlock('<!-- Custom styling -->
-<style>
-.pins-header-demo {
-  min-height: 60px;
-  padding-top: 24px;
-  padding-left: 15px;
-  padding-right: 15px;
-  background: #f3f2f1;
-  border-bottom: 10px solid #13a19b;
-  font-family: Helvetica Neue, Arial, sans-serif;
-}
-</style>
+
 <div class="pins-header-demo">
-  <header role="banner">
-    <div style="max-width:960px; margin:0 auto;">
-      <img src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate black logo" height="40" style="width:auto; vertical-align:middle;">
+  <header>
+    <div>
+      <a href="#" class="back-office-header__logo-link">
+        <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate logo" height="40" style="width:auto; vertical-align:middle;">
+      </a>
     </div>
   </header>
 </div>
@@ -163,10 +152,13 @@
 
     <h3 class="govuk-heading-m">PINS header</h3>
     <div class="header-example-pins-alt">
-      <header class="pins-header-alt" role="banner">
+      <header class="pins-header-alt">
         <div class="pins-header__container govuk-width-container">
           <div class="pins-header__logo">
-            <img src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate black logo" height="40" style="width:auto;vertical-align:middle;">
+            <a href="#" class="govuk-header__link govuk-header__link--homepage back-office-header__logo-link back-office-header__logo-link--internal">
+              <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape-white.png" alt="Planning Inspectorate logo" height="40" style="width:auto;vertical-align:middle;">
+              <img class="back-office-header__logo-image back-office-header__logo-image--focus" src="/public/images/components/header/pins-logo-landscape.png" alt="" aria-hidden="true" height="40" style="width:auto;vertical-align:middle;">
+            </a>
           </div>
         </div>
       </header>
@@ -176,10 +168,12 @@
 
     <div class="header-example-pins">
       <!-- Example PINS header markup -->
-      <header class="pins-header" role="banner">
+      <header class="pins-header">
         <div class="pins-header__container govuk-width-container">
           <div class="pins-header__logo">
-            <img src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate white logo" height="40" style="width:auto;vertical-align:middle;">
+            <a href="#" class="back-office-header__logo-link">
+              <img class="back-office-header__logo-image back-office-header__logo-image--default" src="/public/images/components/header/pins-logo-landscape.png" alt="Planning Inspectorate logo" height="40" style="width:auto;vertical-align:middle;">
+            </a>
           </div>
         </div>
       </header>
@@ -203,7 +197,7 @@
     </p>
 
     <h2 class="govuk-heading-l">Research on this component</h2>
-    <p class="govuk-body">Recommendations from <a href="https://www.sign-in.service.gov.uk/documentation/design-recommendations/let-users-navigate-sign-out">One Login research on long service names </a></p>
+    <p class="govuk-body">Recommendations from <a href="https://www.sign-in.service.gov.uk/documentation/design-recommendations/let-users-navigate-sign-out">One Login research on long service names</a></p>
 
     <p class="govuk-body">User research findings on this component are in progress and will be added here when available.
     </p>
