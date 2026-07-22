@@ -2,39 +2,44 @@
 {%- from "moj/components/side-navigation/macro.njk" import mojSideNavigation -%}
 
 {% macro sideMenu(currentItem) %}
-  {{ mojSideNavigation({
-    label: "Side navigation",
-    items: [
-      {
-        text: "Footer",
-        href: "/components/footer",
-        active: currentItem == "item1"
-      },
-      {
-        text: "Header",
-        href: "/components/header",
-        active: currentItem == "item2"
-      },
-      {
-        text: "Loading spinner",
-        href: "/components/loading-spinner",
-        active: currentItem == "item3"
-      },
-      {
-        text: "Service navigation",
-        href: "/components/service-navigation",
-        active: currentItem == "item4"
-      },
-      {
-        text: "Upload multiple files",
-        href: "/components/multi-file-upload/upload-multiple-files",
-        active: currentItem == "item5"
-      },
-      {
-        text: "Buttons",
-        href: "/components/buttons",
-        active: currentItem == "item6"
-      }
-    ]
-  }) }}
+{{ mojSideNavigation({
+label: "Side navigation",
+items: [
+{
+text: "Footer",
+href: "/components/footer",
+active: currentItem == "item1"
+},
+{
+text: "Header",
+href: "/components/header",
+active: currentItem == "item2"
+},
+{
+text: "Loading spinner",
+href: "/components/loading-spinner",
+active: currentItem == "item3"
+},
+{
+text: "Service navigation",
+href: "/components/service-navigation",
+active: currentItem == "item4"
+},
+{
+text: "Sub navigation",
+href: "/components/subnav",
+active: currentItem == "item7"
+},
+{
+text: "Upload multiple files",
+href: "/components/upload-multiple-files",
+active: currentItem == "item5"
+},
+{
+text: "Buttons",
+href: "/components/buttons",
+active: currentItem == "item6"
+}
+]
+}) }}
 {% endmacro %}
