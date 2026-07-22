@@ -1,6 +1,7 @@
 {# layouts/side-menu.html #}
 {%- from "moj/components/side-navigation/macro.njk" import mojSideNavigation -%}
 
+
 {% macro sideMenu(currentItem) %}
 {{ mojSideNavigation({
 label: "Side navigation",
@@ -32,7 +33,7 @@ active: currentItem == "item7"
 },
 {
 text: "Upload multiple files",
-href: "/components/upload-multiple-files",
+href: "/components/multi-file-upload/upload-multiple-files",
 active: currentItem == "item5"
 },
 {
@@ -43,3 +44,5 @@ active: currentItem == "item6"
 ]
 }) }}
 {% endmacro %}
+
+<!-- I have added new items in alphabetical order but keeping the currentItem number order to save renumbering everything every time we add a new item. Not sure if this is the best way! Amelia -->
