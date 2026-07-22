@@ -1,22 +1,24 @@
-{% set currentPage = "patterns" %}
+{% set currentPage = "content" %}
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Patterns" %}
+{% set pageName = "Content" %}
 
 {% from "layouts/pattern-menu.html" import sideMenu %}
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-quarter">
-    {{ sideMenu("") }}
-  </div>
 
-  <div class="govuk-grid-column-three-quarters">
+  <div class="govuk-grid-column-two-thirds">
+    
     <h1 class="govuk-heading-xl">
       {{ pageName }}
     </h1>
+    <p class="govuk-body-l">
+      Some kind of sub heading text, summary maybe (if you want to use it)
+    </p>
+
     <p class="govuk-body">
-      Patterns show how components can be combined to solve common user needs. They provide guidance on when and how to use them, ensuring services are consistent and user-centred.
+      Blurb goes here
     </p>
   </div>
 </div>
