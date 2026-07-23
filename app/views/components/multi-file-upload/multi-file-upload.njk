@@ -44,7 +44,6 @@
           type="file"
           accept="{{ accept }}"
           multiple
-          tabindex="-1"
           style="position: absolute; left: -9999px;"
         >
       </div>
@@ -222,7 +221,6 @@
 
         if (scrollToTop) {
           errorSummary.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          errorSummary.focus({ preventScroll: true });
         }
       }
 
