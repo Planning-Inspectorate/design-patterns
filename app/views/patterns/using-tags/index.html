@@ -1,0 +1,311 @@
+{% set currentPage = "patterns" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Using tags" %}
+
+{% from "layouts/pattern-menu.html" import sideMenu %}
+
+{# Example Nunjucks code for the radio buttons #}
+
+{% set exampleNunjucks -%}
+  Example goes here
+{%- endset %}
+
+{% block pageTitle %}
+  {{ pageName }} – {{ serviceName }} – GOV.UK
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+      {{ sideMenu("using-tags") }}
+    </div>
+
+    <div class="govuk-grid-column-three-quarters">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-2" id="case-heading">
+        {{ pageName }}
+      </h1>
+
+      <p class="govuk-body">
+
+        {{govukTag({
+          text: "Needs review",
+          classes: "govuk-tag--yellow"
+        })}}
+      </p>
+
+      <p class="govuk-body-l">
+        Use coloured tags to help users see the status of an item or task.
+      </p>
+
+      <p class="govuk-body">
+        Recommended rules for consistent tag colour usage across Planning Inspectorate services, based on <a href="https://design-system.service.gov.uk/components/tag/" class="govuk-link">existing design system guidance</a>, <a href="https://pins-ds.atlassian.net/wiki/spaces/UCD/pages/2719711240/How+services+use+tags" class="govuk-link">current practice</a>, and a small number of additional recommendations.
+      </p>
+
+      <h2 class="govuk-heading-l">
+        When to use tags
+      </h2>
+
+      <p class="govuk-body">
+        Use a tag when users need to quickly identify the status of something.
+      </p>
+
+      <p class="govuk-body">
+        For example:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>a task is in progress</li>
+        <li>a document is awaiting review</li>
+        <li>an appeal has been allowed</li>
+        <li>an item requires urgent attention</li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use tags simply to decorate or categorise content.
+      </p>
+
+      <h2 class="govuk-heading-l">
+        Do not rely on colour alone
+      </h2>
+
+      <p class="govuk-body">
+        The text inside a tag must clearly communicate its meaning without relying on the user being able to perceive its colour.
+      </p>
+
+      <p class="govuk-body">
+        Use short, consistent labels written in sentence case, such as:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>In progress</li>
+        <li>Not started yet</li>
+        <li>Awaiting review</li>
+        <li>Current version</li>
+      </ul>
+
+      <h2 class="govuk-heading-l">
+        Five colour tag system
+      </h2>
+
+      <p class="govuk-body">
+        Use one of the five standard colours wherever possible.
+      </p>
+
+      <div class="govuk-inset-text">
+        <p class="govuk-body">
+          “Be consistent, not uniform.” — <a href="https://www.gov.uk/guidance/government-design-principles#be-consistent-not-uniform" class="govuk-link">Government Design Principles</a> and <a href="https://designnotes.blog.gov.uk/2014/07/08/being-consistent-not-uniform/" class="govuk-link">Being consistent, not uniform</a>
+        </p>
+      </div>
+      
+      <p class="govuk-body">
+        Services may need different labels to describe their processes.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Blue: active
+      </h3>
+
+      <p class="govuk-body">
+        Active, in-progress activity, or contextual document indicators.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Current version",
+          classes: "govuk-tag--blue"
+        }) }}
+      </div>
+
+      <p class="govuk-body">
+        Use a blue tag for:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          an in progress task
+        </li>
+        <li>
+          incomplete work
+        </li>
+        <li>
+          current version
+        </li>
+        <li>
+          shared
+        </li>
+        <li>
+          unread
+        </li>
+        <li>
+          transferred
+        </li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use blue when the current user cannot take action.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Grey: inactive
+      </h3>
+
+      <p class="govuk-body">
+        Use a grey tag when something is inactive, unavailable or has not started.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Withdrawn",
+          classes: "govuk-tag--grey"
+        }) }}
+      </div>
+
+      <p class="govuk-body">
+        Use a grey tag for:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Not started yet</li>
+        <li>Cannot start yet</li>
+        <li>Closed</li>
+        <li>Withdrawn</li>
+        <li>Draft, where inactive</li>
+        <li>Not published</li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use grey for urgent issues or positive outcomes.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Green: positive
+      </h3>
+
+      <p class="govuk-body">
+        Use a green tag for successful completion, availability or a positive outcome.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Published",
+          classes: "govuk-tag--green"
+        }) }}
+      </div>
+
+      <p class="govuk-body">
+        Use a green tag for:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Completed tasks</li>
+        <li>Accepted outcomes</li>
+        <li>Allowed appeals</li>
+        <li>Published states</li>
+        <li>Paid items</li>
+        <li>Read items</li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use green for neutral waiting states or blocked work.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Yellow: awaiting
+      </h3>
+
+      <p class="govuk-body">
+        Use a yellow tag when something is waiting, pending, paused or dependent on another action.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Awaiting review",
+          classes: "govuk-tag--yellow"
+        }) }}
+      </div>
+
+      <p class="govuk-body">
+        Use a yellow tag for:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Awaiting review</li>
+        <li>Awaiting site visit</li>
+        <li>Awaiting hearing</li>
+        <li>Awaiting inquiry</li>
+        <li>Scanning for viruses</li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use yellow for successful completion or urgent failures.
+      </p>
+
+      <h3 class="govuk-heading-m">
+        Red: warning
+      </h3>
+
+      <p class="govuk-body">
+        Use a red tag when something is late, blocked, invalid or requires urgent attention.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Rejected",
+          classes: "govuk-tag--red"
+        }) }}
+      </div>
+
+      <p class="govuk-body">
+        Use a red tag for:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Overdue</li>
+        <li>Invalid</li>
+        <li>Rejected</li>
+        <li>Flagged</li>
+        <li>Virus detected</li>
+        <li>Content warning</li>
+      </ul>
+
+      <p class="govuk-body">
+        Do not use red for routine inactive states.
+      </p>
+
+      <h2 class="govuk-heading-l">
+        Using other colours
+      </h2>
+
+      <p class="govuk-body">
+        Only use secondary colours when you need to distinguish between stages in a complex specialist workflow.
+      </p>
+
+      <div class="govuk-!-margin-bottom-4">
+        {{ govukTag({
+          text: "Automated",
+          classes: "govuk-tag--purple"
+        }) }}
+      </div>
+
+      <h2 class="govuk-heading-l">
+        Check your tag
+      </h2>
+
+      <p class="govuk-body">
+        Before adding a tag, check that:
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the text clearly communicates the status</li>
+        <li>the meaning does not depend on colour</li>
+        <li>the label is short and written in sentence case</li>
+        <li>the colour has the same meaning elsewhere in the service</li>
+        <li>tags are used consistently across the service</li>
+      </ul>
+
+    </div>
+  </div>
+
+{% endblock %}
