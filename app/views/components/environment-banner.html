@@ -1,0 +1,171 @@
+{% set currentPage = "components" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Environment Banner" %}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+
+{% from "layouts/component-menu.html" import sideMenu %}
+{% from "includes/code-block.njk" import codeBlock%}
+
+{% block content %}
+<div class="govuk-grid-row">
+  
+  <!-- side navigation -->
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu('env-banner') }}
+  </div>
+  
+  <!-- main content -->
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl govuk-!-margin-bottom-2">
+      {{ pageName }}
+    </h1>
+    
+    <p>
+      <strong class="govuk-tag govuk-tag--green">
+        In use
+      </strong>
+    </p>
+    
+    <p class="govuk-body-l">
+      Use an environment banner to show users whether they're in a test or live environment.
+    </p>
+ 
+    <p class="govuk-body">
+      The environment banner can be shown using a variable so that people can see the difference between environmants, such as test or training.
+    </p>
+    
+    <h2 class="govuk-heading-l">
+      When to use this component
+    </h2>
+
+    <p class="govuk-body">
+      Use the environment banner when you need to differenciate between deployed environments.
+    </p>
+
+    <h2 class="govuk-heading-l">
+      How to use this component
+    </h2>
+
+    <p class="govuk-body">
+      Differentiate between environments using the text and colours.
+    </p>
+
+    <h3 class="govuk-heading-m">Default button</h3>
+    
+    <div> <!--HTML EXAMPLE-->
+      
+      {% set exampleHtml %}
+        <div style="min-height:2em;color:#fff;font-family:Helvetica,Arial,sans-serif;font-size:1.2em;line-height:2em;font-weight:800;background-color:#0b0c0c;text-align:center;">
+          Test environment
+        </div>  
+      {% endset -%}
+      
+      {% set codeHtml %}
+        <p class="govuk-body">
+          Add the following code to your header html file above the header html.
+        </p>
+        <p class="govuk-body">
+          If the banner variable is set to 'test', the test version of the banner will show. If the banner variable is set to anything else, the other version of the banner will show.
+        </p>
+        <p class="govuk-body">
+          The <a href="#css" class="govuk-link">css code</a> needs to be added to display the banner correctly.
+        </p>
+        
+        {% set codeExample %}
+{% raw %}
+  {# 'environment-banner' has a value #}
+  {% if data['environment-banner'] %}
+
+    {# 'environment-banner' is set to 'test' #}
+    {% if data['environment-banner'] == 'test' %}
+
+      <div class="environment-banner environment-banner--test">
+        Test environment
+      </div>
+
+    {# 'environment-banner' is not set to 'test' #}
+    {% else %}
+
+      <div class="environment-banner">
+        Training environment
+      </div>
+
+    {% endif %}
+  {% endif %}{% endraw %}
+        {% endset %}
+
+{{ codeBlock(codeExample, 'html') }}
+      {% endset -%}
+
+      {% set codeCSS %}
+{{ codeBlock('
+.environment-banner {
+    min-height: 2em;
+    margin-top: 0;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    line-height: 2em;
+    font-weight: 800;
+    background-color: #0b0c0c; /* GOV.UK black */
+    text-align: center;
+    vertical-align: center;
+}
+
+.environment-banner--test {
+    background-color: #1d70b8; /* GOV.UK blue */
+}
+', 'css') }}
+      {% endset -%}
+
+      {{ govukTabs({
+        id: "header-tabs-1",
+        items: [
+          {
+            label: "Example",
+            id: "example",
+            panel: {
+              html: exampleHtml
+            }
+          },
+          {
+            label: "HTML",
+            id: "html",
+            panel: {
+              html: codeHtml
+            }
+          },
+          {
+            label: "CSS",
+            id: "css",
+            panel: {
+              html: codeCSS
+            }
+          }
+        ]
+      }) }}
+    </div>
+
+    <h2 class="govuk-heading-l">
+      When not to use this component
+    </h2>
+
+    <p class="govuk-body">
+      This banner is not intended to be used for public facing websites. It is intended to be used for internal services only.
+    </p>
+    
+    <h2 class="govuk-heading-l">
+      How it works
+    </h2>
+
+    <p class="govuk-body">
+      When a variable is set the banner appears at the top of the page. It has a ‘Test’ and ‘Training’ variants, these could be extended to other versions.
+    </p>
+  
+</div>
+{% endblock %}
+
+

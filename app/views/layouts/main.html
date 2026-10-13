@@ -4,7 +4,10 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 #}
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
-{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+
+{# Include all Nunjucks macros #}
+{# not implemented yet, in progress (Steve)#}
+{% include "includes/allnunjucks.html" %}
 
 {% block header %}
 {% include "includes/header.njk" %}
