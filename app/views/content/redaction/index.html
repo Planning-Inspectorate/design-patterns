@@ -1,0 +1,35 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Redaction" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("redaction") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Keep the user journey clear and consistent when personal or sensitive information needs to be removed.</p>
+
+    <h2 class="govuk-heading-l">When to use redaction</h2>
+    <p class="govuk-body">Use redaction when a user needs to hide personal, sensitive or identifying information before a document is published or shared.</p>
+
+    <p class="govuk-body">The goal is to protect personal information without making the process harder than it needs to be. Redact only what is necessary and keep as much of the original content as possible.</p>
+
+    <h2 class="govuk-heading-l">Recommended behaviour</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Make the user aware of what type of information needs to be removed.</li>
+      <li>Allow them to review the redacted content before they continue.</li>
+      <li>Keep the original text available if needed, but do not let it distract from the task.</li>
+      <li>Show the redaction clearly so the user can see what has been hidden.</li>
+    </ul>
+
+    <p class="govuk-body">If the service supports a redaction tool, use the same actions and language across the service to reduce confusion and make the process easier to complete.</p>
+  </div>
+</div>
+{% endblock %}

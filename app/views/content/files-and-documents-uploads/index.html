@@ -1,0 +1,38 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Files and documents uploads" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("files-and-documents-uploads") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Use the right terms for the thing the user is dealing with.</p>
+
+    <h2 class="govuk-heading-l">Use document for content</h2>
+    <p class="govuk-body">Use <strong>document</strong> when you mean the content or item being reviewed, uploaded or attached.</p>
+
+    <h2 class="govuk-heading-l">Use file for the technical format</h2>
+    <p class="govuk-body">Use <strong>file</strong> only when you mean the downloadable technical format, such as a PDF, Word document or other digital file.</p>
+
+    <h2 class="govuk-heading-l">Choose the right action word</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li><strong>Manage</strong> when a user can do more than one thing to a document or file, such as change its name, amend the details, share it, redact it or replace it.</li>
+      <li><strong>Change</strong> when you are only changing one thing about a file or document.</li>
+      <li><strong>Edit</strong> when you are changing the contents of a file or document.</li>
+      <li><strong>View</strong> when a user wants to look at a file, document or email without making changes.</li>
+      <li><strong>Add</strong> when a user is adding another file or document in the back office, or where multiple files are allowed in the front office.</li>
+      <li><strong>Upload</strong> when the user is adding files or documents in the front office and the service only allows a single file upload at that point.</li>
+    </ul>
+
+    <p class="govuk-body">This keeps language consistent and helps users understand whether they are editing the content, managing the record, or uploading a file.</p>
+  </div>
+</div>
+{% endblock %}

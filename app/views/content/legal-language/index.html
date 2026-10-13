@@ -1,0 +1,37 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Legal language" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("legal-language") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Prioritise plain English. Do not use legal terminology and then explain it.</p>
+
+    <h2 class="govuk-heading-l">Keep content simple</h2>
+    <p class="govuk-body">The more information you add to an email, the less of it people read or understand. Extra detail increases cognitive load and can make it harder for users to take the right action.</p>
+
+    <p class="govuk-body">Our users do not understand the language of legislation, and they should not need to. Services should be simple and easy to use, with the minimum amount of help needed for users to succeed first time.</p>
+
+    <h2 class="govuk-heading-l">Write for the task, not for the law</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Start with simple language and only add more detail when evidence shows it is needed.</li>
+      <li>Explain what the user needs to do in plain English.</li>
+      <li>Focus on the task the user is trying to complete.</li>
+      <li>Use evidence from research, user feedback and case officer feedback to guide changes.</li>
+    </ul>
+
+    <p class="govuk-body">Legislation wording may change, but the fundamentals of what users need to do are less likely to change. Content should help users complete a task or action instead of explaining legal terms.</p>
+
+    <p class="govuk-body">People scan for the information they need. Unnecessary detail makes it more likely that important actions or messages will be missed.</p>
+  </div>
+</div>
+{% endblock %}

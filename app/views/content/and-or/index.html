@@ -1,0 +1,33 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "And/or" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("and-or") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Avoid using and/or in user-facing content.</p>
+
+    <p class="govuk-body">Symbols such as ampersands, slashes and dashes can be harder for users to read at a glance. Write the option in plain English.</p>
+
+    <h2 class="govuk-heading-l">Use plain wording instead</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Use <strong>or</strong> when either option is acceptable.</li>
+      <li>Use <strong>and</strong> when both options are needed.</li>
+      <li>Use <strong>or both</strong> when the user may choose either option or both together.</li>
+    </ul>
+
+    <p class="govuk-body">For example, write <strong>Thing or other thing</strong> rather than <strong>thing/other thing</strong>. If both are possible, write <strong>Thing or other thing (or both)</strong>.</p>
+
+    <p class="govuk-body">This makes the choice easier to scan and reduces the chance that users misread the instructions.</p>
+  </div>
+</div>
+{% endblock %}

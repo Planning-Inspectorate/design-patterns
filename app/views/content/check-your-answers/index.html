@@ -1,0 +1,28 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("check-your-answers") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Decide whether to show full questions or short summaries.</p>
+
+    <h2 class="govuk-heading-l">Use full questions when it is important to check carefully</h2>
+    <p class="govuk-body">Show full questions when the user is making a significant decision, checking the detail of a submission or confirming information that needs careful review.</p>
+
+    <h2 class="govuk-heading-l">Use summaries for long or repetitive journeys</h2>
+    <p class="govuk-body">A summary is often better when the user has already answered many questions and now needs to review the most important information. This reduces clutter and helps them focus on what matters.</p>
+
+    <p class="govuk-body">The best pattern depends on the user need. If they need to check the detail, show the full question. If they just need to confirm the main points quickly, show a concise summary with clear change links.</p>
+  </div>
+</div>
+{% endblock %}

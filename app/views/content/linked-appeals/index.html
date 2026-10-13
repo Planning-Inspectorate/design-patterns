@@ -1,0 +1,30 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Linked appeals" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("linked-appeals") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Use clear and consistent names for related appeals.</p>
+
+    <h2 class="govuk-heading-l">Use the right names</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Call the main appeal the <strong>lead appeal</strong>.</li>
+      <li>Call any associated appeals <strong>linked appeals</strong>.</li>
+    </ul>
+
+    <p class="govuk-body">Do not use the term <strong>child appeal</strong> for these related cases. The linked appeal language is clearer and helps users understand the relationship without implying a hierarchy.</p>
+
+    <p class="govuk-body">This language should be used consistently across case summaries, appeal lists and internal guidance so users can easily understand how the appeals are connected.</p>
+  </div>
+</div>
+{% endblock %}

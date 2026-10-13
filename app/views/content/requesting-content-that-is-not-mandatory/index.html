@@ -1,0 +1,35 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Requesting content that is not mandatory" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("requesting-content-that-is-not-mandatory") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Do not make users stop their journey just because they do not have a document immediately available.</p>
+
+    <h2 class="govuk-heading-l">Use a simple yes or no question</h2>
+    <p class="govuk-body">Sometimes a user may not have access to a document or attachment while they are using a service. We want to ask them for it without making them stop the journey because they do not have it.</p>
+
+    <p class="govuk-body">We also do not want to make it seem like the document is optional or unimportant. Research shows that users are less likely to attach a document when it is marked as optional, even if they already have it.</p>
+
+    <h2 class="govuk-heading-l">Recommended approach</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Ask the user whether they have the document.</li>
+      <li>Give them <strong>Yes</strong> or <strong>No</strong> options to continue.</li>
+      <li>If they select <strong>Yes</strong>, route them to a screen asking them to upload it.</li>
+      <li>If they select <strong>No</strong>, route them to the next question in the journey.</li>
+    </ul>
+
+    <p class="govuk-body">This keeps the document request clear while making it easier for users to continue when they do not have it to hand.</p>
+  </div>
+</div>
+{% endblock %}

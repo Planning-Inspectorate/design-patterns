@@ -1,0 +1,24 @@
+{% set currentPage = "content" %}
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Local planning authority" %}
+
+{% from "layouts/content-menu.html" import sideMenu %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    {{ sideMenu("local-planning-authority") }}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+    <h1 class="govuk-heading-xl">{{ pageName }}</h1>
+
+    <p class="govuk-body-l">Use the term in lower case unless it is the start of a sentence.</p>
+
+    <p class="govuk-body">Write <strong>local planning authority</strong> in lower case when used in body text. This is the standard style for the term in GOV.UK guidance and helps keep the wording clear and consistent.</p>
+
+    <p class="govuk-body">Use it in a way that is easy to understand for the user, without turning the service into a legal reference. Keep the writing practical and task-focused.</p>
+  </div>
+</div>
+{% endblock %}
