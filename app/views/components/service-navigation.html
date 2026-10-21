@@ -20,7 +20,65 @@
     <p class="govuk-body">Use the GOV.UK service navigation for services hosted on service.gov.uk or gov.uk domains. Use the PINS service navigation for services hosted on planninginspectorate.gov.uk or internal domains.</p>
 
     {% set exampleHtml %}
+    <section aria-label="Service information" class="govuk-service-navigation pins-service-navigation" data-module="govuk-service-navigation" data-govuk-service-navigation-init="">
+      <div class="govuk-width-container">
+
+    <div class="govuk-service-navigation__container">
+      
+        <span class="govuk-service-navigation__service-name">
+            <a href="/" class="govuk-service-navigation__link">
+              Plans Examination back office
+            </a>
+        </span>
+
+      
+        <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+          <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" aria-expanded="false">
+            Menu
+          </button>
+
+          <ul class="govuk-service-navigation__list" id="navigation" hidden="">
+
+            
+              
+              <li class="govuk-service-navigation__item">
+                  <a class="govuk-service-navigation__link" href="/create-a-case/case-details/case-officer">
+                                    
+Create a case
+                  </a>
+              </li>
+
+              
+              <li class="govuk-service-navigation__item">
+                  <a class="govuk-service-navigation__link" href="/assigned-to-me">
+                                    
+Assigned to me
+                  </a>
+              </li>
+
+              
+              <li class="govuk-service-navigation__item">
+                  <a class="govuk-service-navigation__link" href="/auth/signout">
+                                    
+Sign out
+                  </a>
+              </li>
+
+            </ul>
+        </nav>
+    </div>
+
+    </div>
+
+  </section>
+  <br>
       <div class="design-b">
+       <style>
+         .govuk-service-navigation.pins-service-navigation {
+           background: #f3f3f3;
+           border-bottom: none;
+         }
+       </style>
         {{ govukServiceNavigation({
           serviceName: "PINS Service with a long title",
           navigation: [

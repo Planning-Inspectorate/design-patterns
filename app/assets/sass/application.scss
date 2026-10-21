@@ -63,6 +63,16 @@ pre code.language-html {
   display: block;
 }
 
+// Allow component example tabs to be widened for responsive previews.
+#header-tabs-1,
+#header-tabs-2 {
+  width: 100%;
+  min-width: 280px;
+  overflow: auto;
+  resize: horizontal;
+  padding-top: 5px;
+}
+
 // PINS header styles
 .header-example-pins .pins-header {
   min-height: 60px;
@@ -235,6 +245,8 @@ pre code.language-html {
 }
 
 // Extra styles
+
+@import "planning-inspectorate/dev-svg-header";
 
 @import "planning-inspectorate/planning-inspectorate-header";
 

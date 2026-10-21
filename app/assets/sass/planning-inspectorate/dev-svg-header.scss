@@ -1,0 +1,66 @@
+// Added to the dev SVG header: logo link states and responsive sizing.
+header.govuk-header.pins-header {
+  min-height: 60px;
+  padding: 1rem 1rem 0;
+  background: #f3f3f3;
+  border-bottom: .5rem solid #13a19b;
+
+  svg {
+    height: 40px;
+  }
+
+  svg rect {
+    fill: #00625e;
+  }
+
+  &.pins-header__external {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background-color: #00625e;
+  }
+
+  &.pins-header__external svg,
+  &.pins-header__external svg rect {
+    fill: #fff;
+  }
+
+  // Reserve underline space so hover and focus do not move the logo.
+  .pins-header__logo-link {
+    display: inline-flex;
+    max-width: 100%;
+    color: #0b0c0c;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+  }
+
+  // Use a white underline on the dark front-office header.
+  &.pins-header__external .pins-header__logo-link {
+    color: #fff;
+  }
+
+  // Underline the whole logo on hover or while pressed.
+  .pins-header__logo-link:hover,
+  .pins-header__logo-link:active {
+    border-bottom-color: currentColor;
+  }
+
+  // Show a yellow background and dark underline when the link has focus.
+  .pins-header__logo-link:focus {
+    color: #0b0c0c;
+    background: #ffdd00;
+    border-bottom-color: #0b0c0c;
+    outline: 3px solid transparent;
+  }
+
+  // Keep the SVG within the available preview width.
+  .pins-header__logo-link svg {
+    max-width: 100%;
+  }
+
+  // Override both logo colours so the SVG remains legible on yellow.
+  .pins-header__logo-link:focus svg,
+  .pins-header__logo-link:focus svg rect {
+    fill: #0b0c0c;
+  }
+}
