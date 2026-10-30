@@ -1,0 +1,44 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+
+{% block pageTitle %}
+Use of AI
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row" style="margin-top: 20px">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <h1 class="govuk-heading-l">Use of AI</h1>
+
+    <p class="govuk-body">We ask whether you've used artificial intelligence (AI):</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>when writing your representation</li>
+      <li>to translate your representation</li>
+      <li>to generate images or other attachments</li>
+    </ul>
+    <p class="govuk-body">This helps Inspectors understand how it was prepared.</p>
+
+    <p class="govuk-body">You do not need to tell us if you've used AI to check spelling or grammar.</p>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h2 class="govuk-fieldset__heading">Did you use AI to write your written representation?</h2>
+        </legend>
+
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="used-ai" name="usedAi" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="used-ai">Yes</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="used-ai-2" name="usedAi" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="used-ai-2">No</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <a href="how.html" class="govuk-button">Continue</a>
+  </div>
+</div>
+{% endblock %}
