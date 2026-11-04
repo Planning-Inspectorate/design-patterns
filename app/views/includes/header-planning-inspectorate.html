@@ -3,17 +3,21 @@
 <!-- crest SVG is in an include file-->
 
 <div id="pins-header-2026">
-	<header role="banner">
+	<header>
     <div class="planning-inspectorate-header">
 
+      <!--Wrapping bar, crest and department name in a link to apply styling -->
+      <a href="#" class="planning-inspectorate-header--link"> 
+      
       <!-- bar -->
       <span class="planning-inspectorate-header--bar"></span>
       
       <!-- crest -->
-      {% include "includes/header-planning-inspectorate-internal-service-crest.njk" %}
+      {% include "includes/header-planning-inspectorate-crest.njk" %}
       
       <!-- department name -->
-      <p class="planning-inspectorate-header--text">Planning Inspectorate</p>
+      <span class="planning-inspectorate-header--text">Planning Inspectorate</span>
+      </a>
 
 		</div>
 	</header>

@@ -3,30 +3,102 @@
     padding-right: 1rem;
     background: #f3f2f1;
     border-bottom: 0.6rem solid #13a19b;
-    font-family: Helvetica Neue, Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .planning-inspectorate-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.2rem;
     max-width: 960px;
     margin: 1rem auto;
     padding-top: 1rem;
 }
 
+/*
+ * Bar, crest and organisation name form one homepage link.
+ * Space is reserved underneath for the interaction indicator,
+ * preventing movement between states.
+ */
+.planning-inspectorate-header--link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+
+    /* Visually balance the identity within the header */
+    transform: translateY(4px);
+    color: #0b0c0c;
+    text-decoration: none;
+}
+
+/* Keep the organisational identity consistent after visiting */
+.planning-inspectorate-header--link:visited {
+    color: #0b0c0c;
+}
+
+/* Vertical bar inherits the link colour */
 .planning-inspectorate-header--bar {
     width: 0.2rem;
     height: 2.5rem;
-    background: #13a19b;
+    background: currentColor;
+    flex-shrink: 0;
 }
 
+/* Crest inherits the link colour */
 .planning-inspectorate--crest-svg {
+    display: block;
+    width: auto;
     height: 2.5rem;
+    fill: currentColor;
+    flex-shrink: 0;
 }
 
+/* Organisation name */
 .planning-inspectorate-header--text {
-    font-size: 1.5rem;
     margin: 0 0.2rem;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Hover and active states */
+.planning-inspectorate-header--link:hover,
+.planning-inspectorate-header--link:active {
+    border-bottom-color: currentColor;
+}
+
+/* GOV.UK-style keyboard focus */
+.planning-inspectorate-header--link:focus {
+    color: #0b0c0c;
+    background: #ffdd00;
+    border-bottom-color: #0b0c0c;
+    outline: 3px solid transparent;
+    text-decoration: none;
+}
+
+
+/* ========================================
+   Inverted / external variant
+   ======================================== */
+
+#pins-header-2026.pins-header--inverse {
+    background: #00625e;
+}
+
+/*
+ * Setting the link colour to white automatically makes
+ * the bar, crest, text and hover indicator white.
+ */
+.pins-header--inverse .planning-inspectorate-header--link,
+.pins-header--inverse .planning-inspectorate-header--link:visited {
+    color: #ffffff;
+}
+
+/* Focus returns the whole identity to black on yellow */
+.pins-header--inverse .planning-inspectorate-header--link:focus {
+    color: #0b0c0c;
+    background: #ffdd00;
+    border-bottom-color: #0b0c0c;
+    outline: 3px solid transparent;
 }
